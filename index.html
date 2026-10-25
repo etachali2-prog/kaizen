@@ -12,141 +12,192 @@
   --blue:#1769aa;
   --gold:#f2b84b;
   --green:#16845b;
-  --red:#c0392b;
   --border:#d8e0e8;
   --text:#243447;
 }
-*{box-sizing:border-box}
-body{
-  margin:0;background:#eaf0f6;color:var(--text);
-  font:14px Arial,Helvetica,sans-serif
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:#eaf0f6;
+  color:var(--text);
+  font:14px Arial,Helvetica,sans-serif;
 }
-.page{
-  width:min(1150px,96%);margin:22px auto;background:white;
-  border-radius:12px;overflow:hidden;
-  box-shadow:0 8px 28px rgba(16,45,79,.12)
+.page {
+  width:min(1150px,96%);
+  margin:22px auto;
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 8px 28px rgba(16,45,79,.12);
 }
-.header{
+.header {
   background:linear-gradient(120deg,#102d4f,#1769aa);
-  color:white;padding:25px 22px;text-align:center;
-  border-bottom:5px solid var(--gold)
+  color:white;
+  padding:25px 22px;
+  text-align:center;
+  border-bottom:5px solid var(--gold);
 }
-.header h1{font-size:24px;margin:0 0 8px}
-.header p{margin:5px 0;line-height:1.5}
-.subtitle{color:#ffe4a5;font-size:17px;font-weight:bold}
-.content{padding:22px}
-.section-title{
-  margin:0 0 16px;color:var(--navy);font-size:17px;
-  border-left:5px solid var(--gold);padding:9px 12px;
-  background:#f3f7fb
+.header h1 { font-size:24px; margin:0 0 8px; }
+.header p { margin:5px 0; line-height:1.5; }
+.subtitle { color:#ffe4a5; font-size:17px; font-weight:bold; }
+.content { padding:22px; }
+.section-title {
+  margin:0 0 16px;
+  color:var(--navy);
+  font-size:17px;
+  border-left:5px solid var(--gold);
+  padding:9px 12px;
+  background:#f3f7fb;
 }
-.metadata{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:15px;margin-bottom:24px
+.metadata {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:15px;
+  margin-bottom:24px;
 }
-.field label{display:block;font-weight:bold;margin-bottom:7px}
-input,select,textarea{
-  width:100%;border:1px solid #cbd5e1;border-radius:7px;
-  padding:10px;background:white;color:var(--text);font:inherit
+.field label { display:block; font-weight:bold; margin-bottom:7px; }
+input,select,textarea {
+  width:100%;
+  border:1px solid #cbd5e1;
+  border-radius:7px;
+  padding:10px;
+  background:white;
+  color:var(--text);
+  font:inherit;
 }
-input:focus,select:focus,textarea:focus{
-  outline:2px solid #9dc8ee;border-color:var(--blue)
+input:focus,select:focus,textarea:focus {
+  outline:2px solid #9dc8ee;
+  border-color:var(--blue);
 }
-.table-wrap{
-  width:100%;overflow-x:auto;border:1px solid var(--border);
-  border-radius:8px
+.table-wrap {
+  width:100%;
+  overflow-x:auto;
+  border:1px solid var(--border);
+  border-radius:8px;
 }
-table{width:100%;min-width:850px;border-collapse:collapse}
-th{
-  background:var(--navy);color:white;text-align:left;
-  padding:12px 10px;font-size:13px
+table { width:100%; min-width:850px; border-collapse:collapse; }
+th {
+  background:var(--navy);
+  color:white;
+  text-align:left;
+  padding:12px 10px;
+  font-size:13px;
 }
-td{border-bottom:1px solid var(--border);padding:10px;vertical-align:top}
-tbody tr:nth-child(even){background:#f7f9fc}
-tbody tr:last-child td{border-bottom:0}
-.number{width:45px;text-align:center;font-weight:bold}
-.activity{min-width:290px;line-height:1.5}
-.response{min-width:125px}
-.score{min-width:85px}
-.comment{min-width:180px}
-.radio-option{
-  display:inline-flex;align-items:center;gap:5px;
-  margin:5px 8px 5px 0;white-space:nowrap
+td { border-bottom:1px solid var(--border); padding:10px; vertical-align:top; }
+tbody tr:nth-child(even) { background:#f7f9fc; }
+.number { width:45px; text-align:center; font-weight:bold; }
+.activity { min-width:290px; line-height:1.5; }
+.response { min-width:125px; }
+.score { min-width:85px; }
+.comment { min-width:180px; }
+.radio-option {
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  margin:5px 8px 5px 0;
+  white-space:nowrap;
 }
-.radio-option input{width:auto;margin:0}
-.comment textarea{min-height:54px;resize:vertical}
-.summary{
-  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:12px;margin:20px 0
+.radio-option input { width:auto; margin:0; }
+.comment textarea { min-height:54px; resize:vertical; }
+.summary {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+  margin:20px 0;
 }
-.stat{
-  border:1px solid var(--border);border-radius:9px;
-  padding:15px;background:#f8fafc
+.stat {
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:15px;
+  background:#f8fafc;
 }
-.stat span{display:block;color:#5d6b7a;font-size:12px;margin-bottom:8px}
-.stat strong{color:var(--navy);font-size:25px}
-.progress-track{
-  background:#e1e8ef;border-radius:20px;height:12px;
-  overflow:hidden;margin-top:12px
+.stat span { display:block; color:#5d6b7a; font-size:12px; margin-bottom:8px; }
+.stat strong { color:var(--navy); font-size:25px; }
+.progress-track {
+  background:#e1e8ef;
+  border-radius:20px;
+  height:12px;
+  overflow:hidden;
+  margin-top:12px;
 }
-.progress-bar{
-  height:100%;width:0;background:var(--green);
-  transition:width .2s ease
+.progress-bar {
+  height:100%;
+  width:0;
+  background:var(--green);
+  transition:width .2s ease;
 }
-.notice{
-  display:none;padding:13px 15px;border-radius:7px;
-  margin:15px 0;line-height:1.5;overflow-wrap:anywhere
+.notice {
+  display:none;
+  padding:13px 15px;
+  border-radius:7px;
+  margin:15px 0;
+  line-height:1.5;
+  overflow-wrap:anywhere;
 }
-.notice.success{display:block;background:#e8f7ee;color:#12683e;border:1px solid #b9e6ca}
-.notice.error{display:block;background:#fff0ef;color:#9b2620;border:1px solid #f1c1bd}
-.notice.info{display:block;background:#eaf4ff;color:#164f85;border:1px solid #c7def5}
-.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-button{
-  border:0;border-radius:7px;padding:12px 19px;
-  font-size:14px;font-weight:bold;cursor:pointer
+.notice.success { display:block; background:#e8f7ee; color:#12683e; border:1px solid #b9e6ca; }
+.notice.error { display:block; background:#fff0ef; color:#9b2620; border:1px solid #f1c1bd; }
+.notice.info { display:block; background:#eaf4ff; color:#164f85; border:1px solid #c7def5; }
+.actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+button {
+  border:0;
+  border-radius:7px;
+  padding:12px 19px;
+  font-size:14px;
+  font-weight:bold;
+  cursor:pointer;
 }
-button:disabled{opacity:.6;cursor:wait}
-.submit-btn{background:var(--green);color:white}
-.print-btn{background:var(--blue);color:white}
-.reset-btn{background:#e5eaf0;color:#243447}
-.footer{
-  text-align:center;background:#f3f6f9;border-top:1px solid var(--border);
-  padding:15px;color:#667788;font-size:12px
+button:disabled { opacity:.6; cursor:wait; }
+.submit-btn { background:var(--green); color:white; }
+.print-btn { background:var(--blue); color:white; }
+.reset-btn { background:#e5eaf0; color:#243447; }
+.footer {
+  text-align:center;
+  background:#f3f6f9;
+  border-top:1px solid var(--border);
+  padding:15px;
+  color:#667788;
+  font-size:12px;
 }
-@media(max-width:720px){
-  .page{width:100%;margin:0;border-radius:0}
-  .header{padding:20px 13px}
-  .header h1{font-size:20px}
-  .content{padding:14px}
-  .metadata{grid-template-columns:1fr}
-  .summary{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .stat strong{font-size:22px}
+#submitFrame { display:none; }
+
+@media(max-width:720px) {
+  .page { width:100%; margin:0; border-radius:0; }
+  .header { padding:20px 13px; }
+  .header h1 { font-size:20px; }
+  .content { padding:14px; }
+  .metadata { grid-template-columns:1fr; }
+  .summary { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .stat strong { font-size:22px; }
 }
-@media print{
-  @page{size:landscape;margin:10mm}
-  body{background:white;font-size:10px}
-  .page{width:100%;margin:0;box-shadow:none;border-radius:0}
-  .header{
-    background:white!important;color:#102d4f!important;
-    border-bottom:2px solid #102d4f;padding:12px
+@media print {
+  @page { size:landscape; margin:10mm; }
+  body { background:white; font-size:10px; }
+  .page { width:100%; margin:0; box-shadow:none; border-radius:0; }
+  .header {
+    background:white!important;
+    color:#102d4f!important;
+    border-bottom:2px solid #102d4f;
+    padding:12px;
   }
-  .subtitle{color:#102d4f!important}
-  .content{padding:10px 0}
-  .actions,.notice,.progress-track{display:none!important}
-  .metadata{gap:8px}
-  input,select,textarea{
-    border:0;padding:2px;appearance:none;background:transparent
+  .subtitle { color:#102d4f!important; }
+  .content { padding:10px 0; }
+  .actions,.notice,.progress-track { display:none!important; }
+  .metadata { gap:8px; }
+  input,select,textarea {
+    border:0;
+    padding:2px;
+    appearance:none;
+    background:transparent;
   }
-  .table-wrap{overflow:visible;border:0}
-  table{min-width:0;font-size:9px}
-  th,td{padding:5px;border:1px solid #bbb}
-  th{background:#e7edf4!important;color:#102d4f!important}
-  .activity,.comment{min-width:0}
-  .comment textarea{min-height:25px}
-  .summary{gap:5px}
-  .stat{padding:7px}
-  .stat strong{font-size:15px}
-  tr{break-inside:avoid}
+  .table-wrap { overflow:visible; border:0; }
+  table { min-width:0; font-size:9px; }
+  th,td { padding:5px; border:1px solid #bbb; }
+  th { background:#e7edf4!important; color:#102d4f!important; }
+  .activity,.comment { min-width:0; }
+  .summary { gap:5px; }
+  .stat { padding:7px; }
+  .stat strong { font-size:15px; }
+  tr { break-inside:avoid; }
 }
 </style>
 </head>
@@ -155,7 +206,7 @@ button:disabled{opacity:.6;cursor:wait}
 <main class="page">
   <header class="header">
     <h1>MELBA PRINTING, PUBLISHING &amp; PACKAGING S.C.</h1>
-    <p>Daayirektoreetii Teekinikaa</p>
+    <p>Daayireektoreetii Teekinikaa</p>
     <p class="subtitle">
       Cheekliistii Hojii Irra Oolmaan Kaayizenii Guyyaa Guyyaan Ittiin Hordofamu
     </p>
@@ -217,22 +268,10 @@ button:disabled{opacity:.6;cursor:wait}
       </h2>
 
       <div class="summary">
-        <div class="stat">
-          <span>Activities</span>
-          <strong id="totalActivities">20</strong>
-        </div>
-        <div class="stat">
-          <span>Eeyyee / Yes</span>
-          <strong id="yesCount">0</strong>
-        </div>
-        <div class="stat">
-          <span>Lakki / No</span>
-          <strong id="noCount">0</strong>
-        </div>
-        <div class="stat">
-          <span>Total Score</span>
-          <strong><span id="scoreValue">0</span>/100</strong>
-        </div>
+        <div class="stat"><span>Activities</span><strong id="totalActivities">20</strong></div>
+        <div class="stat"><span>Eeyyee / Yes</span><strong id="yesCount">0</strong></div>
+        <div class="stat"><span>Lakki / No</span><strong id="noCount">0</strong></div>
+        <div class="stat"><span>Total Score</span><strong><span id="scoreValue">0</span>/100</strong></div>
       </div>
 
       <div>
@@ -242,8 +281,7 @@ button:disabled{opacity:.6;cursor:wait}
         </div>
       </div>
 
-      <div id="statusMessage" class="notice"
-           role="status" aria-live="polite"></div>
+      <div id="statusMessage" class="notice" role="status" aria-live="polite"></div>
 
       <div class="actions">
         <button type="submit" class="submit-btn" id="submitBtn">
@@ -264,12 +302,17 @@ button:disabled{opacity:.6;cursor:wait}
   </footer>
 </main>
 
+<!-- Hidden iframe receives the Apps Script response without cross-origin reading. -->
+<iframe id="submitFrame" name="submitFrame" title="Submission frame"></iframe>
+
 <script>
 "use strict";
 
-/* YOUR GOOGLE APPS SCRIPT WEB APP URL */
+/*
+ * Paste your current deployed Apps Script /exec URL here.
+ */
 const scriptUrl =
-  "https://script.google.com/macros/s/AKfycbzDVONUCIeIR4WhwMfqiYDDIaXa46oHDb9QM3SjblY_16j8gJOthUAd4BsqcPyJ22jg/exec";
+  "PASTE_YOUR_DEPLOYED_APPS_SCRIPT_EXEC_URL_HERE";
 
 const activities = [
   "Iddoo hojii fi meeshaaleen hojii qulqulluu fi sirnaan qindaa'anii jiru?",
@@ -298,6 +341,10 @@ const form = document.getElementById("checklistForm");
 const rowsContainer = document.getElementById("activityRows");
 const submitBtn = document.getElementById("submitBtn");
 const statusMessage = document.getElementById("statusMessage");
+const submitFrame = document.getElementById("submitFrame");
+
+let submissionPending = false;
+let frameLoadTimer = null;
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, function(character) {
@@ -313,27 +360,24 @@ function escapeHtml(value) {
 
 function renderActivities() {
   rowsContainer.innerHTML = activities.map(function(activity, index) {
-    const number = index + 1;
+    const n = index + 1;
 
     return `
       <tr>
-        <td class="number">${number}</td>
+        <td class="number">${n}</td>
         <td class="activity">${escapeHtml(activity)}</td>
         <td class="response">
           <label class="radio-option">
-            <input type="radio" name="response_${number}"
-                   value="Yes" required>
+            <input type="radio" name="response_${n}" value="Yes" required>
             Eeyyee
           </label>
           <label class="radio-option">
-            <input type="radio" name="response_${number}"
-                   value="No" required>
+            <input type="radio" name="response_${n}" value="No" required>
             Lakki
           </label>
         </td>
         <td class="score">
-          <select id="score_${number}" required
-                  aria-label="Score for activity ${number}">
+          <select id="score_${n}" required aria-label="Score for activity ${n}">
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -343,16 +387,14 @@ function renderActivities() {
           </select>
         </td>
         <td class="comment">
-          <textarea id="comment_${number}" maxlength="2000"
+          <textarea id="comment_${n}" maxlength="2000"
                     placeholder="Yaada / Comment..."
-                    aria-label="Comment for activity ${number}"></textarea>
+                    aria-label="Comment for activity ${n}"></textarea>
         </td>
-      </tr>
-    `;
+      </tr>`;
   }).join("");
 
-  document.getElementById("totalActivities").textContent =
-    activities.length;
+  document.getElementById("totalActivities").textContent = activities.length;
 }
 
 function updateSummary() {
@@ -361,29 +403,24 @@ function updateSummary() {
   let score = 0;
 
   activities.forEach(function(activity, index) {
-    const number = index + 1;
+    const n = index + 1;
     const selected = document.querySelector(
-      'input[name="response_' + number + '"]:checked'
+      'input[name="response_' + n + '"]:checked'
     );
 
     if (selected && selected.value === "Yes") yes++;
     if (selected && selected.value === "No") no++;
 
-    score += Number(
-      document.getElementById("score_" + number).value
-    );
+    score += Number(document.getElementById("score_" + n).value);
   });
 
-  const maximumScore = activities.length * 5;
-  const percentage = Math.round(score / maximumScore * 100);
+  const percent = Math.round(score / (activities.length * 5) * 100);
 
   document.getElementById("yesCount").textContent = yes;
   document.getElementById("noCount").textContent = no;
   document.getElementById("scoreValue").textContent = score;
-  document.getElementById("scorePercent").textContent =
-    percentage + "% Score";
-  document.getElementById("progressBar").style.width =
-    percentage + "%";
+  document.getElementById("scorePercent").textContent = percent + "% Score";
+  document.getElementById("progressBar").style.width = percent + "%";
 }
 
 function showMessage(message, type) {
@@ -397,97 +434,107 @@ function clearMessage() {
 }
 
 function getPayload() {
-  const items = activities.map(function(activity, index) {
-    const number = index + 1;
-    const selected = document.querySelector(
-      'input[name="response_' + number + '"]:checked'
-    );
-
-    return {
-      activity: activity,
-      response: selected ? selected.value : "",
-      score: Number(
-        document.getElementById("score_" + number).value
-      ),
-      comment: document.getElementById("comment_" + number)
-        .value.trim()
-    };
-  });
-
   return {
     date: document.getElementById("checkDate").value,
     department: document.getElementById("department").value,
     signature: document.getElementById("signature").value.trim(),
-    items: items
+    items: activities.map(function(activity, index) {
+      const n = index + 1;
+      const selected = document.querySelector(
+        'input[name="response_' + n + '"]:checked'
+      );
+
+      return {
+        activity: activity,
+        response: selected ? selected.value : "",
+        score: Number(document.getElementById("score_" + n).value),
+        comment: document.getElementById("comment_" + n).value.trim()
+      };
+    })
   };
-}
-
-/*
- * Submit to the deployed Apps Script URL.
- * no-cors means the browser cannot read the server response.
- */
-async function submitChecklist(event) {
-  event.preventDefault();
-  clearMessage();
-
-  if (!form.reportValidity()) {
-    showMessage(
-      "Please complete all required fields and answer all 20 activities.",
-      "error"
-    );
-    return;
-  }
-
-  const payload = getPayload();
-
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Submitting...";
-
-  showMessage(
-    "Sending checklist to Google Sheets. Please wait...",
-    "info"
-  );
-
-  try {
-    await fetch(scriptUrl, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-      },
-      body: JSON.stringify(payload)
-    });
-
-    showMessage(
-      "The submission request was sent. Please verify the Kaizen Records sheet to confirm that all 20 activity records were saved.",
-      "info"
-    );
-
-  } catch (error) {
-    showMessage(
-      "Unable to send the request. Check your internet connection, Apps Script URL, and deployment permissions.",
-      "error"
-    );
-
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Submit to Google Sheets";
-  }
 }
 
 function setToday() {
   const now = new Date();
-
-  const localDate = [
+  document.getElementById("checkDate").value = [
     now.getFullYear(),
     String(now.getMonth() + 1).padStart(2, "0"),
     String(now.getDate()).padStart(2, "0")
   ].join("-");
-
-  document.getElementById("checkDate").value = localDate;
 }
 
-/* Initialize the form */
+function submitChecklist(event) {
+  event.preventDefault();
+  clearMessage();
+
+  if (scriptUrl.includes("PASTE_YOUR_DEPLOYED")) {
+    showMessage("Please paste your deployed Apps Script /exec URL in the scriptUrl variable.", "error");
+    return;
+  }
+
+  if (!form.reportValidity()) {
+    showMessage("Please complete the required fields and answer all 20 activities.", "error");
+    return;
+  }
+
+  if (submissionPending) return;
+
+  const payload = getPayload();
+
+  /*
+   * Use a regular HTML form POST to send a URL-encoded payload.
+   * Code.gs reads it from e.parameter.payload.
+   */
+  const hiddenForm = document.createElement("form");
+  hiddenForm.method = "POST";
+  hiddenForm.action = scriptUrl;
+  hiddenForm.target = "submitFrame";
+  hiddenForm.acceptCharset = "UTF-8";
+  hiddenForm.style.display = "none";
+
+  const payloadInput = document.createElement("input");
+  payloadInput.type = "hidden";
+  payloadInput.name = "payload";
+  payloadInput.value = JSON.stringify(payload);
+
+  hiddenForm.appendChild(payloadInput);
+  document.body.appendChild(hiddenForm);
+
+  submissionPending = true;
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Submitting...";
+
+  showMessage(
+    "The form is being sent to Google Apps Script. Check the Kaizen Records sheet to confirm that the 20 rows were saved.",
+    "info"
+  );
+
+  try {
+    hiddenForm.submit();
+  } catch (error) {
+    submissionPending = false;
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit to Google Sheets";
+    showMessage("Could not submit the form: " + error.message, "error");
+  }
+
+  /*
+   * The browser cannot read the cross-origin Apps Script response.
+   * This timer only restores the button; it does not confirm saving.
+   */
+  frameLoadTimer = window.setTimeout(function() {
+    submissionPending = false;
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit to Google Sheets";
+    hiddenForm.remove();
+
+    showMessage(
+      "Submission request sent. Please check the Kaizen Records tab and Apps Script Executions to confirm the save.",
+      "info"
+    );
+  }, 5000);
+}
+
 renderActivities();
 setToday();
 updateSummary();

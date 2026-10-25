@@ -3,257 +3,200 @@
 <html lang="om">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MELBA Daily Kaizen Checklist</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MELBA | Daily Kaizen Checklist</title>
 
 <style>
 :root {
-  --navy:#102d4f;
-  --blue:#1769aa;
-  --gold:#f2b84b;
-  --green:#16845b;
-  --border:#d8e0e8;
-  --text:#243447;
+  --navy: #142b4a;
+  --blue: #1d4e89;
+  --gold: #d6a746;
+  --bg: #f1f5f9;
+  --border: #dce3ed;
+  --text: #243247;
 }
-* { box-sizing:border-box; }
+* { box-sizing: border-box; }
 body {
-  margin:0;
-  background:#eaf0f6;
-  color:var(--text);
-  font:14px Arial,Helvetica,sans-serif;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
-.page {
-  width:min(1150px,96%);
-  margin:22px auto;
-  background:white;
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 8px 28px rgba(16,45,79,.12);
+header {
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  padding: 22px;
+  border-bottom: 5px solid var(--gold);
 }
-.header {
-  background:linear-gradient(120deg,#102d4f,#1769aa);
-  color:white;
-  padding:25px 22px;
-  text-align:center;
-  border-bottom:5px solid var(--gold);
+.header-inner {
+  max-width: 1200px;
+  margin: auto;
 }
-.header h1 { font-size:24px; margin:0 0 8px; }
-.header p { margin:5px 0; line-height:1.5; }
-.subtitle { color:#ffe4a5; font-size:17px; font-weight:bold; }
-.content { padding:22px; }
-.section-title {
-  margin:0 0 16px;
-  color:var(--navy);
-  font-size:17px;
-  border-left:5px solid var(--gold);
-  padding:9px 12px;
-  background:#f3f7fb;
+header h1 { font-size: 22px; margin: 0 0 8px; }
+header p { margin: 0; font-size: 13px; color: #e1eaf5; }
+main { max-width: 1200px; margin: 24px auto; padding: 0 15px; }
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 18px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(20,43,74,.05);
 }
-.metadata {
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:15px;
-  margin-bottom:24px;
+h2, h3 { color: var(--navy); }
+h2 { font-size: 23px; margin-top: 0; }
+h3 { font-size: 17px; margin-top: 0; }
+label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 7px; }
+input, select, textarea {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  background: white;
+  font: inherit;
+  font-size: 14px;
 }
-.field label { display:block; font-weight:bold; margin-bottom:7px; }
-input,select,textarea {
-  width:100%;
-  border:1px solid #cbd5e1;
-  border-radius:7px;
-  padding:10px;
-  background:white;
-  color:var(--text);
-  font:inherit;
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid #a9c9ed;
+  border-color: var(--blue);
 }
-input:focus,select:focus,textarea:focus {
-  outline:2px solid #9dc8ee;
-  border-color:var(--blue);
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
 }
-.table-wrap {
-  width:100%;
-  overflow-x:auto;
-  border:1px solid var(--border);
-  border-radius:8px;
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
 }
-table { width:100%; min-width:850px; border-collapse:collapse; }
-th {
-  background:var(--navy);
-  color:white;
-  text-align:left;
-  padding:12px 10px;
-  font-size:13px;
+button, .back-link {
+  border: 0;
+  border-radius: 7px;
+  padding: 12px 17px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
 }
-td { border-bottom:1px solid var(--border); padding:10px; vertical-align:top; }
-tbody tr:nth-child(even) { background:#f7f9fc; }
-.number { width:45px; text-align:center; font-weight:bold; }
-.activity { min-width:290px; line-height:1.5; }
-.response { min-width:125px; }
-.score { min-width:85px; }
-.comment { min-width:180px; }
-.radio-option {
-  display:inline-flex;
-  align-items:center;
-  gap:5px;
-  margin:5px 8px 5px 0;
-  white-space:nowrap;
+.primary { background: var(--navy); color: white; }
+.gold { background: var(--gold); color: #182536; }
+.secondary { background: white; border: 1px solid var(--border); color: var(--navy); }
+button:disabled { opacity: .6; cursor: wait; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 780px; font-size: 13px; }
+th, td { border: 1px solid var(--border); padding: 10px; text-align: left; vertical-align: top; }
+th { background: #eaf0f8; color: var(--navy); }
+tbody tr:nth-child(even) { background: #f8fafc; }
+td select, td input { min-width: 100px; }
+.activity-number { text-align: center; font-weight: bold; width: 55px; }
+#status {
+  display: none;
+  padding: 13px;
+  border-radius: 8px;
+  margin: 15px 0;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
-.radio-option input { width:auto; margin:0; }
-.comment textarea { min-height:54px; resize:vertical; }
-.summary {
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:12px;
-  margin:20px 0;
-}
-.stat {
-  border:1px solid var(--border);
-  border-radius:9px;
-  padding:15px;
-  background:#f8fafc;
-}
-.stat span { display:block; color:#5d6b7a; font-size:12px; margin-bottom:8px; }
-.stat strong { color:var(--navy); font-size:25px; }
-.progress-track {
-  background:#e1e8ef;
-  border-radius:20px;
-  height:12px;
-  overflow:hidden;
-  margin-top:12px;
-}
-.progress-bar {
-  height:100%;
-  width:0;
-  background:var(--green);
-  transition:width .2s ease;
-}
-.notice {
-  display:none;
-  padding:13px 15px;
-  border-radius:7px;
-  margin:15px 0;
-  line-height:1.5;
-  overflow-wrap:anywhere;
-}
-.notice.success { display:block; background:#e8f7ee; color:#12683e; border:1px solid #b9e6ca; }
-.notice.error { display:block; background:#fff0ef; color:#9b2620; border:1px solid #f1c1bd; }
-.notice.info { display:block; background:#eaf4ff; color:#164f85; border:1px solid #c7def5; }
-.actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
-button {
-  border:0;
-  border-radius:7px;
-  padding:12px 19px;
-  font-size:14px;
-  font-weight:bold;
-  cursor:pointer;
-}
-button:disabled { opacity:.6; cursor:wait; }
-.submit-btn { background:var(--green); color:white; }
-.print-btn { background:var(--blue); color:white; }
-.reset-btn { background:#e5eaf0; color:#243447; }
-.footer {
-  text-align:center;
-  background:#f3f6f9;
-  border-top:1px solid var(--border);
-  padding:15px;
-  color:#667788;
-  font-size:12px;
-}
-#submitFrame { display:none; }
-
-@media(max-width:720px) {
-  .page { width:100%; margin:0; border-radius:0; }
-  .header { padding:20px 13px; }
-  .header h1 { font-size:20px; }
-  .content { padding:14px; }
-  .metadata { grid-template-columns:1fr; }
-  .summary { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .stat strong { font-size:22px; }
+#status.show { display: block; }
+#status.info { background: #eaf2ff; color: #173e70; }
+#status.success { background: #e7f7ec; color: #166534; }
+#status.error { background: #fdecec; color: #991b1b; }
+.small { font-size: 12px; color: #64748b; line-height: 1.5; }
+footer { text-align: center; color: #64748b; font-size: 12px; padding: 20px; }
+@media(max-width:700px) {
+  header { padding: 18px 14px; }
+  header h1 { font-size: 17px; line-height: 1.5; }
+  main { padding: 0 9px; margin: 15px auto; }
+  .card { padding: 14px; }
+  .field-grid { grid-template-columns: 1fr; }
+  .actions button, .actions a { flex: 1; text-align: center; }
 }
 @media print {
-  @page { size:landscape; margin:10mm; }
-  body { background:white; font-size:10px; }
-  .page { width:100%; margin:0; box-shadow:none; border-radius:0; }
-  .header {
-    background:white!important;
-    color:#102d4f!important;
-    border-bottom:2px solid #102d4f;
-    padding:12px;
-  }
-  .subtitle { color:#102d4f!important; }
-  .content { padding:10px 0; }
-  .actions,.notice,.progress-track { display:none!important; }
-  .metadata { gap:8px; }
-  input,select,textarea {
-    border:0;
-    padding:2px;
-    appearance:none;
-    background:transparent;
-  }
-  .table-wrap { overflow:visible; border:0; }
-  table { min-width:0; font-size:9px; }
-  th,td { padding:5px; border:1px solid #bbb; }
-  th { background:#e7edf4!important; color:#102d4f!important; }
-  .activity,.comment { min-width:0; }
-  .summary { gap:5px; }
-  .stat { padding:7px; }
-  .stat strong { font-size:15px; }
-  tr { break-inside:avoid; }
+  @page { size: A4 landscape; margin: 8mm; }
+  body { background: white; }
+  header { background: white; color: black; border-bottom: 2px solid #b18a32; padding: 8px 0; }
+  header p { color: black; }
+  main { max-width: none; margin: 10px 0; padding: 0; }
+  .no-print, #status { display: none !important; }
+  .card { box-shadow: none; padding: 8px; border: 0; }
+  table { min-width: 0; font-size: 8pt; }
+  th, td { padding: 4px; }
+  input, select, textarea { border: 0; padding: 2px; appearance: none; font-size: 8pt; }
+  tr { break-inside: avoid; }
+  footer { display: none; }
 }
 </style>
 </head>
 
 <body>
-<main class="page">
-  <header class="header">
+<header>
+  <div class="header-inner">
     <h1>MELBA PRINTING, PUBLISHING &amp; PACKAGING S.C.</h1>
-    <p>Daayireektoreetii Teekinikaa</p>
-    <p class="subtitle">
-      Cheekliistii Hojii Irra Oolmaan Kaayizenii Guyyaa Guyyaan Ittiin Hordofamu
-    </p>
-    <p>
-      Sirna Qulqullinaa, Qindoominaa, Yeroo, Rakkoo fi Fooyya'iinsa Itti Fufiinsa Qabu Hordofuuf
-    </p>
-  </header>
+    <p>Technical Department | Daily Kaizen Checklist</p>
+  </div>
+</header>
 
-  <section class="content">
-    <h2 class="section-title">Odeeffannoo Waliigalaa</h2>
+<main>
+  <section class="card">
+    <h2>Cheekliistii Hojii Irra Oolmaan Kaayizenii Guyyaa Guyyaan Ittiin Hordofamu</h2>
+    <p class="small">
+      Sirna qulqullinaa, qindoominaa, yeroo, rakkoo fi fooyya'iinsa itti fufiinsa qabu hordofuuf.
+    </p>
 
-    <form id="checklistForm">
-      <div class="metadata">
-        <div class="field">
-          <label for="checkDate">Guyyaa / Date *</label>
-          <input type="date" id="checkDate" required>
+    <form id="kaizenForm">
+      <div class="field-grid">
+        <div>
+          <label for="date">Guyyaa / Date *</label>
+          <input type="date" id="date" required>
         </div>
 
-        <div class="field">
-          <label for="department">Daayirektoreetii / Department *</label>
+        <div>
+          <label for="department">Kutaa Hojii / Department *</label>
           <select id="department" required>
             <option value="">-- Select Department --</option>
-            <option>Production Directorate</option>
-            <option>Technical Directorate</option>
-            <option>Finance</option>
-            <option>General Service</option>
-            <option>Marketing</option>
-            <option>Human Resource</option>
-            <option>Procurement</option>
+            <option>Technical Department</option>
+            <option>Prepress</option>
+            <option>Printing</option>
+            <option>Finishing</option>
+            <option>Utilities</option>
+            <option>Maintenance Workshop</option>
+            <option>Production</option>
+            <option>Other</option>
           </select>
         </div>
 
-        <div class="field">
-          <label for="signature">Maqaa / Mallattoo *</label>
-          <input type="text" id="signature" maxlength="150"
-                 placeholder="Enter your name" required>
+        <div>
+          <label for="signature">Maqaa Guutuu / Submitted By *</label>
+          <input id="signature" type="text" maxlength="100"
+                 placeholder="Enter full name" required>
         </div>
       </div>
 
-      <h2 class="section-title">Hojiiwwan Hordofaman / Checklist Activities</h2>
+      <div class="actions no-print">
+        <a class="back-link primary"
+           href="https://etachali2-prog.github.io/all/">← Back</a>
+        <button type="button" class="secondary" onclick="window.print()">
+          Print Checklist
+        </button>
+      </div>
+
+      <div id="status" role="status" aria-live="polite"></div>
+
+      <h3>Hojiiwwan Hordofaman / Activities</h3>
+      <p class="small">
+        Each activity requires a Yes/No response and a score from 0 to 5.
+        Edit the sample activities in the JavaScript if your official checklist differs.
+      </p>
 
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th class="number">Lakk.</th>
-              <th>Hojiiwwan Hordofaman</th>
+              <th>Lakk.</th>
+              <th>Hojiiwwan Hordofaman / Activities</th>
               <th>Eeyyee / Lakki</th>
               <th>Qabxii (0–5)</th>
               <th>Yaada / Comment</th>
@@ -263,297 +206,212 @@ button:disabled { opacity:.6; cursor:wait; }
         </table>
       </div>
 
-      <h2 class="section-title" style="margin-top:24px">
-        Cuunfaa / Daily Summary
-      </h2>
-
-      <div class="summary">
-        <div class="stat"><span>Activities</span><strong id="totalActivities">20</strong></div>
-        <div class="stat"><span>Eeyyee / Yes</span><strong id="yesCount">0</strong></div>
-        <div class="stat"><span>Lakki / No</span><strong id="noCount">0</strong></div>
-        <div class="stat"><span>Total Score</span><strong><span id="scoreValue">0</span>/100</strong></div>
+      <div class="actions no-print">
+        <button type="submit" id="submitBtn" class="gold">
+          Submit Checklist to Google Sheets
+        </button>
+        <button type="reset" class="secondary">Clear Form</button>
       </div>
 
-      <div>
-        <strong id="scorePercent">0% Score</strong>
-        <div class="progress-track">
-          <div class="progress-bar" id="progressBar"></div>
-        </div>
-      </div>
-
-      <div id="statusMessage" class="notice" role="status" aria-live="polite"></div>
-
-      <div class="actions">
-        <button type="submit" class="submit-btn" id="submitBtn">
-          Submit to Google Sheets
-        </button>
-        <button type="button" class="print-btn" id="printBtn">
-          Print / Save PDF
-        </button>
-        <button type="reset" class="reset-btn" id="resetBtn">
-          Clear Form
-        </button>
-      </div>
+      <p class="small">
+        Note: This form sends your submission to Google Apps Script.
+        The submission message cannot independently confirm that Google Sheets
+        saved the records. Verify the new rows in the Kaizen Records tab.
+      </p>
     </form>
   </section>
-
-  <footer class="footer">
-    MELBA Technical Department | Daily Kaizen Monitoring System
-  </footer>
 </main>
 
-<!-- Hidden iframe receives the Apps Script response without cross-origin reading. -->
-<iframe id="submitFrame" name="submitFrame" title="Submission frame"></iframe>
+<footer>MELBA Technical Department | Daily Kaizen Records</footer>
 
 <script>
-"use strict";
+/*
+  STEP 1:
+  Replace the URL below with your deployed Apps Script URL ending in /exec.
+*/
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyKf7LjRyENrLOmVohmkSZNKzcKtvFrgnzuhqTnP-JxY3WYVP2UIfvCbmIQl9GELPAl/exec";
 
 /*
- * Paste your current deployed Apps Script /exec URL here.
- */
-const scriptUrl =
-  "https://script.google.com/macros/s/AKfycbx_uGSMTDJeB0bVtnNtP6SJiYcPxBnrlTdS_nt3PHQMgHEa5Fk18WNNIX_GlBjZQcAI/exec";
-
+  STEP 2:
+  These are sample activities. Replace them with the exact 20 activities
+  in your official MELBA Daily Kaizen Checklist if they differ.
+*/
 const activities = [
-  "Iddoo hojii fi meeshaaleen hojii qulqulluu fi sirnaan qindaa'anii jiru?",
-  "Meeshaaleen barbaachisoon bakka isaanii irratti argamu?",
-  "Meeshaaleen hin barbaachifne iddoo hojii irraa kaafamaniiru?",
-  "Karaa deeminsaa fi bakka hojii gufuu irraa bilisa dha?",
-  "Meeshaaleen hojii fi meeshaaleen nageenyaa sirnaan kaa'amaniiru?",
-  "Maashinoonni fi meeshaaleen hojii qulqulluu ta'anii jiru?",
-  "Balfa, waraqaa haftee fi wantoonni hin barbaachifne sirnaan walitti qabamaniiru?",
-  "Mallattoon nageenyaa fi akeekkachiisaa ifatti mul'ata?",
-  "Rakkooleen maashinii fi meeshaalee argaman galmeeffamaniiru?",
-  "Rakkooleen hojii irratti mul'atan itti gaafatamtootaaf gabaafamaniiru?",
-  "Meeshaaleen hojii dura sakatta'amanii jiru?",
-  "Hojiiwwan guyyaa karooraan qophaa'an hordofamaniiru?",
-  "Meeshaaleen spare part fi meeshaaleen suphaa barbaachisan adda baafamaniiru?",
-  "Humni ibsaa fi hidhiinsi elektirikii nageenyaan sakatta'ameera?",
-  "Dhangaala'aan zayitaa, bishaanii fi qilleensaa yoo jiraate gabaafameera?",
-  "Meeshaaleen safartuu fi meeshaaleen hojii sirnaan kunuunfamaniiru?",
-  "Hojiiwwan suphaa xumuraman galmee irratti galmeeffamaniiru?",
-  "Hojjettoonni meeshaalee nageenyaa barbaachisan fayyadamaa jiru?",
-  "Yaadni fooyya'iinsaa fi furmaanni rakkoo kaafameera?",
-  "Hojiiwwan fooyya'iinsa guyyaa darbe irratti hordoffiin taasifameera?"
+  "Workplace cleanliness is maintained.",
+  "Tools and equipment are arranged properly.",
+  "Materials are stored in designated locations.",
+  "Unnecessary items are removed from the workplace.",
+  "Walkways and working areas are kept clear.",
+  "Waste and scrap are collected properly.",
+  "Machines are cleaned according to requirements.",
+  "Safety guards and protective devices are checked.",
+  "Required personal protective equipment is used.",
+  "Electrical cables and connections are kept orderly.",
+  "Oil and other leaks are reported.",
+  "Abnormal machine conditions are reported promptly.",
+  "Preventive maintenance activities are followed.",
+  "Tools are returned after use.",
+  "Work instructions and procedures are followed.",
+  "Work is organized to reduce unnecessary movement.",
+  "Time is used effectively.",
+  "Identified problems are recorded and addressed.",
+  "Improvement ideas are communicated to the team.",
+  "Previous Kaizen actions are followed up."
 ];
 
-const form = document.getElementById("checklistForm");
-const rowsContainer = document.getElementById("activityRows");
+const tbody = document.getElementById("activityRows");
+const form = document.getElementById("kaizenForm");
 const submitBtn = document.getElementById("submitBtn");
-const statusMessage = document.getElementById("statusMessage");
-const submitFrame = document.getElementById("submitFrame");
+const statusBox = document.getElementById("status");
 
-let submissionPending = false;
-let frameLoadTimer = null;
+function showStatus(message, type) {
+  statusBox.textContent = message;
+  statusBox.className = "show " + type;
+}
 
-function escapeHtml(value) {
-  return String(value).replace(/[&<>"']/g, function(character) {
-    return {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;"
-    }[character];
+function buildActivities() {
+  tbody.replaceChildren();
+
+  activities.forEach((activity, index) => {
+    const tr = document.createElement("tr");
+
+    const numberCell = document.createElement("td");
+    numberCell.className = "activity-number";
+    numberCell.textContent = index + 1;
+
+    const activityCell = document.createElement("td");
+    activityCell.textContent = activity;
+
+    const responseCell = document.createElement("td");
+    const response = document.createElement("select");
+    response.required = true;
+    response.setAttribute("aria-label", "Response for activity " + (index + 1));
+    response.innerHTML =
+      '<option value="">Choose</option>' +
+      '<option value="Yes">Eeyyee / Yes</option>' +
+      '<option value="No">Lakki / No</option>';
+    responseCell.appendChild(response);
+
+    const scoreCell = document.createElement("td");
+    const score = document.createElement("select");
+    score.required = true;
+    score.setAttribute("aria-label", "Score for activity " + (index + 1));
+    score.innerHTML =
+      '<option value="">Score</option>' +
+      [0, 1, 2, 3, 4, 5]
+        .map(n => '<option value="' + n + '">' + n + '</option>')
+        .join("");
+    scoreCell.appendChild(score);
+
+    const commentCell = document.createElement("td");
+    const comment = document.createElement("input");
+    comment.type = "text";
+    comment.maxLength = 500;
+    comment.placeholder = "Optional comment";
+    comment.setAttribute("aria-label", "Comment for activity " + (index + 1));
+    commentCell.appendChild(comment);
+
+    tr.append(numberCell, activityCell, responseCell, scoreCell, commentCell);
+    tbody.appendChild(tr);
   });
-}
-
-function renderActivities() {
-  rowsContainer.innerHTML = activities.map(function(activity, index) {
-    const n = index + 1;
-
-    return `
-      <tr>
-        <td class="number">${n}</td>
-        <td class="activity">${escapeHtml(activity)}</td>
-        <td class="response">
-          <label class="radio-option">
-            <input type="radio" name="response_${n}" value="Yes" required>
-            Eeyyee
-          </label>
-          <label class="radio-option">
-            <input type="radio" name="response_${n}" value="No" required>
-            Lakki
-          </label>
-        </td>
-        <td class="score">
-          <select id="score_${n}" required aria-label="Score for activity ${n}">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-        </td>
-        <td class="comment">
-          <textarea id="comment_${n}" maxlength="2000"
-                    placeholder="Yaada / Comment..."
-                    aria-label="Comment for activity ${n}"></textarea>
-        </td>
-      </tr>`;
-  }).join("");
-
-  document.getElementById("totalActivities").textContent = activities.length;
-}
-
-function updateSummary() {
-  let yes = 0;
-  let no = 0;
-  let score = 0;
-
-  activities.forEach(function(activity, index) {
-    const n = index + 1;
-    const selected = document.querySelector(
-      'input[name="response_' + n + '"]:checked'
-    );
-
-    if (selected && selected.value === "Yes") yes++;
-    if (selected && selected.value === "No") no++;
-
-    score += Number(document.getElementById("score_" + n).value);
-  });
-
-  const percent = Math.round(score / (activities.length * 5) * 100);
-
-  document.getElementById("yesCount").textContent = yes;
-  document.getElementById("noCount").textContent = no;
-  document.getElementById("scoreValue").textContent = score;
-  document.getElementById("scorePercent").textContent = percent + "% Score";
-  document.getElementById("progressBar").style.width = percent + "%";
-}
-
-function showMessage(message, type) {
-  statusMessage.textContent = message;
-  statusMessage.className = "notice " + type;
-}
-
-function clearMessage() {
-  statusMessage.textContent = "";
-  statusMessage.className = "notice";
 }
 
 function getPayload() {
+  const rows = Array.from(tbody.querySelectorAll("tr"));
+
   return {
-    date: document.getElementById("checkDate").value,
+    date: document.getElementById("date").value,
     department: document.getElementById("department").value,
     signature: document.getElementById("signature").value.trim(),
-    items: activities.map(function(activity, index) {
-      const n = index + 1;
-      const selected = document.querySelector(
-        'input[name="response_' + n + '"]:checked'
-      );
-
-      return {
-        activity: activity,
-        response: selected ? selected.value : "",
-        score: Number(document.getElementById("score_" + n).value),
-        comment: document.getElementById("comment_" + n).value.trim()
-      };
-    })
+    items: rows.map((tr, index) => ({
+      activity: activities[index],
+      response: tr.cells[2].querySelector("select").value,
+      score: tr.cells[3].querySelector("select").value,
+      comment: tr.cells[4].querySelector("input").value.trim()
+    }))
   };
 }
 
-function setToday() {
-  const now = new Date();
-  document.getElementById("checkDate").value = [
-    now.getFullYear(),
-    String(now.getMonth() + 1).padStart(2, "0"),
-    String(now.getDate()).padStart(2, "0")
-  ].join("-");
-}
-
-function submitChecklist(event) {
+form.addEventListener("submit", async function(event) {
   event.preventDefault();
-  clearMessage();
 
-  if (scriptUrl.includes("PASTE_YOUR_DEPLOYED")) {
-    showMessage("Please paste your deployed Apps Script /exec URL in the scriptUrl variable.", "error");
+  if (SCRIPT_URL === "" ||
+      !SCRIPT_URL.startsWith("https://script.google.com/")) {
+    showStatus(
+      "Setup required: paste your deployed Google Apps Script /exec URL into SCRIPT_URL.",
+      "error"
+    );
     return;
   }
 
-  if (!form.reportValidity()) {
-    showMessage("Please complete the required fields and answer all 20 activities.", "error");
-    return;
-  }
-
-  if (submissionPending) return;
+  if (!form.reportValidity()) return;
 
   const payload = getPayload();
 
-  /*
-   * Use a regular HTML form POST to send a URL-encoded payload.
-   * Code.gs reads it from e.parameter.payload.
-   */
-  const hiddenForm = document.createElement("form");
-  hiddenForm.method = "POST";
-  hiddenForm.action = scriptUrl;
-  hiddenForm.target = "submitFrame";
-  hiddenForm.acceptCharset = "UTF-8";
-  hiddenForm.style.display = "none";
-
-  const payloadInput = document.createElement("input");
-  payloadInput.type = "hidden";
-  payloadInput.name = "payload";
-  payloadInput.value = JSON.stringify(payload);
-
-  hiddenForm.appendChild(payloadInput);
-  document.body.appendChild(hiddenForm);
-
-  submissionPending = true;
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Submitting...";
-
-  showMessage(
-    "The form is being sent to Google Apps Script. Check the Kaizen Records sheet to confirm that the 20 rows were saved.",
-    "info"
-  );
-
-  try {
-    hiddenForm.submit();
-  } catch (error) {
-    submissionPending = false;
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Submit to Google Sheets";
-    showMessage("Could not submit the form: " + error.message, "error");
+  if (payload.items.length !== 20 ||
+      payload.items.some(item =>
+        !["Yes", "No"].includes(item.response) ||
+        item.score === ""
+      )) {
+    showStatus(
+      "Please select Yes/No and a score from 0 to 5 for all 20 activities.",
+      "error"
+    );
+    return;
   }
 
-  /*
-   * The browser cannot read the cross-origin Apps Script response.
-   * This timer only restores the button; it does not confirm saving.
-   */
-  frameLoadTimer = window.setTimeout(function() {
-    submissionPending = false;
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Submit to Google Sheets";
-    hiddenForm.remove();
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Sending checklist...";
+  showStatus("Sending your checklist to Google Sheets. Please wait...", "info");
 
-    showMessage(
-      "Submission request sent. Please check the Kaizen Records tab and Apps Script Executions to confirm the save.",
+  try {
+    const body = new URLSearchParams();
+    body.set("payload", JSON.stringify(payload));
+
+    /*
+      no-cors allows this cross-origin form submission without a preflight.
+      Its response is opaque, so JavaScript cannot verify the server result.
+    */
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: body
+    });
+
+    showStatus(
+      "The submission request was sent. Please open your Google Sheet and " +
+      "check the Kaizen Records tab to confirm that 20 new rows were saved. " +
+      "If no rows appear, verify the Spreadsheet ID, deployment permissions, " +
+      "web app URL and Apps Script execution log before retrying.",
       "info"
     );
-  }, 5000);
-}
 
-renderActivities();
-setToday();
-updateSummary();
-
-rowsContainer.addEventListener("change", updateSummary);
-form.addEventListener("change", updateSummary);
-form.addEventListener("submit", submitChecklist);
-
-document.getElementById("printBtn").addEventListener("click", function() {
-  window.print();
+  } catch (error) {
+    console.error(error);
+    showStatus(
+      "Could not send the request. Check your internet connection and " +
+      "deployed Apps Script URL, then try again.",
+      "error"
+    );
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit Checklist to Google Sheets";
+  }
 });
 
-document.getElementById("resetBtn").addEventListener("click", function() {
-  window.setTimeout(function() {
-    setToday();
-    clearMessage();
-    updateSummary();
+form.addEventListener("reset", function() {
+  setTimeout(() => {
+    document.getElementById("date").value =
+      new Date().toLocaleDateString("en-CA");
+    statusBox.className = "";
+    statusBox.textContent = "";
   }, 0);
 });
+
+document.getElementById("date").value =
+  new Date().toLocaleDateString("en-CA");
+
+buildActivities();
 </script>
 </body>
 </html>

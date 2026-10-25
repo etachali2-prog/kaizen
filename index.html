@@ -5,7 +5,6 @@
   <base target="_top">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <title>MELBA Daily Kaizen Checklist</title>
 
   <style>
@@ -20,9 +19,7 @@
       --text: #243447;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -38,11 +35,11 @@
       background: white;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 8px 28px rgba(16, 45, 79, .12);
+      box-shadow: 0 8px 28px rgba(16,45,79,.12);
     }
 
     .header {
-      background: linear-gradient(120deg, #102d4f, #1769aa);
+      background: linear-gradient(120deg,#102d4f,#1769aa);
       color: white;
       padding: 25px 22px;
       text-align: center;
@@ -55,10 +52,7 @@
       letter-spacing: .4px;
     }
 
-    .header p {
-      margin: 5px 0;
-      line-height: 1.5;
-    }
+    .header p { margin: 5px 0; line-height: 1.5; }
 
     .header .subtitle {
       color: #ffe4a5;
@@ -66,9 +60,7 @@
       font-weight: bold;
     }
 
-    .content {
-      padding: 22px;
-    }
+    .content { padding: 22px; }
 
     .section-title {
       margin: 0 0 16px;
@@ -81,7 +73,7 @@
 
     .metadata {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(3,minmax(0,1fr));
       gap: 15px;
       margin-bottom: 24px;
     }
@@ -134,13 +126,8 @@
       vertical-align: top;
     }
 
-    tbody tr:nth-child(even) {
-      background: #f7f9fc;
-    }
-
-    tbody tr:last-child td {
-      border-bottom: 0;
-    }
+    tbody tr:nth-child(even) { background: #f7f9fc; }
+    tbody tr:last-child td { border-bottom: 0; }
 
     .number {
       width: 45px;
@@ -148,14 +135,10 @@
       font-weight: bold;
     }
 
-    .activity {
-      min-width: 290px;
-      line-height: 1.5;
-    }
-
-    .response {
-      min-width: 125px;
-    }
+    .activity { min-width: 290px; line-height: 1.5; }
+    .response { min-width: 125px; }
+    .score { min-width: 85px; }
+    .comment { min-width: 180px; }
 
     .radio-option {
       display: inline-flex;
@@ -170,14 +153,6 @@
       margin: 0;
     }
 
-    .score {
-      min-width: 85px;
-    }
-
-    .comment {
-      min-width: 180px;
-    }
-
     .comment textarea {
       min-height: 54px;
       resize: vertical;
@@ -185,7 +160,7 @@
 
     .summary {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(4,minmax(0,1fr));
       gap: 12px;
       margin: 20px 0;
     }
@@ -270,25 +245,10 @@
       cursor: pointer;
     }
 
-    button:disabled {
-      opacity: .6;
-      cursor: wait;
-    }
-
-    .submit-btn {
-      background: var(--green);
-      color: white;
-    }
-
-    .print-btn {
-      background: var(--blue);
-      color: white;
-    }
-
-    .reset-btn {
-      background: #e5eaf0;
-      color: #243447;
-    }
+    button:disabled { opacity: .6; cursor: wait; }
+    .submit-btn { background: var(--green); color: white; }
+    .print-btn { background: var(--blue); color: white; }
+    .reset-btn { background: #e5eaf0; color: #243447; }
 
     .footer {
       text-align: center;
@@ -306,36 +266,18 @@
         border-radius: 0;
       }
 
-      .header {
-        padding: 20px 13px;
-      }
-
-      .header h1 {
-        font-size: 20px;
-      }
-
-      .content {
-        padding: 14px;
-      }
-
-      .metadata {
-        grid-template-columns: 1fr;
-      }
-
-      .summary {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .stat strong {
-        font-size: 22px;
-      }
+      .header { padding: 20px 13px; }
+      .header h1 { font-size: 20px; }
+      .content { padding: 14px; }
+      .metadata { grid-template-columns: 1fr; }
+      .summary { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .stat strong { font-size: 22px; }
     }
 
     @media print {
-      body {
-        background: white;
-        font-size: 10px;
-      }
+      @page { size: landscape; margin: 10mm; }
+
+      body { background: white; font-size: 10px; }
 
       .page {
         width: 100%;
@@ -351,75 +293,36 @@
         padding: 12px;
       }
 
-      .header .subtitle {
-        color: #102d4f !important;
-      }
-
-      .content {
-        padding: 10px 0;
-      }
+      .header .subtitle { color: #102d4f !important; }
+      .content { padding: 10px 0; }
 
       .actions, .notice, .progress-track {
         display: none !important;
       }
 
-      .metadata {
-        gap: 8px;
-      }
-
+      .metadata { gap: 8px; }
       input, select, textarea {
         border: 0;
         padding: 2px;
         appearance: none;
+        background: transparent;
       }
 
-      .table-wrap {
-        overflow: visible;
-        border: 0;
-      }
-
-      table {
-        min-width: 0;
-        font-size: 9px;
-      }
-
-      th, td {
-        padding: 5px;
-        border: 1px solid #bbb;
-      }
+      .table-wrap { overflow: visible; border: 0; }
+      table { min-width: 0; font-size: 9px; }
+      th, td { padding: 5px; border: 1px solid #bbb; }
 
       th {
         background: #e7edf4 !important;
         color: #102d4f !important;
       }
 
-      .activity {
-        min-width: 0;
-      }
-
-      .comment {
-        min-width: 0;
-      }
-
-      .comment textarea {
-        min-height: 25px;
-      }
-
-      .summary {
-        gap: 5px;
-      }
-
-      .stat {
-        padding: 7px;
-      }
-
-      .stat strong {
-        font-size: 15px;
-      }
-
-      tr {
-        break-inside: avoid;
-      }
+      .activity, .comment { min-width: 0; }
+      .comment textarea { min-height: 25px; }
+      .summary { gap: 5px; }
+      .stat { padding: 7px; }
+      .stat strong { font-size: 15px; }
+      tr { break-inside: avoid; }
     }
   </style>
 </head>
@@ -463,13 +366,8 @@
 
           <div class="field">
             <label for="signature">Maqaa / Mallattoo *</label>
-            <input
-              type="text"
-              id="signature"
-              maxlength="150"
-              placeholder="Enter your name"
-              required
-            >
+            <input type="text" id="signature" maxlength="150"
+                   placeholder="Enter your name" required>
           </div>
         </div>
 
@@ -499,17 +397,14 @@
             <span>Activities</span>
             <strong id="totalActivities">20</strong>
           </div>
-
           <div class="stat">
             <span>Eeyyee / Yes</span>
             <strong id="yesCount">0</strong>
           </div>
-
           <div class="stat">
             <span>Lakki / No</span>
             <strong id="noCount">0</strong>
           </div>
-
           <div class="stat">
             <span>Total Score</span>
             <strong><span id="scoreValue">0</span>/100</strong>
@@ -523,17 +418,16 @@
           </div>
         </div>
 
-        <div id="statusMessage" class="notice" role="status" aria-live="polite"></div>
+        <div id="statusMessage" class="notice"
+             role="status" aria-live="polite"></div>
 
         <div class="actions">
           <button type="submit" class="submit-btn" id="submitBtn">
             Submit to Google Sheets
           </button>
-
           <button type="button" class="print-btn" id="printBtn">
             Print / Save PDF
           </button>
-
           <button type="reset" class="reset-btn" id="resetBtn">
             Clear Form
           </button>
@@ -597,29 +491,17 @@
         return `
           <tr>
             <td class="number">${number}</td>
-
-            <td class="activity">
-              ${escapeHtml(activity)}
-            </td>
+            <td class="activity">${escapeHtml(activity)}</td>
 
             <td class="response">
               <label class="radio-option">
-                <input
-                  type="radio"
-                  name="response_${number}"
-                  value="Yes"
-                  required
-                >
+                <input type="radio" name="response_${number}"
+                       value="Yes" required>
                 Eeyyee
               </label>
-
               <label class="radio-option">
-                <input
-                  type="radio"
-                  name="response_${number}"
-                  value="No"
-                  required
-                >
+                <input type="radio" name="response_${number}"
+                       value="No" required>
                 Lakki
               </label>
             </td>
@@ -637,16 +519,16 @@
             </td>
 
             <td class="comment">
-              <textarea
-                id="comment_${number}"
-                maxlength="2000"
-                placeholder="Yaada / Comment..."
-                aria-label="Comment for activity ${number}"
-              ></textarea>
+              <textarea id="comment_${number}" maxlength="2000"
+                        placeholder="Yaada / Comment..."
+                        aria-label="Comment for activity ${number}"></textarea>
             </td>
           </tr>
         `;
       }).join("");
+
+      document.getElementById("totalActivities").textContent =
+        activities.length;
     }
 
     function updateSummary() {
@@ -667,7 +549,10 @@
         score += Number(scoreSelect ? scoreSelect.value : 0);
       });
 
-      const percentage = score;
+      const maximumScore = activities.length * 5;
+      const percentage = maximumScore
+        ? Math.round(score / maximumScore * 100)
+        : 0;
 
       document.getElementById("yesCount").textContent = yes;
       document.getElementById("noCount").textContent = no;
@@ -690,10 +575,6 @@
     }
 
     function getPayload() {
-      const date = document.getElementById("checkDate").value;
-      const department = document.getElementById("department").value;
-      const signature = document.getElementById("signature").value.trim();
-
       const items = activities.map(function(activity, index) {
         const number = index + 1;
         const selected = document.querySelector(
@@ -706,14 +587,15 @@
           score: Number(
             document.getElementById("score_" + number).value
           ),
-          comment: document.getElementById("comment_" + number).value.trim()
+          comment: document.getElementById("comment_" + number)
+            .value.trim()
         };
       });
 
       return {
-        date: date,
-        department: department,
-        signature: signature,
+        date: document.getElementById("checkDate").value,
+        department: document.getElementById("department").value,
+        signature: document.getElementById("signature").value.trim(),
         items: items
       };
     }
@@ -724,15 +606,19 @@
 
       if (!form.reportValidity()) {
         showMessage(
-          "Maaloo odeeffannoo dirqamaa hunda guuti. Please complete the required fields.",
+          "Maaloo odeeffannoo dirqamaa hunda guuti. Please complete all required fields.",
           "error"
         );
         return;
       }
 
-      if (!window.google || !google.script || !google.script.run) {
+      if (
+        !window.google ||
+        !google.script ||
+        !google.script.run
+      ) {
         showMessage(
-          "https://script.google.com/macros/s/AKfycbyGAj25IshrN98gwWLrT7MZ2x-uTy5wKdb_mQHt68wAaG9QgNTrxs5FmhC90oK9LeZ-/exec",
+          "Google Sheets submission requires the deployed Google Apps Script web app. Please open the web app URL.",
           "error"
         );
         return;
@@ -743,7 +629,10 @@
       submitBtn.disabled = true;
       submitBtn.textContent = "Submitting...";
 
-      showMessage("Submitting checklist to Google Sheets. Please wait...", "info");
+      showMessage(
+        "Submitting checklist to Google Sheets. Please wait...",
+        "info"
+      );
 
       google.script.run
         .withSuccessHandler(function(result) {
@@ -752,7 +641,9 @@
 
           if (!result || !result.success) {
             showMessage(
-              "The server did not confirm that the data was saved. Please check the sheet.",
+              result && result.message
+                ? result.message
+                : "The server did not confirm that the data was saved. Check Code.gs and your Google Sheet.",
               "error"
             );
             return;

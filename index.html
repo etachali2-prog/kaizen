@@ -2,706 +2,511 @@
 <!DOCTYPE html>
 <html lang="om">
 <head>
-  <base target="_top">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MELBA Daily Kaizen Checklist</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MELBA Daily Kaizen Checklist</title>
 
-  <style>
-    :root {
-      --navy: #102d4f;
-      --blue: #1769aa;
-      --gold: #f2b84b;
-      --green: #16845b;
-      --red: #c0392b;
-      --light: #f2f6fa;
-      --border: #d8e0e8;
-      --text: #243447;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      background: #eaf0f6;
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 14px;
-    }
-
-    .page {
-      width: min(1150px, 96%);
-      margin: 22px auto;
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 8px 28px rgba(16,45,79,.12);
-    }
-
-    .header {
-      background: linear-gradient(120deg,#102d4f,#1769aa);
-      color: white;
-      padding: 25px 22px;
-      text-align: center;
-      border-bottom: 5px solid var(--gold);
-    }
-
-    .header h1 {
-      font-size: 24px;
-      margin: 0 0 8px;
-      letter-spacing: .4px;
-    }
-
-    .header p { margin: 5px 0; line-height: 1.5; }
-
-    .header .subtitle {
-      color: #ffe4a5;
-      font-size: 17px;
-      font-weight: bold;
-    }
-
-    .content { padding: 22px; }
-
-    .section-title {
-      margin: 0 0 16px;
-      color: var(--navy);
-      font-size: 17px;
-      border-left: 5px solid var(--gold);
-      padding: 9px 12px;
-      background: #f3f7fb;
-    }
-
-    .metadata {
-      display: grid;
-      grid-template-columns: repeat(3,minmax(0,1fr));
-      gap: 15px;
-      margin-bottom: 24px;
-    }
-
-    .field label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 7px;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      border: 1px solid #cbd5e1;
-      border-radius: 7px;
-      padding: 10px;
-      background: white;
-      color: var(--text);
-      font: inherit;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      outline: 2px solid #9dc8ee;
-      border-color: var(--blue);
-    }
-
-    .table-wrap {
-      width: 100%;
-      overflow-x: auto;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-    }
-
-    table {
-      width: 100%;
-      min-width: 850px;
-      border-collapse: collapse;
-    }
-
-    th {
-      background: var(--navy);
-      color: white;
-      text-align: left;
-      padding: 12px 10px;
-      font-size: 13px;
-    }
-
-    td {
-      border-bottom: 1px solid var(--border);
-      padding: 10px;
-      vertical-align: top;
-    }
-
-    tbody tr:nth-child(even) { background: #f7f9fc; }
-    tbody tr:last-child td { border-bottom: 0; }
-
-    .number {
-      width: 45px;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    .activity { min-width: 290px; line-height: 1.5; }
-    .response { min-width: 125px; }
-    .score { min-width: 85px; }
-    .comment { min-width: 180px; }
-
-    .radio-option {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      margin: 5px 8px 5px 0;
-      white-space: nowrap;
-    }
-
-    .radio-option input {
-      width: auto;
-      margin: 0;
-    }
-
-    .comment textarea {
-      min-height: 54px;
-      resize: vertical;
-    }
-
-    .summary {
-      display: grid;
-      grid-template-columns: repeat(4,minmax(0,1fr));
-      gap: 12px;
-      margin: 20px 0;
-    }
-
-    .stat {
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      padding: 15px;
-      background: #f8fafc;
-    }
-
-    .stat span {
-      display: block;
-      color: #5d6b7a;
-      font-size: 12px;
-      margin-bottom: 8px;
-    }
-
-    .stat strong {
-      color: var(--navy);
-      font-size: 25px;
-    }
-
-    .progress-track {
-      background: #e1e8ef;
-      border-radius: 20px;
-      height: 12px;
-      overflow: hidden;
-      margin-top: 12px;
-    }
-
-    .progress-bar {
-      height: 100%;
-      width: 0;
-      background: var(--green);
-      transition: width .2s ease;
-    }
-
-    .notice {
-      display: none;
-      padding: 13px 15px;
-      border-radius: 7px;
-      margin: 15px 0;
-      line-height: 1.5;
-      overflow-wrap: anywhere;
-    }
-
-    .notice.success {
-      display: block;
-      background: #e8f7ee;
-      color: #12683e;
-      border: 1px solid #b9e6ca;
-    }
-
-    .notice.error {
-      display: block;
-      background: #fff0ef;
-      color: #9b2620;
-      border: 1px solid #f1c1bd;
-    }
-
-    .notice.info {
-      display: block;
-      background: #eaf4ff;
-      color: #164f85;
-      border: 1px solid #c7def5;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 22px;
-    }
-
-    button {
-      border: 0;
-      border-radius: 7px;
-      padding: 12px 19px;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:disabled { opacity: .6; cursor: wait; }
-    .submit-btn { background: var(--green); color: white; }
-    .print-btn { background: var(--blue); color: white; }
-    .reset-btn { background: #e5eaf0; color: #243447; }
-
-    .footer {
-      text-align: center;
-      background: #f3f6f9;
-      border-top: 1px solid var(--border);
-      padding: 15px;
-      color: #667788;
-      font-size: 12px;
-    }
-
-    @media (max-width: 720px) {
-      .page {
-        width: 100%;
-        margin: 0;
-        border-radius: 0;
-      }
-
-      .header { padding: 20px 13px; }
-      .header h1 { font-size: 20px; }
-      .content { padding: 14px; }
-      .metadata { grid-template-columns: 1fr; }
-      .summary { grid-template-columns: repeat(2,minmax(0,1fr)); }
-      .stat strong { font-size: 22px; }
-    }
-
-    @media print {
-      @page { size: landscape; margin: 10mm; }
-
-      body { background: white; font-size: 10px; }
-
-      .page {
-        width: 100%;
-        margin: 0;
-        box-shadow: none;
-        border-radius: 0;
-      }
-
-      .header {
-        background: white !important;
-        color: #102d4f !important;
-        border-bottom: 2px solid #102d4f;
-        padding: 12px;
-      }
-
-      .header .subtitle { color: #102d4f !important; }
-      .content { padding: 10px 0; }
-
-      .actions, .notice, .progress-track {
-        display: none !important;
-      }
-
-      .metadata { gap: 8px; }
-      input, select, textarea {
-        border: 0;
-        padding: 2px;
-        appearance: none;
-        background: transparent;
-      }
-
-      .table-wrap { overflow: visible; border: 0; }
-      table { min-width: 0; font-size: 9px; }
-      th, td { padding: 5px; border: 1px solid #bbb; }
-
-      th {
-        background: #e7edf4 !important;
-        color: #102d4f !important;
-      }
-
-      .activity, .comment { min-width: 0; }
-      .comment textarea { min-height: 25px; }
-      .summary { gap: 5px; }
-      .stat { padding: 7px; }
-      .stat strong { font-size: 15px; }
-      tr { break-inside: avoid; }
-    }
-  </style>
+<style>
+:root {
+  --navy:#102d4f;
+  --blue:#1769aa;
+  --gold:#f2b84b;
+  --green:#16845b;
+  --red:#c0392b;
+  --border:#d8e0e8;
+  --text:#243447;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:#eaf0f6;color:var(--text);
+  font:14px Arial,Helvetica,sans-serif
+}
+.page{
+  width:min(1150px,96%);margin:22px auto;background:white;
+  border-radius:12px;overflow:hidden;
+  box-shadow:0 8px 28px rgba(16,45,79,.12)
+}
+.header{
+  background:linear-gradient(120deg,#102d4f,#1769aa);
+  color:white;padding:25px 22px;text-align:center;
+  border-bottom:5px solid var(--gold)
+}
+.header h1{font-size:24px;margin:0 0 8px}
+.header p{margin:5px 0;line-height:1.5}
+.subtitle{color:#ffe4a5;font-size:17px;font-weight:bold}
+.content{padding:22px}
+.section-title{
+  margin:0 0 16px;color:var(--navy);font-size:17px;
+  border-left:5px solid var(--gold);padding:9px 12px;
+  background:#f3f7fb
+}
+.metadata{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:15px;margin-bottom:24px
+}
+.field label{display:block;font-weight:bold;margin-bottom:7px}
+input,select,textarea{
+  width:100%;border:1px solid #cbd5e1;border-radius:7px;
+  padding:10px;background:white;color:var(--text);font:inherit
+}
+input:focus,select:focus,textarea:focus{
+  outline:2px solid #9dc8ee;border-color:var(--blue)
+}
+.table-wrap{
+  width:100%;overflow-x:auto;border:1px solid var(--border);
+  border-radius:8px
+}
+table{width:100%;min-width:850px;border-collapse:collapse}
+th{
+  background:var(--navy);color:white;text-align:left;
+  padding:12px 10px;font-size:13px
+}
+td{border-bottom:1px solid var(--border);padding:10px;vertical-align:top}
+tbody tr:nth-child(even){background:#f7f9fc}
+tbody tr:last-child td{border-bottom:0}
+.number{width:45px;text-align:center;font-weight:bold}
+.activity{min-width:290px;line-height:1.5}
+.response{min-width:125px}
+.score{min-width:85px}
+.comment{min-width:180px}
+.radio-option{
+  display:inline-flex;align-items:center;gap:5px;
+  margin:5px 8px 5px 0;white-space:nowrap
+}
+.radio-option input{width:auto;margin:0}
+.comment textarea{min-height:54px;resize:vertical}
+.summary{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;margin:20px 0
+}
+.stat{
+  border:1px solid var(--border);border-radius:9px;
+  padding:15px;background:#f8fafc
+}
+.stat span{display:block;color:#5d6b7a;font-size:12px;margin-bottom:8px}
+.stat strong{color:var(--navy);font-size:25px}
+.progress-track{
+  background:#e1e8ef;border-radius:20px;height:12px;
+  overflow:hidden;margin-top:12px
+}
+.progress-bar{
+  height:100%;width:0;background:var(--green);
+  transition:width .2s ease
+}
+.notice{
+  display:none;padding:13px 15px;border-radius:7px;
+  margin:15px 0;line-height:1.5;overflow-wrap:anywhere
+}
+.notice.success{display:block;background:#e8f7ee;color:#12683e;border:1px solid #b9e6ca}
+.notice.error{display:block;background:#fff0ef;color:#9b2620;border:1px solid #f1c1bd}
+.notice.info{display:block;background:#eaf4ff;color:#164f85;border:1px solid #c7def5}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+button{
+  border:0;border-radius:7px;padding:12px 19px;
+  font-size:14px;font-weight:bold;cursor:pointer
+}
+button:disabled{opacity:.6;cursor:wait}
+.submit-btn{background:var(--green);color:white}
+.print-btn{background:var(--blue);color:white}
+.reset-btn{background:#e5eaf0;color:#243447}
+.footer{
+  text-align:center;background:#f3f6f9;border-top:1px solid var(--border);
+  padding:15px;color:#667788;font-size:12px
+}
+@media(max-width:720px){
+  .page{width:100%;margin:0;border-radius:0}
+  .header{padding:20px 13px}
+  .header h1{font-size:20px}
+  .content{padding:14px}
+  .metadata{grid-template-columns:1fr}
+  .summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat strong{font-size:22px}
+}
+@media print{
+  @page{size:landscape;margin:10mm}
+  body{background:white;font-size:10px}
+  .page{width:100%;margin:0;box-shadow:none;border-radius:0}
+  .header{
+    background:white!important;color:#102d4f!important;
+    border-bottom:2px solid #102d4f;padding:12px
+  }
+  .subtitle{color:#102d4f!important}
+  .content{padding:10px 0}
+  .actions,.notice,.progress-track{display:none!important}
+  .metadata{gap:8px}
+  input,select,textarea{
+    border:0;padding:2px;appearance:none;background:transparent
+  }
+  .table-wrap{overflow:visible;border:0}
+  table{min-width:0;font-size:9px}
+  th,td{padding:5px;border:1px solid #bbb}
+  th{background:#e7edf4!important;color:#102d4f!important}
+  .activity,.comment{min-width:0}
+  .comment textarea{min-height:25px}
+  .summary{gap:5px}
+  .stat{padding:7px}
+  .stat strong{font-size:15px}
+  tr{break-inside:avoid}
+}
+</style>
 </head>
 
 <body>
-  <main class="page">
-    <header class="header">
-      <h1>MELBA PRINTING, PUBLISHING &amp; PACKAGING S.C.</h1>
-      <p>Daayirektoreetii Teekinikaa</p>
-      <p class="subtitle">
-        Cheekliistii Hojii Irra Oolmaan Kaayizenii Guyyaa Guyyaan Ittiin Hordofamu
-      </p>
-      <p>
-        Sirna Qulqullinaa, Qindoominaa, Yeroo, Rakkoo fi Fooyya'iinsa Itti Fufiinsa Qabu Hordofuuf
-      </p>
-    </header>
+<main class="page">
+  <header class="header">
+    <h1>MELBA PRINTING, PUBLISHING &amp; PACKAGING S.C.</h1>
+    <p>Daayirektoreetii Teekinikaa</p>
+    <p class="subtitle">
+      Cheekliistii Hojii Irra Oolmaan Kaayizenii Guyyaa Guyyaan Ittiin Hordofamu
+    </p>
+    <p>
+      Sirna Qulqullinaa, Qindoominaa, Yeroo, Rakkoo fi Fooyya'iinsa Itti Fufiinsa Qabu Hordofuuf
+    </p>
+  </header>
 
-    <section class="content">
-      <h2 class="section-title">Odeeffannoo Waliigalaa</h2>
+  <section class="content">
+    <h2 class="section-title">Odeeffannoo Waliigalaa</h2>
 
-      <form id="checklistForm">
-        <div class="metadata">
-          <div class="field">
-            <label for="checkDate">Guyyaa / Date *</label>
-            <input type="date" id="checkDate" required>
-          </div>
-
-          <div class="field">
-            <label for="department">Daayirektoreetii / Department *</label>
-            <select id="department" required>
-              <option value="">-- Select Department --</option>
-              <option>Production Directorate</option>
-              <option>Technical Directorate</option>
-              <option>Finance</option>
-              <option>General Service</option>
-              <option>Marketing</option>
-              <option>Human Resource</option>
-              <option>Procurement</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="signature">Maqaa / Mallattoo *</label>
-            <input type="text" id="signature" maxlength="150"
-                   placeholder="Enter your name" required>
-          </div>
+    <form id="checklistForm">
+      <div class="metadata">
+        <div class="field">
+          <label for="checkDate">Guyyaa / Date *</label>
+          <input type="date" id="checkDate" required>
         </div>
 
-        <h2 class="section-title">Hojiiwwan Hordofaman / Checklist Activities</h2>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th class="number">Lakk.</th>
-                <th>Hojiiwwan Hordofaman</th>
-                <th>Eeyyee / Lakki</th>
-                <th>Qabxii (0–5)</th>
-                <th>Yaada / Comment</th>
-              </tr>
-            </thead>
-            <tbody id="activityRows"></tbody>
-          </table>
+        <div class="field">
+          <label for="department">Daayirektoreetii / Department *</label>
+          <select id="department" required>
+            <option value="">-- Select Department --</option>
+            <option>Production Directorate</option>
+            <option>Technical Directorate</option>
+            <option>Finance</option>
+            <option>General Service</option>
+            <option>Marketing</option>
+            <option>Human Resource</option>
+            <option>Procurement</option>
+          </select>
         </div>
 
-        <h2 class="section-title" style="margin-top:24px">
-          Cuunfaa / Daily Summary
-        </h2>
-
-        <div class="summary">
-          <div class="stat">
-            <span>Activities</span>
-            <strong id="totalActivities">20</strong>
-          </div>
-          <div class="stat">
-            <span>Eeyyee / Yes</span>
-            <strong id="yesCount">0</strong>
-          </div>
-          <div class="stat">
-            <span>Lakki / No</span>
-            <strong id="noCount">0</strong>
-          </div>
-          <div class="stat">
-            <span>Total Score</span>
-            <strong><span id="scoreValue">0</span>/100</strong>
-          </div>
+        <div class="field">
+          <label for="signature">Maqaa / Mallattoo *</label>
+          <input type="text" id="signature" maxlength="150"
+                 placeholder="Enter your name" required>
         </div>
+      </div>
 
-        <div>
-          <strong id="scorePercent">0% Score</strong>
-          <div class="progress-track">
-            <div class="progress-bar" id="progressBar"></div>
-          </div>
+      <h2 class="section-title">Hojiiwwan Hordofaman / Checklist Activities</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="number">Lakk.</th>
+              <th>Hojiiwwan Hordofaman</th>
+              <th>Eeyyee / Lakki</th>
+              <th>Qabxii (0–5)</th>
+              <th>Yaada / Comment</th>
+            </tr>
+          </thead>
+          <tbody id="activityRows"></tbody>
+        </table>
+      </div>
+
+      <h2 class="section-title" style="margin-top:24px">
+        Cuunfaa / Daily Summary
+      </h2>
+
+      <div class="summary">
+        <div class="stat">
+          <span>Activities</span>
+          <strong id="totalActivities">20</strong>
         </div>
-
-        <div id="statusMessage" class="notice"
-             role="status" aria-live="polite"></div>
-
-        <div class="actions">
-          <button type="submit" class="submit-btn" id="submitBtn">
-            Submit to Google Sheets
-          </button>
-          <button type="button" class="print-btn" id="printBtn">
-            Print / Save PDF
-          </button>
-          <button type="reset" class="reset-btn" id="resetBtn">
-            Clear Form
-          </button>
+        <div class="stat">
+          <span>Eeyyee / Yes</span>
+          <strong id="yesCount">0</strong>
         </div>
-      </form>
-    </section>
+        <div class="stat">
+          <span>Lakki / No</span>
+          <strong id="noCount">0</strong>
+        </div>
+        <div class="stat">
+          <span>Total Score</span>
+          <strong><span id="scoreValue">0</span>/100</strong>
+        </div>
+      </div>
 
-    <footer class="footer">
-      MELBA Technical Department | Daily Kaizen Monitoring System
-    </footer>
-  </main>
+      <div>
+        <strong id="scorePercent">0% Score</strong>
+        <div class="progress-track">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
 
-  <script>
-    "use strict";
+      <div id="statusMessage" class="notice"
+           role="status" aria-live="polite"></div>
 
-    const activities = [
-      "Iddoo hojii fi meeshaaleen hojii qulqulluu fi sirnaan qindaa'anii jiru?",
-      "Meeshaaleen barbaachisoon bakka isaanii irratti argamu?",
-      "Meeshaaleen hin barbaachifne iddoo hojii irraa kaafamaniiru?",
-      "Karaa deeminsaa fi bakka hojii gufuu irraa bilisa dha?",
-      "Meeshaaleen hojii fi meeshaaleen nageenyaa sirnaan kaa'amaniiru?",
-      "Maashinoonni fi meeshaaleen hojii qulqulluu ta'anii jiru?",
-      "Balfa, waraqaa haftee fi wantoonni hin barbaachifne sirnaan walitti qabamaniiru?",
-      "Mallattoon nageenyaa fi akeekkachiisaa ifatti mul'ata?",
-      "Rakkooleen maashinii fi meeshaalee argaman galmeeffamaniiru?",
-      "Rakkooleen hojii irratti mul'atan itti gaafatamtootaaf gabaafamaniiru?",
-      "Meeshaaleen hojii dura sakatta'amanii jiru?",
-      "Hojiiwwan guyyaa karooraan qophaa'an hordofamaniiru?",
-      "Meeshaaleen spare part fi meeshaaleen suphaa barbaachisan adda baafamaniiru?",
-      "Humni ibsaa fi hidhiinsi elektirikii nageenyaan sakatta'ameera?",
-      "Dhangaala'aan zayitaa, bishaanii fi qilleensaa yoo jiraate gabaafameera?",
-      "Meeshaaleen safartuu fi meeshaaleen hojii sirnaan kunuunfamaniiru?",
-      "Hojiiwwan suphaa xumuraman galmee irratti galmeeffamaniiru?",
-      "Hojjettoonni meeshaalee nageenyaa barbaachisan fayyadamaa jiru?",
-      "Yaadni fooyya'iinsaa fi furmaanni rakkoo kaafameera?",
-      "Hojiiwwan fooyya'iinsa guyyaa darbe irratti hordoffiin taasifameera?"
-    ];
+      <div class="actions">
+        <button type="submit" class="submit-btn" id="submitBtn">
+          Submit to Google Sheets
+        </button>
+        <button type="button" class="print-btn" id="printBtn">
+          Print / Save PDF
+        </button>
+        <button type="reset" class="reset-btn" id="resetBtn">
+          Clear Form
+        </button>
+      </div>
+    </form>
+  </section>
 
-    const form = document.getElementById("checklistForm");
-    const rowsContainer = document.getElementById("activityRows");
-    const submitBtn = document.getElementById("submitBtn");
-    const statusMessage = document.getElementById("statusMessage");
+  <footer class="footer">
+    MELBA Technical Department | Daily Kaizen Monitoring System
+  </footer>
+</main>
 
-    function escapeHtml(value) {
-      return String(value).replace(/[&<>"']/g, function(character) {
-        const map = {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#039;"
-        };
-        return map[character];
-      });
-    }
+<script>
+"use strict";
 
-    function renderActivities() {
-      rowsContainer.innerHTML = activities.map(function(activity, index) {
-        const number = index + 1;
+/* YOUR GOOGLE APPS SCRIPT WEB APP URL */
+const scriptUrl =
+  "https://script.google.com/macros/s/AKfycbzkxF9XjwJosK3E4kKQvbJ48i6PgJyWB-074iIJDSzGXCFm-e9GCOzn9oHOD89KZYwg/exec";
 
-        return `
-          <tr>
-            <td class="number">${number}</td>
-            <td class="activity">${escapeHtml(activity)}</td>
+const activities = [
+  "Iddoo hojii fi meeshaaleen hojii qulqulluu fi sirnaan qindaa'anii jiru?",
+  "Meeshaaleen barbaachisoon bakka isaanii irratti argamu?",
+  "Meeshaaleen hin barbaachifne iddoo hojii irraa kaafamaniiru?",
+  "Karaa deeminsaa fi bakka hojii gufuu irraa bilisa dha?",
+  "Meeshaaleen hojii fi meeshaaleen nageenyaa sirnaan kaa'amaniiru?",
+  "Maashinoonni fi meeshaaleen hojii qulqulluu ta'anii jiru?",
+  "Balfa, waraqaa haftee fi wantoonni hin barbaachifne sirnaan walitti qabamaniiru?",
+  "Mallattoon nageenyaa fi akeekkachiisaa ifatti mul'ata?",
+  "Rakkooleen maashinii fi meeshaalee argaman galmeeffamaniiru?",
+  "Rakkooleen hojii irratti mul'atan itti gaafatamtootaaf gabaafamaniiru?",
+  "Meeshaaleen hojii dura sakatta'amanii jiru?",
+  "Hojiiwwan guyyaa karooraan qophaa'an hordofamaniiru?",
+  "Meeshaaleen spare part fi meeshaaleen suphaa barbaachisan adda baafamaniiru?",
+  "Humni ibsaa fi hidhiinsi elektirikii nageenyaan sakatta'ameera?",
+  "Dhangaala'aan zayitaa, bishaanii fi qilleensaa yoo jiraate gabaafameera?",
+  "Meeshaaleen safartuu fi meeshaaleen hojii sirnaan kunuunfamaniiru?",
+  "Hojiiwwan suphaa xumuraman galmee irratti galmeeffamaniiru?",
+  "Hojjettoonni meeshaalee nageenyaa barbaachisan fayyadamaa jiru?",
+  "Yaadni fooyya'iinsaa fi furmaanni rakkoo kaafameera?",
+  "Hojiiwwan fooyya'iinsa guyyaa darbe irratti hordoffiin taasifameera?"
+];
 
-            <td class="response">
-              <label class="radio-option">
-                <input type="radio" name="response_${number}"
-                       value="Yes" required>
-                Eeyyee
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="response_${number}"
-                       value="No" required>
-                Lakki
-              </label>
-            </td>
+const form = document.getElementById("checklistForm");
+const rowsContainer = document.getElementById("activityRows");
+const submitBtn = document.getElementById("submitBtn");
+const statusMessage = document.getElementById("statusMessage");
 
-            <td class="score">
-              <select id="score_${number}" required
-                      aria-label="Score for activity ${number}">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-            </td>
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, function(character) {
+    return {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    }[character];
+  });
+}
 
-            <td class="comment">
-              <textarea id="comment_${number}" maxlength="2000"
-                        placeholder="Yaada / Comment..."
-                        aria-label="Comment for activity ${number}"></textarea>
-            </td>
-          </tr>
-        `;
-      }).join("");
+function renderActivities() {
+  rowsContainer.innerHTML = activities.map(function(activity, index) {
+    const number = index + 1;
 
-      document.getElementById("totalActivities").textContent =
-        activities.length;
-    }
+    return `
+      <tr>
+        <td class="number">${number}</td>
+        <td class="activity">${escapeHtml(activity)}</td>
+        <td class="response">
+          <label class="radio-option">
+            <input type="radio" name="response_${number}"
+                   value="Yes" required>
+            Eeyyee
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="response_${number}"
+                   value="No" required>
+            Lakki
+          </label>
+        </td>
+        <td class="score">
+          <select id="score_${number}" required
+                  aria-label="Score for activity ${number}">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </td>
+        <td class="comment">
+          <textarea id="comment_${number}" maxlength="2000"
+                    placeholder="Yaada / Comment..."
+                    aria-label="Comment for activity ${number}"></textarea>
+        </td>
+      </tr>
+    `;
+  }).join("");
 
-    function updateSummary() {
-      let yes = 0;
-      let no = 0;
-      let score = 0;
+  document.getElementById("totalActivities").textContent =
+    activities.length;
+}
 
-      activities.forEach(function(activity, index) {
-        const number = index + 1;
-        const selected = document.querySelector(
-          'input[name="response_' + number + '"]:checked'
-        );
+function updateSummary() {
+  let yes = 0;
+  let no = 0;
+  let score = 0;
 
-        if (selected && selected.value === "Yes") yes++;
-        if (selected && selected.value === "No") no++;
+  activities.forEach(function(activity, index) {
+    const number = index + 1;
+    const selected = document.querySelector(
+      'input[name="response_' + number + '"]:checked'
+    );
 
-        const scoreSelect = document.getElementById("score_" + number);
-        score += Number(scoreSelect ? scoreSelect.value : 0);
-      });
+    if (selected && selected.value === "Yes") yes++;
+    if (selected && selected.value === "No") no++;
 
-      const maximumScore = activities.length * 5;
-      const percentage = maximumScore
-        ? Math.round(score / maximumScore * 100)
-        : 0;
+    score += Number(
+      document.getElementById("score_" + number).value
+    );
+  });
 
-      document.getElementById("yesCount").textContent = yes;
-      document.getElementById("noCount").textContent = no;
-      document.getElementById("scoreValue").textContent = score;
-      document.getElementById("scorePercent").textContent =
-        percentage + "% Score";
+  const maximumScore = activities.length * 5;
+  const percentage = Math.round(score / maximumScore * 100);
 
-      document.getElementById("progressBar").style.width =
-        percentage + "%";
-    }
+  document.getElementById("yesCount").textContent = yes;
+  document.getElementById("noCount").textContent = no;
+  document.getElementById("scoreValue").textContent = score;
+  document.getElementById("scorePercent").textContent =
+    percentage + "% Score";
+  document.getElementById("progressBar").style.width =
+    percentage + "%";
+}
 
-    function showMessage(message, type) {
-      statusMessage.textContent = message;
-      statusMessage.className = "notice " + type;
-    }
+function showMessage(message, type) {
+  statusMessage.textContent = message;
+  statusMessage.className = "notice " + type;
+}
 
-    function clearMessage() {
-      statusMessage.textContent = "";
-      statusMessage.className = "notice";
-    }
+function clearMessage() {
+  statusMessage.textContent = "";
+  statusMessage.className = "notice";
+}
 
-    function getPayload() {
-      const items = activities.map(function(activity, index) {
-        const number = index + 1;
-        const selected = document.querySelector(
-          'input[name="response_' + number + '"]:checked'
-        );
+function getPayload() {
+  const items = activities.map(function(activity, index) {
+    const number = index + 1;
+    const selected = document.querySelector(
+      'input[name="response_' + number + '"]:checked'
+    );
 
-        return {
-          activity: activity,
-          response: selected ? selected.value : "",
-          score: Number(
-            document.getElementById("score_" + number).value
-          ),
-          comment: document.getElementById("comment_" + number)
-            .value.trim()
-        };
-      });
+    return {
+      activity: activity,
+      response: selected ? selected.value : "",
+      score: Number(
+        document.getElementById("score_" + number).value
+      ),
+      comment: document.getElementById("comment_" + number)
+        .value.trim()
+    };
+  });
 
-      return {
-        date: document.getElementById("checkDate").value,
-        department: document.getElementById("department").value,
-        signature: document.getElementById("signature").value.trim(),
-        items: items
-      };
-    }
+  return {
+    date: document.getElementById("checkDate").value,
+    department: document.getElementById("department").value,
+    signature: document.getElementById("signature").value.trim(),
+    items: items
+  };
+}
 
-    function submitChecklist(event) {
-      event.preventDefault();
-      clearMessage();
+/*
+ * Submit to the deployed Apps Script URL.
+ * no-cors means the browser cannot read the server response.
+ */
+async function submitChecklist(event) {
+  event.preventDefault();
+  clearMessage();
 
-      if (!form.reportValidity()) {
-        showMessage(
-          "Maaloo odeeffannoo dirqamaa hunda guuti. Please complete all required fields.",
-          "error"
-        );
-        return;
-      }
+  if (!form.reportValidity()) {
+    showMessage(
+      "Please complete all required fields and answer all 20 activities.",
+      "error"
+    );
+    return;
+  }
 
-      if (
-        !window.google ||
-        !google.script ||
-        !google.script.run
-      ) {
-        showMessage(
-          "Google Sheets submission requires the deployed Google Apps Script web app. Please open the web app URL.",
-          "error"
-        );
-        return;
-      }
+  const payload = getPayload();
 
-      const payload = getPayload();
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Submitting...";
 
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Submitting...";
+  showMessage(
+    "Sending checklist to Google Sheets. Please wait...",
+    "info"
+  );
 
-      showMessage(
-        "Submitting checklist to Google Sheets. Please wait...",
-        "info"
-      );
+  try {
+    await fetch(scriptUrl, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    });
 
-      google.script.run
-        .withSuccessHandler(function(result) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = "Submit to Google Sheets";
+    showMessage(
+      "The submission request was sent. Please verify the Kaizen Records sheet to confirm that all 20 activity records were saved.",
+      "info"
+    );
 
-          if (!result || !result.success) {
-            showMessage(
-              result && result.message
-                ? result.message
-                : "The server did not confirm that the data was saved. Check Code.gs and your Google Sheet.",
-              "error"
-            );
-            return;
-          }
+  } catch (error) {
+    showMessage(
+      "Unable to send the request. Check your internet connection, Apps Script URL, and deployment permissions.",
+      "error"
+    );
 
-          showMessage(
-            "SUCCESS! Checklist saved to Google Sheets. " +
-            result.recordsSaved + " activity records saved. " +
-            "Yes: " + result.yesCount +
-            " | No: " + result.noCount +
-            " | Score: " + result.totalScore +
-            "/" + result.maximumScore +
-            " (" + result.percentage + "%).",
-            "success"
-          );
-        })
-        .withFailureHandler(function(error) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = "Submit to Google Sheets";
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit to Google Sheets";
+  }
+}
 
-          const message = error && error.message
-            ? error.message
-            : String(error || "Unknown error");
+function setToday() {
+  const now = new Date();
 
-          showMessage("FAILED TO SAVE: " + message, "error");
-        })
-        .saveChecklist(payload);
-    }
+  const localDate = [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, "0"),
+    String(now.getDate()).padStart(2, "0")
+  ].join("-");
 
-    function setToday() {
-      const now = new Date();
-      const localDate = [
-        now.getFullYear(),
-        String(now.getMonth() + 1).padStart(2, "0"),
-        String(now.getDate()).padStart(2, "0")
-      ].join("-");
+  document.getElementById("checkDate").value = localDate;
+}
 
-      document.getElementById("checkDate").value = localDate;
-    }
+/* Initialize the form */
+renderActivities();
+setToday();
+updateSummary();
 
-    renderActivities();
+rowsContainer.addEventListener("change", updateSummary);
+form.addEventListener("change", updateSummary);
+form.addEventListener("submit", submitChecklist);
+
+document.getElementById("printBtn").addEventListener("click", function() {
+  window.print();
+});
+
+document.getElementById("resetBtn").addEventListener("click", function() {
+  window.setTimeout(function() {
     setToday();
+    clearMessage();
     updateSummary();
-
-    rowsContainer.addEventListener("change", updateSummary);
-    form.addEventListener("submit", submitChecklist);
-
-    document.getElementById("printBtn").addEventListener("click", function() {
-      window.print();
-    });
-
-    document.getElementById("resetBtn").addEventListener("click", function() {
-      window.setTimeout(function() {
-        setToday();
-        clearMessage();
-        updateSummary();
-      }, 0);
-    });
-  </script>
+  }, 0);
+});
+</script>
 </body>
 </html>

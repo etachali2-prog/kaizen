@@ -1,135 +1,325 @@
 
 <!DOCTYPE html>
-<html lang="om">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Cheekliistii Kaayizenii Guyyaa Guyyaa</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    color: #222;
-  }
-  h2, h3, p { text-align: center; }
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    font-size: 13px;
-  }
-  th, td {
-    border: 1px solid #555;
-    padding: 8px;
-    text-align: left;
-  }
-  th {
-    background: #d9ead3;
-    text-align: center;
-  }
-  .title {
-    background: #b6d7a8;
-    font-weight: bold;
-    text-align: center;
-  }
-  button {
-    margin: 15px 0;
-    padding: 10px 18px;
-    background: #188038;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-</style>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f6f4;
+      color: #202820;
+      margin: 0;
+      padding: 16px;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: auto;
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px #00000012;
+    }
+
+    h1 {
+      color: #216e39;
+      text-align: center;
+      font-size: 24px;
+    }
+
+    .subtitle {
+      text-align: center;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    label { font-weight: bold; }
+
+    input[type="date"],
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #c9d2ca;
+      border-radius: 6px;
+      font: inherit;
+    }
+
+    .field { margin: 16px 0; }
+
+    .task {
+      border: 1px solid #dce4dc;
+      border-radius: 8px;
+      padding: 14px;
+      margin: 12px 0;
+    }
+
+    .task-title {
+      font-weight: bold;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .choices {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 12px;
+    }
+
+    .choices label {
+      font-weight: normal;
+      cursor: pointer;
+    }
+
+    input[type="radio"] {
+      accent-color: #188038;
+      transform: scale(1.15);
+      margin-right: 5px;
+    }
+
+    button {
+      border: none;
+      border-radius: 7px;
+      padding: 13px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #submitBtn {
+      background: #188038;
+      color: white;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    .score {
+      background: #eaf4e9;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    #message {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 6px;
+      display: none;
+      overflow-wrap: anywhere;
+    }
+
+    .success { background: #e4f5e8; color: #17632d; }
+    .error { background: #fce8e6; color: #a12622; }
+
+    @media (max-width: 600px) {
+      body { padding: 8px; }
+      .container { padding: 14px; }
+      h1 { font-size: 20px; }
+    }
+  </style>
 </head>
+
 <body>
+<div class="container">
+  <h1>Cheekliistii Hojii irra Oolmaan Kaayizenii Guyyaa Guyyaan ittiin Hordofamu</h1>
 
-<h2>Cheekliistii Hojii irra Oolmaan Kaayizenii Guyyaa Guyyaan ittiin Hordofamu</h2>
-<p>Sirna Qulqullinaa, Qindoominaa, Yeroo, Rakkoo fi Fooyya'iinsa Itti Fufiinsa Qabu Hordofuuf</p>
-<h3>Daayirektoreetii Teekinikaa</h3>
+  <div class="subtitle">
+    Sirna Qulqullinaa, Qindoominaa, Yeroo, Rakkoo fi Fooyya'iinsa
+    Itti Fufiinsa Qabu Hordofuuf<br>
+    <strong>Daayirektoreetii Teekinikaa</strong>
+  </div>
 
-<button onclick="copyTable()">Copy Table to Google Sheets</button>
+  <form id="kaizenForm">
+    <div class="field">
+      <label for="date">Guyyaa / Date *</label>
+      <input type="date" id="date" required>
+    </div>
 
-<table id="checklist">
-<thead>
-<tr>
-  <th colspan="8" class="title">
-    CHEEKLIISTII KAAYIZENII GUYYAA GUYYAAN
-  </th>
-</tr>
-<tr>
-  <th>Guyyaa</th>
-  <th>Lakk.</th>
-  <th>Hojiiwwan Hordofaman</th>
-  <th>Eeyyee ✓</th>
-  <th>Lakki ✗</th>
-  <th>Qabxii</th>
-  <th>Yaada/Furmaata</th>
-  <th>Mallattoo</th>
-</tr>
-</thead>
-<tbody id="items"></tbody>
-</table>
+    <div id="taskList"></div>
+
+    <div class="score">
+      Qabxii Waliigalaa / Total Score:
+      <span id="score">0</span> / 20
+      <div id="percentage">0%</div>
+    </div>
+
+    <div class="field">
+      <label for="signature">Maqaa fi Mallattoo / Name and Signature *</label>
+      <input
+        type="text"
+        id="signature"
+        placeholder="Maqaa guutuu galchi"
+        required
+      >
+    </div>
+
+    <button type="submit" id="submitBtn">
+      Galmeessi / Submit Checklist
+    </button>
+
+    <div id="message" role="status" aria-live="polite"></div>
+  </form>
+</div>
 
 <script>
 const tasks = [
-"Bakki hojii qulqulluu fi sirrii ta'uu isaa mirkaneessuu",
-"Meeshaaleen hojii barbaachisoo ta'an bakka isaanii irratti argamuu",
-"Meeshaalee hin barbaachifne bakka hojii irraa qulqulleessuu",
-"Faayilootaa fi dokumeentoota sirnaan qindeessuu",
-"Hojii guyyaa sanaaf karoorfame adda baasuu",
-"Hojii dursa kennamuuf qabu adda baasuu",
-"Hojiiwwan yeroo isaanii eeganii raawwatamuu isaanii hordofuu",
-"Yeroo hojii sirnaan fayyadamuu",
-"Qisaasama yeroo, meeshaa fi qabeenyaa xiqqeessuu",
-"Rakkoo hojii keessatti mul'ate adda baasuu",
-"Sababa rakkoo sanaa adda baasuu",
-"Furmaata rakkoo sanaaf tarkaanfii fudhachuu",
-"Hojii har'aa kan kaleessaa caalaa fooyyeessuuf yaada haaraa qabaachuu",
-"Yaada fooyya'iinsaa hojjettoota irraa walitti qabu",
-"Tajaajila kennamu irratti qulqullinaa fi saffisa mirkaneessuu",
-"Komii ykn yaada maamilaa/hojii waliin walqabatu galmeessuu",
-"Hojiiwwan raawwataman ragaan isaanii sirnaan qabamuu",
-"Seera, qajeelfama fi tartiiba hojii kabajuu",
-"Hojii guyyaa sanaa madaaluu",
-"Boruuf hojii fooyya'aa fi tarkaanfii itti aanu murteessuu"
+  "Bakki hojii qulqulluu fi sirrii ta'uu isaa mirkaneessuu",
+  "Meeshaaleen hojii barbaachisoo ta'an bakka isaanii irratti argamuu",
+  "Meeshaalee hin barbaachifne bakka hojii irraa qulqulleessuu",
+  "Faayilootaa fi dokumeentoota sirnaan qindeessuu",
+  "Hojii guyyaa sanaaf karoorfame adda baasuu",
+  "Hojii dursa kennamuuf qabu adda baasuu",
+  "Hojiiwwan yeroo isaanii eeganii raawwatamuu isaanii hordofuu",
+  "Yeroo hojii sirnaan fayyadamuu",
+  "Qisaasama yeroo, meeshaa fi qabeenyaa xiqqeessuu",
+  "Rakkoo hojii keessatti mul'ate adda baasuu",
+  "Sababa rakkoo sanaa adda baasuu",
+  "Furmaata rakkoo sanaaf tarkaanfii fudhachuu",
+  "Hojii har'aa kan kaleessaa caalaa fooyyeessuuf yaada haaraa qabaachuu",
+  "Yaada fooyya'iinsaa hojjettoota irraa walitti qabu",
+  "Tajaajila kennamu irratti qulqullinaa fi saffisa mirkaneessuu",
+  "Komii ykn yaada maamilaa/hojii waliin walqabatu galmeessuu",
+  "Hojiiwwan raawwataman ragaan isaanii sirnaan qabamuu",
+  "Seera, qajeelfama fi tartiiba hojii kabajuu",
+  "Hojii guyyaa sanaa madaaluu",
+  "Boruuf hojii fooyya'aa fi tarkaanfii itti aanu murteessuu"
 ];
 
-const tbody = document.getElementById("items");
+const list = document.getElementById("taskList");
 
 tasks.forEach((task, i) => {
-  const tr = document.createElement("tr");
-  tr.innerHTML = `
-    <td>04/01/2019</td>
-    <td>${i + 1}</td>
-    <td>${task}</td>
-    <td>☐</td>
-    <td>☐</td>
-    <td>0</td>
-    <td></td>
-    <td></td>
-  `;
-  tbody.appendChild(tr);
+  const card = document.createElement("section");
+  card.className = "task";
+
+  const title = document.createElement("div");
+  title.className = "task-title";
+  title.textContent = `${i + 1}. ${task}`;
+  card.appendChild(title);
+
+  const choices = document.createElement("div");
+  choices.className = "choices";
+
+  [
+    { value: "Eeyyee", label: "Eeyyee ✓" },
+    { value: "Lakki", label: "Lakki ✗" }
+  ].forEach(option => {
+    const label = document.createElement("label");
+    const radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = `answer_${i}`;
+    radio.value = option.value;
+    radio.required = true;
+    radio.addEventListener("change", updateScore);
+
+    label.appendChild(radio);
+    label.appendChild(document.createTextNode(option.label));
+    choices.appendChild(label);
+  });
+
+  card.appendChild(choices);
+
+  const commentLabel = document.createElement("label");
+  commentLabel.textContent = "Yaada / Furmaata";
+  commentLabel.htmlFor = `comment_${i}`;
+  card.appendChild(commentLabel);
+
+  const comment = document.createElement("textarea");
+  comment.id = `comment_${i}`;
+  comment.rows = 2;
+  comment.placeholder = "Yaada ykn tarkaanfii furmaataa (filannoo)";
+  card.appendChild(comment);
+
+  list.appendChild(card);
 });
 
-function copyTable() {
-  const table = document.getElementById("checklist");
-  const rows = [...table.rows].slice(1);
-  const text = rows.map(row =>
-    [...row.cells].map(cell =>
-      cell.innerText.replace(/\t/g, " ")
-    ).join("\t")
-  ).join("\n");
+function updateScore() {
+  const score = tasks.reduce((sum, task, i) => {
+    const selected = document.querySelector(
+      `input[name="answer_${i}"]:checked`
+    );
+    return sum + (selected && selected.value === "Eeyyee" ? 1 : 0);
+  }, 0);
 
-  const textarea = document.createElement("textarea");
-  textarea.value = text;
-  document.body.appendChild(textarea);
-  textarea.select();
-  document.execCommand("copy");
-  textarea.remove();
+  document.getElementById("score").textContent = score;
+  document.getElementById("percentage").textContent =
+    `${Math.round(score / tasks.length * 100)}%`;
+}
 
-  alert("Copied! Open Google Sheets, select cell A1, and paste.");
+document.getElementById("kaizenForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const data = {
+    date: document.getElementById("date").value,
+    signature: document.getElementById("signature").value.trim(),
+    items: tasks.map((task, i) => {
+      const selected = document.querySelector(
+        `input[name="answer_${i}"]:checked`
+      );
+
+      return {
+        answer: selected ? selected.value : "",
+        comment: document.getElementById(`comment_${i}`).value.trim()
+      };
+    })
+  };
+
+  if (!data.date || !data.signature ||
+      data.items.some(item => !item.answer)) {
+    showMessage(
+      "Maaloo guyyaa, maqaa fi deebii hojiiwwan 20 hunda guuti.",
+      false
+    );
+    return;
+  }
+
+  const button = document.getElementById("submitBtn");
+  button.disabled = true;
+  button.textContent = "Galmeessaa jira...";
+
+  google.script.run
+    .withSuccessHandler(result => {
+      button.disabled = false;
+      button.textContent = "Galmeessi / Submit Checklist";
+
+      showMessage(
+        `Milkaa'inaan galmaa'e! Qabxii: ${result.score}/${result.total} ` +
+        `(${result.percentage}%). Submission ID: ${result.submissionId}`,
+        true
+      );
+
+      document.getElementById("kaizenForm").reset();
+      document.getElementById("score").textContent = "0";
+      document.getElementById("percentage").textContent = "0%";
+    })
+    .withFailureHandler(error => {
+      button.disabled = false;
+      button.textContent = "Galmeessi / Submit Checklist";
+      showMessage(
+        "Galmeessuun hin milkoofne: " +
+        (error.message || "Dogoggorri hin beekamne uumame."),
+        false
+      );
+    })
+    .submitChecklist(data);
+});
+
+function showMessage(message, success) {
+  const box = document.getElementById("message");
+  box.textContent = message;
+  box.className = success ? "success" : "error";
+  box.style.display = "block";
+  box.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 </script>
-
 </body>
 </html>

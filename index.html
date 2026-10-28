@@ -50,7 +50,7 @@
 
       <!-- Checklist Items Container -->
       <div>
-        <h2 class="text-lg font-semibold text-gray-700 mb-3">Hojiiwwan Hordofaman (Evaluation Criteria)</h2>
+        <h2 class="text-lg font-semibold text-gray-700 mb-3">Hojiiwwan Hordofaman (Evaluation Criteria - 20)</h2>
         <div id="checklistItems" class="space-y-4">
           <!-- Dynamically generated checklist rows will appear here -->
         </div>
@@ -90,4 +90,157 @@
   <!-- JavaScript Logic -->
   <script>
     // Your Google Apps Script Web App URL
-    const WEB_APP_URL = "
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbznmKUgOrZ3Pky5856WYXegF6k8nMQM3aEHAVo2CrDnRL0yoY2ym03hhGafdk2-XZi3/exec";
+
+    // Full 20 Kaizen Checklist Questions in Afaan Oromo
+    const questions = [
+      "Bakki hojii qulqulluu fi sirrii ta'uu isaa mirkaneessuu",
+      "Meeshaaleen hojii barbaachisoo ta'an bakka isaanii irratti argamuu",
+      "Meeshaalee hin barbaachifne bakka hojii irraa qulqulleessuu",
+      "Faayilootaa fi dokumeentoota sirnaan qindeessuu",
+      "Hojii guyyaa sanaaf karoorfame adda baasuu",
+      "Hojii dursa kennamuuf qabu adda baasuu",
+      "Hojiiwwan yeroo isaanii eeganii raawwatamuu isaanii hordofuu",
+      "Yeroo hojii sirnaan fayyadamuu",
+      "Qisaasama yeroo, meeshaa fi qabeenyaa xiqqeessuu",
+      "Rakkoo hojii keessatti mul'ate adda baasuu",
+      "Sababa rakkoo sanaa adda baasuu",
+      "Furmaata rakkoo sanaaf tarkaanfii fudhachuu",
+      "Hojii har'aa kan kaleessaa caalaa fooyyeessuuf yaada haaraa qabaachuu",
+      "Yaada fooyya'iinsaa hojjettoota irraa walitti qabu",
+      "Tajaajila kennamu irratti qulqullinaa fi saffisa mirkaneessuu",
+      "Komii ykn yaada maamilaa/hojii waliin walqabatu galmeessuu",
+      "Hojiiwwan raawwataman ragaan isaanii sirnaan qabamuu",
+      "Seera, qajeelfama fi tartiiba hojii kabajuu",
+      "Hojii guyyaa sanaa madaaluu",
+      "Boruuf hojii fooyya'aa fi tarkaanfii itti aanu murteessuu"
+    ];
+
+    // Dynamic header text update
+    function updateHeaderDepartment(selectedDept) {
+      document.getElementById('headerDepartment').textContent = `Daayirektoreetii ${selectedDept}`;
+    }
+
+    // Populate checklist items dynamically on load
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('date').valueAsDate = new Date();
+
+      const container = document.getElementById('checklistItems');
+      questions.forEach((q, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = "p-4 border rounded-xl bg-gray-50 space-y-3";
+        itemDiv.innerHTML = `
+          <p class="text-sm font-medium text-gray-800"><span class="font-bold text-blue-600">Lakk. ${index + 1}</span> - ${q}</p>
+          <div class="flex items-center space-x-6">
+            <label class="inline-flex items-center cursor-pointer">
+              <input type="radio" name="question_${index}" value="Eeyyee" required class="text-blue-600 focus:ring-blue-500 h-4 w-4">
+              <span class="ml-2 text-sm font-medium text-gray-700">Eeyyee ✓</span>
+            </label>
+            <label class="inline-flex items-center cursor-pointer">
+              <input type="radio" name="question_${index}" value="Lakki" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
+              <span class="ml-2 text-sm font-medium text-gray-700">Lakki ✗</span>
+            </label>
+          </div>
+          <div>
+            <input type="text" placeholder="Yaada ykn Furmaata (Optional comments/notes)..." data-comment="${index}" class="w-full text-xs px-3 py-1.5 border rounded-lg bg-white focus:ring-1 focus:ring-blue-500 focus:outline-none text-gray-600">
+          </div>
+        `;
+        container.appendChild(itemDiv);
+      });
+    });
+
+    // Handle Form Submission via Fetch API to Google Sheets
+    function handleFormSubmit(event) {
+      event.preventDefault();
+
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      const spinner = document.getElementById('spinner');
+      
+      submitBtn.disabled = true;
+      btnText.textContent = "Ergaa jira... (Submitting...)";
+      spinner.classList.remove('hidden');
+
+      const date = document.getElementById('date').value;
+      const department = document.getElementById('department').value;
+      const signature = document.getElementById('signature').value;
+      
+      const items = [];
+      questions.forEach((q, index) => {
+        const selectedRadio = document.querySelector(`input[name="question_${index}"]:checked`);
+        const commentInput = document.querySelector(`input[data-comment="${index}"]`);
+        
+        items.push({
+          questionNumber: index + 1,
+          questionText: q,
+          answer: selectedRadio ? selectedRadio.value : "",
+          comment: commentInput ? commentInput.value : ""
+        });
+      });
+
+      const payload = {
+        date: date,
+        department: department,
+        signature: signature,
+        items: items
+      };
+
+      // Send data via fetch to Google Apps Script Web App
+      fetch(WEB_APP_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          onSubmissionSuccess(data, department);
+        } else {
+          throw new Error(data.error || "Unknown server error");
+        }
+      })
+      .catch(error => {
+        onSubmissionFailure(error);
+      });
+    }
+
+    function onSubmissionSuccess(response, department) {
+      document.getElementById('kaizenForm').classList.add('hidden');
+      document.getElementById('resultCard').classList.remove('hidden');
+
+      document.getElementById('resId').textContent = response.submissionId;
+      document.getElementById('resDept').textContent = department;
+      document.getElementById('resScore').textContent = response.score;
+      document.getElementById('resTotal').textContent = response.total;
+      document.getElementById('resPercentage').textContent = response.percentage;
+    }
+
+    function onSubmissionFailure(error) {
+      alert("Dogoggorri uumame: " + error.message);
+      
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      const spinner = document.getElementById('spinner');
+      
+      submitBtn.disabled = false;
+      btnText.textContent = "Cheekliistii Ergi (Submit Checklist)";
+      spinner.classList.add('hidden');
+    }
+
+    function resetForm() {
+      document.getElementById('kaizenForm').reset();
+      document.getElementById('date').valueAsDate = new Date();
+      document.getElementById('headerDepartment').textContent = "Daayirektoreetii Teekinikaa";
+      document.getElementById('resultCard').classList.add('hidden');
+      document.getElementById('kaizenForm').classList.remove('hidden');
+      
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      const spinner = document.getElementById('spinner');
+      
+      submitBtn.disabled = false;
+      btnText.textContent = "Cheekliistii Ergi (Submit Checklist)";
+      spinner.classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

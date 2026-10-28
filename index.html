@@ -88,7 +88,8 @@
 
   <!-- JavaScript Logic -->
   <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxOiwL_2-csFwnHimJe668Xwk8ARskgfWwuKwAmSWgBpueS9dMSqAKk8XiEelMBKDA/exec";
+    // Iddoo kanaatti Web App URL kee galchi
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxYUKqWTZxjA-0C94O1FN27qE_oFsPZXoAcXLaUNXhgrDMdqvYqFHcBuqBP9gfGre0v/exec";
 
     const questions = [
       "Bakki hojii qulqulluu fi sirrii ta'uu isaa mirkaneessuu",
@@ -159,7 +160,7 @@
 
       const date = document.getElementById('date').value;
       const department = document.getElementById('department').value;
-      const signature = document.getElementById('signature').value;
+      const signature = document.importNode ? document.getElementById('signature').value : document.getElementById('signature').value;
       
       const items = [];
       questions.forEach((q, index) => {
@@ -177,12 +178,15 @@
       const payload = {
         date: date,
         department: department,
-        signature: signature,
+        signature: document.getElementById('signature').value,
         items: items
       };
 
       fetch(WEB_APP_URL, {
         method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
         body: JSON.stringify(payload)
       })
       .then(response => response.json())

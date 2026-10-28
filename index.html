@@ -90,7 +90,7 @@
   <!-- JavaScript Logic -->
   <script>
     // Your Google Apps Script Web App URL
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwJKu_1OR37KtHHerdgPg7DP3M4q9Rwq2wEXI7VWlyfdCT1nMinefqWeOseCxqUuZOD/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzb75V0HojVZMTIQb6VhoZjhTSUMLuvA6xejCWaZeYXWINdUm39DwhwYZBr-VpMuEwx/exec";
 
     // Full 20 Kaizen Checklist Questions in Afaan Oromo
     const questions = [
@@ -116,12 +116,10 @@
       "Boruuf hojii fooyya'aa fi tarkaanfii itti aanu murteessuu"
     ];
 
-    // Dynamic header text update
     function updateHeaderDepartment(selectedDept) {
       document.getElementById('headerDepartment').textContent = `Daayirektoreetii ${selectedDept}`;
     }
 
-    // Populate checklist items dynamically on load
     window.addEventListener('DOMContentLoaded', () => {
       document.getElementById('date').valueAsDate = new Date();
 
@@ -149,7 +147,6 @@
       });
     });
 
-    // Handle Form Submission via Fetch API to Google Sheets
     function handleFormSubmit(event) {
       event.preventDefault();
 
@@ -185,7 +182,6 @@
         items: items
       };
 
-      // Send data via fetch to Google Apps Script Web App
       fetch(WEB_APP_URL, {
         method: 'POST',
         body: JSON.stringify(payload)

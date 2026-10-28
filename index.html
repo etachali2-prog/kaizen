@@ -170,4 +170,52 @@
       .then(response => response.json())
       .then(data => {
         if (data.success) {
-          on
+          onSubmissionSuccess(data);
+        } else {
+          throw new Error(data.error || "Unknown server error");
+        }
+      })
+      .catch(error => {
+        onSubmissionFailure(error);
+      });
+    }
+
+    function onSubmissionSuccess(response) {
+      document.getElementById('kaizenForm').classList.add('hidden');
+      document.getElementById('resultCard').classList.remove('hidden');
+
+      document.getElementById('resId').textContent = response.submissionId;
+      document.getElementById('resScore').textContent = response.score;
+      document.getElementById('resTotal').textContent = response.total;
+      document.getElementById('resPercentage').textContent = response.percentage;
+    }
+
+    function onSubmissionFailure(error) {
+      alert("Dogoggorri uumame: " + error.message);
+      
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      const spinner = document.getElementById('spinner');
+      
+      submitBtn.disabled = false;
+      btnText.textContent = "Cheekliistii Ergi (Submit Checklist)";
+      spinner.classList.add('hidden');
+    }
+
+    function resetForm() {
+      document.getElementById('kaizenForm').reset();
+      document.getElementById('date').valueAsDate = new Date();
+      document.getElementById('resultCard').classList.add('hidden');
+      document.getElementById('kaizenForm').classList.remove('hidden');
+      
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      const spinner = document.getElementById('spinner');
+      
+      submitBtn.disabled = false;
+      btnText.textContent = "Cheekliistii Ergi (Submit Checklist)";
+      spinner.classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

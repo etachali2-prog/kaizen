@@ -15,18 +15,33 @@
     <div class="border-b pb-4 mb-6 text-center sm:text-left">
       <h1 class="text-2xl font-bold text-blue-600">Cheekliistii Hojii irra Oolmaan Kaayizenii Guyyaa Guyyaan ittiin Hordofamu</h1>
       <p class="text-sm font-medium text-gray-600 mt-1">Sirna Qulqullinaa, Qindoominaa, Yeroo, Rakkoo fi Fooyya'iinsa Itti Fufiinsa Qabu Hordofuuf</p>
-      <p class="text-xs font-semibold text-blue-500 mt-2 uppercase tracking-wide">Daayirektoreetii Teekinikaa</p>
+      <p id="headerDepartment" class="text-xs font-semibold text-blue-500 mt-2 uppercase tracking-wide">Daayirektoreetii Teekinikaa</p>
     </div>
 
     <!-- Form Container -->
     <form id="kaizenForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
       
       <!-- Metadata Section -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-xl border">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-gray-50 p-4 rounded-xl border">
         <div>
           <label class="block text-xs font-semibold uppercase tracking-wider text-gray-600 mb-1">Guyyaa (Date)</label>
           <input type="date" id="date" required class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white">
         </div>
+
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-gray-600 mb-1">Kutaa Hojii (Department)</label>
+          <select id="department" required onchange="updateHeaderDepartment(this.value)" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white font-medium text-gray-700">
+            <option value="" disabled selected>Kutaa Hojii Filadhaa</option>
+            <option value="Technic">Technic (Teekinikaa)</option>
+            <option value="Production">Production (Oomisha)</option>
+            <option value="Finance">Finance (Faayinaansii)</option>
+            <option value="Marketing">Marketing (Gabaa)</option>
+            <option value="Procurement">Procurement (Bittaa)</option>
+            <option value="Human Resource">Human Resource (Qabeenya Namaa)</option>
+            <option value="Others">Others (Kan biroo)</option>
+          </select>
+        </div>
+
         <div>
           <label class="block text-xs font-semibold uppercase tracking-wider text-gray-600 mb-1">Maqaa / Mallattoo (Signature)</label>
           <input type="text" id="signature" placeholder="Maqaa guutuu galchaa" required class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white">
@@ -59,6 +74,7 @@
       <p class="text-sm text-gray-600 mb-4">Gamaaggamni Kaayizenii keessan sirnaan galmeeffameera.</p>
       <div class="inline-block bg-white border px-6 py-3 rounded-xl shadow-sm text-left space-y-1 mb-4">
         <p class="text-xs text-gray-500">Submission ID: <span id="resId" class="font-mono font-bold text-gray-700"></span></p>
+        <p class="text-xs text-gray-500">Kutaa Hojii (Department): <span id="resDept" class="font-bold text-gray-700"></span></p>
         <p class="text-xs text-gray-500">Qabxii (Score): <span id="resScore" class="font-bold text-gray-700"></span> / <span id="resTotal" class="font-bold text-gray-700"></span></p>
         <p class="text-xs text-gray-500">Parsenti (Percentage): <span id="resPercentage" class="font-bold text-blue-600"></span>%</p>
       </div>
@@ -74,148 +90,4 @@
   <!-- JavaScript Logic -->
   <script>
     // Your Google Apps Script Web App URL
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbznmKUgOrZ3Pky5856WYXegF6k8nMQM3aEHAVo2CrDnRL0yoY2ym03hhGafdk2-XZi3/exec";
-
-    // Full 20 Kaizen Checklist Questions in Afaan Oromo
-    const questions = [
-      "Bakki hojii qulqulluu fi sirrii ta'uu isaa mirkaneessuu",
-      "Meeshaaleen hojii barbaachisoo ta'an bakka isaanii irratti argamuu",
-      "Meeshaalee hin barbaachifne bakka hojii irraa qulqulleessuu",
-      "Faayilootaa fi dokumeentoota sirnaan qindeessuu",
-      "Hojii guyyaa sanaaf karoorfame adda baasuu",
-      "Hojii dursa kennamuuf qabu adda baasuu",
-      "Hojiiwwan yeroo isaanii eeganii raawwatamuu isaanii hordofuu",
-      "Yeroo hojii sirnaan fayyadamuu",
-      "Qisaasama yeroo, meeshaa fi qabeenyaa xiqqeessuu",
-      "Rakkoo hojii keessatti mul'ate adda baasuu",
-      "Sababa rakkoo sanaa adda baasuu",
-      "Furmaata rakkoo sanaaf tarkaanfii fudhachuu",
-      "Hojii har'aa kan kaleessaa caalaa fooyyeessuuf yaada haaraa qabaachuu",
-      "Yaada fooyya'iinsaa hojjettoota irraa walitti qabu",
-      "Tajaajila kennamu irratti qulqullinaa fi saffisa mirkaneessuu",
-      "Komii ykn yaada maamilaa/hojii waliin walqabatu galmeessuu",
-      "Hojiiwwan raawwataman ragaan isaanii sirnaan qabamuu",
-      "Seera, qajeelfama fi tartiiba hojii kabajuu",
-      "Hojii guyyaa sanaa madaaluu",
-      "Boruuf hojii fooyya'aa fi tarkaanfii itti aanu murteessuu"
-    ];
-
-    // Populate checklist items dynamically on load
-    window.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('date').valueAsDate = new Date();
-
-      const container = document.getElementById('checklistItems');
-      questions.forEach((q, index) => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = "p-4 border rounded-xl bg-gray-50 space-y-3";
-        itemDiv.innerHTML = `
-          <p class="text-sm font-medium text-gray-800"><span class="font-bold text-blue-600">Lakk. ${index + 1}</span> - ${q}</p>
-          <div class="flex items-center space-x-6">
-            <label class="inline-flex items-center cursor-pointer">
-              <input type="radio" name="question_${index}" value="Eeyyee" required class="text-blue-600 focus:ring-blue-500 h-4 w-4">
-              <span class="ml-2 text-sm font-medium text-gray-700">Eeyyee ✓</span>
-            </label>
-            <label class="inline-flex items-center cursor-pointer">
-              <input type="radio" name="question_${index}" value="Lakki" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
-              <span class="ml-2 text-sm font-medium text-gray-700">Lakki ✗</span>
-            </label>
-          </div>
-          <div>
-            <input type="text" placeholder="Yaada ykn Furmaata (Optional comments/notes)..." data-comment="${index}" class="w-full text-xs px-3 py-1.5 border rounded-lg bg-white focus:ring-1 focus:ring-blue-500 focus:outline-none text-gray-600">
-          </div>
-        `;
-        container.appendChild(itemDiv);
-      });
-    });
-
-    // Handle Form Submission via Fetch API to Google Sheets
-    function handleFormSubmit(event) {
-      event.preventDefault();
-
-      const submitBtn = document.getElementById('submitBtn');
-      const btnText = document.getElementById('btnText');
-      const spinner = document.getElementById('spinner');
-      
-      submitBtn.disabled = true;
-      btnText.textContent = "Ergaa jira... (Submitting...)";
-      spinner.classList.remove('hidden');
-
-      const date = document.getElementById('date').value;
-      const signature = document.getElementById('signature').value;
-      
-      const items = [];
-      questions.forEach((q, index) => {
-        const selectedRadio = document.querySelector(`input[name="question_${index}"]:checked`);
-        const commentInput = document.querySelector(`input[data-comment="${index}"]`);
-        
-        items.push({
-          questionNumber: index + 1,
-          questionText: q,
-          answer: selectedRadio ? selectedRadio.value : "",
-          comment: commentInput ? commentInput.value : ""
-        });
-      });
-
-      const payload = {
-        date: date,
-        signature: signature,
-        items: items
-      };
-
-      // Send data via fetch to Google Apps Script Web App
-      fetch(WEB_APP_URL, {
-        method: 'POST',
-        body: JSON.stringify(payload)
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          onSubmissionSuccess(data);
-        } else {
-          throw new Error(data.error || "Unknown server error");
-        }
-      })
-      .catch(error => {
-        onSubmissionFailure(error);
-      });
-    }
-
-    function onSubmissionSuccess(response) {
-      document.getElementById('kaizenForm').classList.add('hidden');
-      document.getElementById('resultCard').classList.remove('hidden');
-
-      document.getElementById('resId').textContent = response.submissionId;
-      document.getElementById('resScore').textContent = response.score;
-      document.getElementById('resTotal').textContent = response.total;
-      document.getElementById('resPercentage').textContent = response.percentage;
-    }
-
-    function onSubmissionFailure(error) {
-      alert("Dogoggorri uumame: " + error.message);
-      
-      const submitBtn = document.getElementById('submitBtn');
-      const btnText = document.getElementById('btnText');
-      const spinner = document.getElementById('spinner');
-      
-      submitBtn.disabled = false;
-      btnText.textContent = "Cheekliistii Ergi (Submit Checklist)";
-      spinner.classList.add('hidden');
-    }
-
-    function resetForm() {
-      document.getElementById('kaizenForm').reset();
-      document.getElementById('date').valueAsDate = new Date();
-      document.getElementById('resultCard').classList.add('hidden');
-      document.getElementById('kaizenForm').classList.remove('hidden');
-      
-      const submitBtn = document.getElementById('submitBtn');
-      const btnText = document.getElementById('btnText');
-      const spinner = document.getElementById('spinner');
-      
-      submitBtn.disabled = false;
-      btnText.textContent = "Cheekliistii Ergi (Submit Checklist)";
-      spinner.classList.add('hidden');
-    }
-  </script>
-</body>
-</html>
+    const WEB_APP_URL = "

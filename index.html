@@ -89,7 +89,7 @@
   <!-- JavaScript Logic -->
   <script>
     // Iddoo kanaatti Web App URL kee galchi
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxedyo47if9smNKO5LAK2QVXH8Al1q8hKXC7HUlGQEnYIf7_sXBx9P4DnaWcweVg1s/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw5mFDOSLdbhHBJm7WNGVYZnsypS4FJXYZl0g2ta9q_aVM9aNha6eAWwhhfbq6Q8Ogg/exec";
 
     const questions = [
       "Bakki hojii qulqulluu fi sirrii ta'uu isaa mirkaneessuu",
@@ -160,7 +160,7 @@
 
       const date = document.getElementById('date').value;
       const department = document.getElementById('department').value;
-      const signature = document.importNode ? document.getElementById('signature').value : document.getElementById('signature').value;
+      const signature = document.getElementById('signature').value;
       
       const items = [];
       questions.forEach((q, index) => {
@@ -178,7 +178,7 @@
       const payload = {
         date: date,
         department: department,
-        signature: document.getElementById('signature').value,
+        signature: signature,
         items: items
       };
 

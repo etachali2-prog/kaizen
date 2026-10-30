@@ -2,603 +2,385 @@
 <!DOCTYPE html>
 <html lang="om">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MELBA Daily Kaizen Checklist</title>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MELBA Daily Kaizen Checklist</title>
 
-<style>
-:root {
-    --navy: #102d4f;
-    --gold: #d6a843;
-    --green: #16834a;
-    --red: #c62828;
-    --light: #f2f5f9;
-}
+  <style>
+    :root {
+      --navy:#102d4f;
+      --blue:#174a78;
+      --gold:#d6a63b;
+      --light:#f2f5f9;
+      --green:#16834a;
+    }
 
-* {
-    box-sizing: border-box;
-}
+    * { box-sizing:border-box; }
 
-body {
-    margin: 0;
-    padding: 20px;
-    background: var(--light);
-    font-family: Arial, sans-serif;
-    color: #243247;
-}
-
-.container {
-    max-width: 1100px;
-    margin: auto;
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,.08);
-}
-
-.header {
-    background: var(--navy);
-    color: white;
-    text-align: center;
-    padding: 25px 15px;
-    border-bottom: 5px solid var(--gold);
-}
-
-.header h1 {
-    margin: 0 0 8px;
-    font-size: 25px;
-}
-
-.header p {
-    margin: 5px;
-}
-
-.form-content {
-    padding: 22px;
-}
-
-.details {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-bottom: 25px;
-}
-
-label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 7px;
-}
-
-input, select, textarea {
-    width: 100%;
-    padding: 11px;
-    border: 1px solid #ccd5df;
-    border-radius: 6px;
-    font-size: 14px;
-}
-
-.section-title {
-    background: var(--navy);
-    color: white;
-    padding: 13px;
-    margin: 20px 0 10px;
-    border-left: 5px solid var(--gold);
-}
-
-.question {
-    border: 1px solid #dce3eb;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 12px;
-    background: #fff;
-}
-
-.question-title {
-    font-weight: bold;
-    margin-bottom: 12px;
-    line-height: 1.5;
-}
-
-.question-number {
-    color: var(--navy);
-    margin-right: 7px;
-}
-
-.answer-row {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
-}
-
-.answer-option {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    cursor: pointer;
-}
-
-.answer-option input {
-    width: auto;
-}
-
-.comment {
-    margin-top: 8px;
-}
-
-.summary {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin: 20px 0;
-}
-
-.summary-card {
-    flex: 1;
-    min-width: 120px;
-    padding: 15px;
-    text-align: center;
-    border-radius: 8px;
-    background: #eef3f8;
-}
-
-.summary-card strong {
-    display: block;
-    font-size: 25px;
-    margin-top: 5px;
-}
-
-.actions {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 25px;
-}
-
-button {
-    border: none;
-    border-radius: 6px;
-    padding: 13px 22px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.submit-btn {
-    background: var(--green);
-    color: white;
-}
-
-.clear-btn {
-    background: #64748b;
-    color: white;
-}
-
-.print-btn {
-    background: var(--gold);
-    color: #172334;
-}
-
-button:disabled {
-    opacity: .6;
-    cursor: not-allowed;
-}
-
-#status {
-    margin-top: 15px;
-    padding: 12px;
-    border-radius: 6px;
-    display: none;
-    line-height: 1.5;
-}
-
-.success {
-    display: block !important;
-    background: #e4f6eb;
-    color: #146c38;
-}
-
-.error {
-    display: block !important;
-    background: #fde8e8;
-    color: #a51d1d;
-}
-
-.footer {
-    background: #f1f4f8;
-    padding: 15px;
-    text-align: center;
-    color: #526174;
-    font-size: 13px;
-}
-
-@media(max-width:700px) {
     body {
-        padding: 7px;
+      margin:0;
+      padding:18px;
+      background:var(--light);
+      font-family:Arial,sans-serif;
+      color:#253247;
     }
 
-    .details {
-        grid-template-columns: 1fr;
+    .container { max-width:1050px; margin:auto; }
+
+    header {
+      background:var(--navy);
+      color:white;
+      text-align:center;
+      padding:25px;
+      border-bottom:5px solid var(--gold);
+      border-radius:12px;
     }
 
-    .form-content {
-        padding: 13px;
+    header h1 { margin:0 0 8px; font-size:25px; }
+    header p { margin:5px; }
+
+    .actions {
+      display:flex;
+      justify-content:flex-end;
+      margin:15px 0;
     }
 
-    .header h1 {
-        font-size: 20px;
-    }
-}
-
-@media print {
-    body {
-        background: white;
-        padding: 0;
+    .panel {
+      background:white;
+      padding:22px;
+      border-radius:10px;
+      margin-bottom:18px;
+      box-shadow:0 2px 9px #0000000d;
     }
 
-    .container {
-        box-shadow: none;
+    h2 { color:var(--navy); }
+
+    .grid {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:15px;
     }
 
-    .actions, #status {
-        display: none !important;
+    label {
+      display:block;
+      font-weight:bold;
+      margin-bottom:7px;
+    }
+
+    input, select {
+      width:100%;
+      padding:11px;
+      border:1px solid #cbd5e1;
+      border-radius:6px;
+      font-size:15px;
     }
 
     .question {
-        break-inside: avoid;
+      border:1px solid #e1e7ef;
+      border-radius:8px;
+      padding:15px;
+      margin-bottom:12px;
     }
 
-    input, select, textarea {
-        border: 1px solid #aaa;
+    .question-title {
+      font-weight:bold;
+      line-height:1.5;
+      margin-bottom:12px;
     }
-}
-</style>
+
+    .number { color:var(--gold); }
+
+    .answers {
+      display:flex;
+      gap:25px;
+      margin-bottom:12px;
+    }
+
+    .answers label {
+      display:flex;
+      align-items:center;
+      gap:7px;
+      margin:0;
+    }
+
+    .answers input { width:auto; }
+
+    .summary {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .summary div {
+      background:#f1f5f9;
+      padding:15px;
+      text-align:center;
+      border-radius:8px;
+    }
+
+    .summary strong {
+      display:block;
+      font-size:24px;
+      color:var(--navy);
+      margin-top:5px;
+    }
+
+    button, .link {
+      border:0;
+      border-radius:6px;
+      padding:12px 18px;
+      cursor:pointer;
+      font-weight:bold;
+      text-decoration:none;
+      display:inline-block;
+    }
+
+    .blue { background:var(--blue); color:white; }
+    .gold { background:var(--gold); color:#17243a; }
+    .submit {
+      background:var(--green);
+      color:white;
+      padding:14px 35px;
+      font-size:16px;
+    }
+
+    .submit:disabled { opacity:.6; cursor:not-allowed; }
+
+    .submit-area { text-align:center; padding:15px; }
+
+    #message {
+      display:none;
+      padding:14px;
+      border-radius:7px;
+      margin:15px 0;
+      font-weight:bold;
+    }
+
+    .success { display:block!important; background:#d4edda; color:#155724; }
+    .error { display:block!important; background:#f8d7da; color:#721c24; }
+
+    footer { text-align:center; padding:18px; color:#64748b; }
+
+    @media(max-width:700px) {
+      .grid,.summary { grid-template-columns:1fr; }
+      body { padding:9px; }
+      header h1 { font-size:20px; }
+    }
+
+    @media print {
+      .actions,.submit-area,footer { display:none!important; }
+      body { background:white; }
+      .panel,.question { box-shadow:none; break-inside:avoid; }
+    }
+  </style>
 </head>
 
 <body>
-
 <div class="container">
 
-    <div class="header">
-        <h1>MELBA PRINTING, PUBLISHING & PACKAGING S.C.</h1>
-        <h2>DAILY KAIZEN CHECKLIST</h2>
-        <p>Technical Directorate / Daily Kaizen Monitoring</p>
+  <header>
+    <h1>MELBA DAILY KAIZEN CHECKLIST</h1>
+    <p>MELBA PRINTING, PUBLISHING & PACKAGING S.C.</p>
+    <p>Technical Directorate</p>
+  </header>
+
+  <div class="actions">
+    <a class="link blue" href="https://script.google.com/macros/s/AKfycbyTCbS-JnxALxiIiOFnwE0izBIbMo0KZ_0WljOMFxGfDudH4r9967ivclSMR4alt4oE/exec">
+      View Records Dashboard
+    </a>
+  </div>
+
+  <form id="kaizenForm">
+
+    <section class="panel">
+      <h2>General Information</h2>
+
+      <div class="grid">
+        <div>
+          <label for="date">Date</label>
+          <input type="date" id="date" required>
+        </div>
+
+        <div>
+          <label for="department">Department</label>
+          <select id="department" required>
+            <option value="">Select Department</option>
+            <option>Production Directorate</option>
+            <option>Technical Directorate</option>
+            <option>Finance</option>
+            <option>General Service</option>
+            <option>Marketing</option>
+            <option>Human Resource</option>
+            <option>Procurement</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="signature">Name / Signature</label>
+          <input id="signature" type="text"
+            placeholder="Enter your name" required>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Daily Kaizen Checklist</h2>
+      <p>Answer all 20 questions using Eeyyee or Miti.</p>
+
+      <div id="questions"></div>
+
+      <div class="summary">
+        <div>Eeyyee<strong id="yesCount">0</strong></div>
+        <div>Miti<strong id="noCount">0</strong></div>
+        <div>Score<strong id="score">0%</strong></div>
+      </div>
+    </section>
+
+    <div id="message"></div>
+
+    <div class="submit-area">
+      <button type="submit" class="submit" id="submitBtn">
+        Submit Checklist
+      </button>
     </div>
 
-    <div class="form-content">
+  </form>
 
-        <form id="kaizenForm">
-
-            <div class="section-title">Submission Information</div>
-
-            <div class="details">
-
-                <div>
-                    <label for="date">Date</label>
-                    <input type="date" id="date" required>
-                </div>
-
-                <div>
-                    <label for="department">Department</label>
-                    <select id="department" required>
-                        <option value="">Select Department</option>
-                        <option>Production Directorate</option>
-                        <option>Technical Directorate</option>
-                        <option>Finance</option>
-                        <option>General Service</option>
-                        <option>Marketing</option>
-                        <option>Human Resource</option>
-                        <option>Procurement</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="signature">Observer / Signature</label>
-                    <input type="text" id="signature"
-                           placeholder="Enter observer name" required>
-                </div>
-
-            </div>
-
-            <div class="section-title">
-                Kaizen Daily Evaluation Checklist
-            </div>
-
-            <p>
-                Each checklist item must be evaluated as
-                <strong>Eeyyee</strong> or <strong>Lakki</strong>.
-                Use the comment field to explain problems or observations.
-            </p>
-
-            <div id="questions"></div>
-
-            <div class="section-title">Evaluation Summary</div>
-
-            <div class="summary">
-                <div class="summary-card">
-                    Total Questions
-                    <strong id="total">20</strong>
-                </div>
-
-                <div class="summary-card">
-                    Eeyyee
-                    <strong id="yesCount">0</strong>
-                </div>
-
-                <div class="summary-card">
-                    Lakki
-                    <strong id="noCount">0</strong>
-                </div>
-
-                <div class="summary-card">
-                    Unanswered
-                    <strong id="unanswered">20</strong>
-                </div>
-            </div>
-
-            <div class="actions">
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    Submit to Google Sheets
-                </button>
-
-                <button type="reset" class="clear-btn">
-                    Clear Form
-                </button>
-
-                <button type="button" class="print-btn"
-                        onclick="window.print()">
-                    Print / Save PDF
-                </button>
-            </div>
-
-            <div id="status"></div>
-
-        </form>
-
-    </div>
-
-    <div class="footer">
-        MELBA Technical Directorate | Daily Kaizen Monitoring System
-    </div>
-
+  <footer>MELBA Technical Directorate | Daily Kaizen Monitoring System</footer>
 </div>
 
 <script>
-
-/* PASTE YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL HERE */
-const WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbysT55M_ry2Q_onXMgsjxIpmbVywsTw8lfLS58VCCJC2zXaGU8VGiaGv8MdC11OU3f1/exec";
-
-
-/* Replace these descriptions with the exact 20 checklist items
-   from your approved Kaizen checklist if they differ. */
-
 const questions = [
-    "Meesha hojii qulqulluu fi sirnaan qindaa'aa dha?",
-    "Meeshaaleen hojii bakka isaanii kaa'amanii jiru?",
-    "Meeshaaleen hin barbaachifne bakka hojii irraa kaafamanii jiru?",
-    "Meeshaaleen hojii sirnaan mallatteeffamanii jiru?",
-    "Daandiin sochii fi bakka hojii gufuu irraa bilisa dha?",
-    "Meeshaaleen nageenyaa sirnaan kaa'amanii jiru?",
-    "Hojjettoonni uffata hojii fi meeshaalee eegumsaa fayyadamaa jiru?",
-    "Meeshaaleen hojii qulqulluu fi haala gaarii keessa jiru?",
-    "Bakka hojii keessatti balfi sirnaan walitti qabamaa jira?",
-    "Meeshaaleen hojii erga itti fayyadamanii booda bakka isaanii deebi'anii jiru?",
-    "Rakkooleen hojii guyyaa guyyaa galmaa'aa jiru?",
-    "Rakkooleen argaman itti gaafatamtootaaf gabaafamaa jiru?",
-    "Hojii qulqullinaa fi qindoominaa guyyaa guyyaan raawwatamaa jira?",
-    "Hojjettoonni sirna Kaayizenii irratti hirmaachaa jiru?",
-    "Tarkaanfiin sirreeffamaa rakkoolee irratti fudhatamaa jira?",
-    "Meeshaaleen hojii akkaataa qajeelfamaatiin itti fayyadamaa jiru?",
-    "Bakka hojii keessatti nageenyi hojii eegamaa jira?",
-    "Hojiiwwan guyyaa guyyaa yeroo isaanii keessatti xumuramaa jiru?",
-    "Fooyya'iinsi hojii irratti taasifame hordoffii keessa jira?",
-    "Sirni qulqullinaa fi qindoominaa itti fufiinsaan eegamaa jira?"
+  "Bakki hojii qulqulluu fi sirrii ta'uu isaa mirkaneessuu",
+  "Meeshaaleen hojii barbaachisoo ta'an bakka isaanii irratti argamuu",
+  "Meeshaalee hin barbaachifne bakka hojii irraa qulqulleessuu",
+  "Faayilootaa fi dokumeentoota sirnaan qindeessuu",
+  "Hojii guyyaa sanaaf karoorfame adda baasuu",
+  "Hojii dursa kennamuuf qabu adda baasuu",
+  "Hojiiwwan yeroo isaanii eeganii raawwatamuu isaanii hordofuu",
+  "Yeroo hojii sirnaan fayyadamuu",
+  "Qisaasama yeroo, meeshaa fi qabeenyaa xiqqeessuu",
+  "Rakkoo hojii keessatti mul'ate adda baasuu",
+  "Sababa rakkoo sanaa adda baasuu",
+  "Furmaata rakkoo sanaaf tarkaanfii fudhachuu",
+  "Hojii har'aa kan kaleessaa caalaa fooyyeessuuf yaada haaraa qabaachuu",
+  "Yaada fooyya'iinsaa hojjettoota irraa walitti qabu",
+  "Tajaajila kennamu irratti qulqullinaa fi saffisa mirkaneessuu",
+  "Komii ykn yaada maamilaa/hojii waliin walqabatu galmeessuu",
+  "Hojiiwwan raawwataman ragaan isaanii sirnaan qabamuu",
+  "Seera, qajeelfama fi tartiiba hojii kabajuu",
+  "Hojii guyyaa sanaa madaaluu",
+  "Boruuf hojii fooyya'aa fi tarkaanfii itti aanu murteessuu"
 ];
-
-
-/* Generate checklist questions */
 
 const questionContainer = document.getElementById("questions");
 
-questions.forEach((question, index) => {
+questions.forEach((question,index) => {
+  const n = index + 1;
+  const div = document.createElement("div");
+  div.className = "question";
 
-    const number = index + 1;
+  div.innerHTML = `
+    <div class="question-title">
+      <span class="number">${n}.</span> ${question}
+    </div>
+    <div class="answers">
+      <label><input type="radio" name="q${n}" value="Eeyyee" required> Eeyyee</label>
+      <label><input type="radio" name="q${n}" value="Miti"> Miti</label>
+    </div>
+    <input type="text" id="comment${n}" placeholder="Comment / Yaada dabalataa (optional)">
+  `;
 
-    const div = document.createElement("div");
-    div.className = "question";
-
-    div.innerHTML = `
-        <div class="question-title">
-            <span class="question-number">${number}.</span>
-            ${question}
-        </div>
-
-        <div class="answer-row">
-
-            <label class="answer-option">
-                <input type="radio"
-                       name="answer${number}"
-                       value="Eeyyee"
-                       required
-                       onchange="updateSummary()">
-                Eeyyee
-            </label>
-
-            <label class="answer-option">
-                <input type="radio"
-                       name="answer${number}"
-                       value="Lakki"
-                       onchange="updateSummary()">
-                Lakki
-            </label>
-
-        </div>
-
-        <div class="comment">
-            <label>Comment / Observation</label>
-            <textarea id="comment${number}"
-                      rows="2"
-                      placeholder="Write observation or corrective action..."></textarea>
-        </div>
-    `;
-
-    questionContainer.appendChild(div);
-
+  questionContainer.appendChild(div);
 });
-
-
-/* Set today's date */
 
 document.getElementById("date").value =
-    new Date().toLocaleDateString("en-CA");
+  new Date().toLocaleDateString("en-CA");
 
-
-/* Update live summary */
+questionContainer.addEventListener("change", updateSummary);
 
 function updateSummary() {
+  let yes = 0;
+  let no = 0;
 
-    let yes = 0;
-    let no = 0;
-    let unanswered = 0;
+  for (let i=1; i<=20; i++) {
+    const selected = document.querySelector(`input[name="q${i}"]:checked`);
+    if (selected?.value === "Eeyyee") yes++;
+    if (selected?.value === "Miti") no++;
+  }
 
-    for (let i = 1; i <= 20; i++) {
-
-        const selected =
-            document.querySelector(`input[name="answer${i}"]:checked`);
-
-        if (!selected) {
-            unanswered++;
-        } else if (selected.value === "Eeyyee") {
-            yes++;
-        } else {
-            no++;
-        }
-    }
-
-    document.getElementById("yesCount").textContent = yes;
-    document.getElementById("noCount").textContent = no;
-    document.getElementById("unanswered").textContent = unanswered;
+  document.getElementById("yesCount").textContent = yes;
+  document.getElementById("noCount").textContent = no;
+  document.getElementById("score").textContent = yes * 5 + "%";
 }
 
+function showMessage(message,type) {
+  const box = document.getElementById("message");
+  box.textContent = message;
+  box.className = type;
+  box.scrollIntoView({behavior:"smooth",block:"center"});
+}
 
-/* Submit data to Google Sheets */
+document.getElementById("kaizenForm").addEventListener("submit",function(event) {
+  event.preventDefault();
 
-document.getElementById("kaizenForm")
-.addEventListener("submit", async function(event) {
+  const answers = [];
 
-    event.preventDefault();
+  for (let i=1; i<=20; i++) {
+    const selected = document.querySelector(`input[name="q${i}"]:checked`);
 
-    const status = document.getElementById("status");
-    const submitBtn = document.getElementById("submitBtn");
+    if (!selected) {
+      showMessage("Please answer question " + i + ".", "error");
+      return;
+    }
 
-    status.className = "";
-    status.textContent = "";
+    answers.push({
+      answer:selected.value,
+      comment:document.getElementById("comment"+i).value.trim()
+    });
+  }
 
-    if (WEB_APP_URL.includes("https://script.google.com/macros/s/AKfycbxT7dPGRmD65GzOUC_pczV5Z3qRa_T0MXK1GesyD0RF1aQhaVnt73cGOg3QnWzPPcVd/exec")) {
-        status.textContent =
-            "Please enter your deployed Google Apps Script Web App URL.";
-        status.className = "error";
+  const payload = {
+    date:document.getElementById("date").value,
+    department:document.getElementById("department").value,
+    signature:document.getElementById("signature").value.trim(),
+    answers:answers
+  };
+
+  const button = document.getElementById("submitBtn");
+  button.disabled = true;
+  button.textContent = "Submitting...";
+
+  google.script.run
+    .withSuccessHandler(function(result) {
+      button.disabled = false;
+      button.textContent = "Submit Checklist";
+
+      if (!result || !result.success) {
+        showMessage("Submission failed.", "error");
         return;
-    }
+      }
 
-    const items = [];
+      showMessage(
+        "Submitted successfully. ID: " + result.submissionId +
+        " | Score: " + result.score + "/100 (" + result.percentage + ")",
+        "success"
+      );
 
-    for (let i = 1; i <= 20; i++) {
-
-        const selected =
-            document.querySelector(`input[name="answer${i}"]:checked`);
-
-        if (!selected) {
-            status.textContent =
-                "Please answer all 20 checklist questions before submitting.";
-            status.className = "error";
-            document.querySelector(`input[name="answer${i}"]`)
-                .scrollIntoView({behavior: "smooth", block: "center"});
-            return;
-        }
-
-        items.push({
-            answer: selected.value,
-            comment: document.getElementById(`comment${i}`).value.trim()
-        });
-    }
-
-    const payload = {
-        date: document.getElementById("date").value,
-        department: document.getElementById("department").value,
-        signature: document.getElementById("signature").value.trim(),
-        items: items
-    };
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Submitting...";
-
-    status.textContent = "Sending data to Google Sheets...";
-    status.className = "success";
-
-    try {
-
-        /*
-          text/plain avoids a CORS preflight request.
-          The Apps Script doPost(e) must parse e.postData.contents.
-        */
-
-        const response = await fetch(WEB_APP_URL, {
-            method: "POST",
-            body: JSON.stringify(payload)
-        });
-
-        const result = await response.json();
-
-        if (!response.ok || result.success !== true) {
-            throw new Error(result.message || "Submission failed.");
-        }
-
-        status.textContent =
-            "Successfully submitted! Your Kaizen record has been saved to Google Sheets. Submission ID: " +
-            (result.id || "Saved");
-
-        status.className = "success";
-
-        document.getElementById("kaizenForm").reset();
-
-        document.getElementById("date").value =
-            new Date().toLocaleDateString("en-CA");
-
-        updateSummary();
-
-    } catch (error) {
-
-        status.textContent =
-            "Submission could not be confirmed. " +
-            error.message +
-            " Check your Apps Script deployment and browser connection. " +
-            "Do not submit again until you check the Google Sheet to avoid duplicate records.";
-
-        status.className = "error";
-
-    } finally {
-
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Submit to Google Sheets";
-
-    }
-
+      document.getElementById("kaizenForm").reset();
+      document.getElementById("date").value =
+        new Date().toLocaleDateString("en-CA");
+      updateSummary();
+    })
+    .withFailureHandler(function(error) {
+      button.disabled = false;
+      button.textContent = "Submit Checklist";
+      showMessage("Error: " + error.message, "error");
+    })
+    .saveKaizen(payload);
 });
-
-
-/* Clear summary when form is reset */
-
-document.getElementById("kaizenForm")
-.addEventListener("reset", function() {
-
-    setTimeout(updateSummary, 0);
-
-});
-
 </script>
-
 </body>
 </html>

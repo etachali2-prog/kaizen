@@ -4,7 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MELBA Daily Kaizen Checklist</title>
+
+<title>MELBA Daily Kaizen Records</title>
 
 <style>
 * {
@@ -15,24 +16,21 @@ body {
     margin: 0;
     padding: 20px;
     font-family: Arial, Helvetica, sans-serif;
-    background: #eef2f7;
-    color: #243247;
+    background: #edf2f7;
+    color: #263548;
 }
 
 .container {
-    max-width: 1050px;
+    max-width: 1400px;
     margin: auto;
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.09);
 }
 
 .header {
     background: #142d4e;
     color: white;
     padding: 25px;
-    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 
 .header h1 {
@@ -42,202 +40,317 @@ body {
 
 .header p {
     margin: 0;
-    color: #d7e2ef;
-    font-size: 13px;
+    color: #d5dfeb;
 }
 
-.content {
-    padding: 25px;
-}
-
-.section-title {
-    color: #17365d;
-    border-bottom: 2px solid #dce5ef;
-    padding-bottom: 9px;
-    margin: 25px 0 18px;
-}
-
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-}
-
-.form-group label {
-    font-weight: bold;
-    font-size: 14px;
-}
-
-input[type="date"],
-input[type="text"],
-select,
-textarea {
-    width: 100%;
-    padding: 11px;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    font-family: inherit;
-    font-size: 14px;
+.toolbar {
     background: white;
-}
-
-.question-card {
-    border: 1px solid #dbe3ed;
-    border-radius: 8px;
-    padding: 17px;
-    margin-bottom: 16px;
-    background: #fff;
-}
-
-.question-title {
-    font-weight: bold;
-    line-height: 1.5;
-    margin-bottom: 13px;
-    color: #263c58;
-}
-
-.answer-options {
-    display: flex;
-    gap: 25px;
-    margin-bottom: 15px;
-}
-
-.answer-options label {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.answer-options input {
-    width: 17px;
-    height: 17px;
-    accent-color: #176b50;
-}
-
-.comment-label {
-    display: block;
-    font-size: 13px;
-    font-weight: bold;
-    margin-bottom: 7px;
-    color: #526276;
-}
-
-.question-comment {
-    min-height: 65px;
-    resize: vertical;
-}
-
-.summary {
-    background: #edf4fa;
-    border: 1px solid #d1dfed;
-    border-radius: 8px;
-    padding: 20px;
-    margin-top: 25px;
-}
-
-.summary h3 {
-    margin-top: 0;
-    color: #17365d;
-}
-
-.summary-values {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-}
-
-.summary-item {
-    font-size: 15px;
-}
-
-.summary-item strong {
-    color: #176b50;
-    font-size: 21px;
-    display: block;
-    margin-top: 5px;
-}
-
-.buttons {
+    padding: 18px;
+    border-radius: 9px;
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+.toolbar input {
+    flex: 1;
+    min-width: 180px;
+    padding: 12px;
+    border: 1px solid #ccd5e0;
+    border-radius: 6px;
+    font-size: 14px;
 }
 
 button {
     border: none;
+    padding: 11px 18px;
     border-radius: 6px;
-    padding: 12px 22px;
-    font-size: 14px;
-    font-weight: bold;
     cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
 }
 
-.submit-btn {
+button:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.refresh-btn {
     background: #176b50;
     color: white;
 }
 
-.print-btn {
+.view-btn {
     background: #17365d;
     color: white;
 }
 
-.reset-btn {
-    background: #e5eaf0;
-    color: #263c58;
+.print-btn {
+    background: #176b50;
+    color: white;
 }
 
-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+.close-btn {
+    background: white;
+    color: #142d4e;
 }
 
-#status {
-    margin-top: 15px;
+.summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    background: white;
+    padding: 20px;
+    border-radius: 9px;
+    border-left: 4px solid #176b50;
+}
+
+.summary-card span {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.summary-card strong {
+    display: block;
+    font-size: 26px;
+    margin-top: 8px;
+    color: #17365d;
+}
+
+.status {
+    padding: 14px;
+    margin-bottom: 15px;
+    background: white;
+    border-radius: 7px;
+    color: #526276;
+    overflow-wrap: anywhere;
+}
+
+.status.error {
+    color: #b42318;
+}
+
+.table-container {
+    background: white;
+    border-radius: 9px;
+    padding: 15px;
+    overflow-x: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 850px;
+}
+
+th, td {
+    padding: 13px;
+    text-align: left;
+    border-bottom: 1px solid #e3e9ef;
+    font-size: 13px;
+}
+
+th {
+    background: #17365d;
+    color: white;
+    white-space: nowrap;
+}
+
+tr:hover td {
+    background: #f6f9fc;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    background: rgba(0,0,0,.65);
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.modal-content {
+    max-width: 1000px;
+    margin: 20px auto;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.modal-header {
+    background: #142d4e;
+    color: white;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.modal-body {
+    padding: 22px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.info-box {
+    background: #f1f5f9;
+    padding: 14px;
+    border-radius: 7px;
+    overflow-wrap: anywhere;
+}
+
+.info-box small {
+    display: block;
+    color: #64748b;
+    margin-bottom: 7px;
+}
+
+.info-box strong {
+    color: #17365d;
+}
+
+.result-box {
+    background: #eaf3ef;
+    border: 1px solid #c8e0d4;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 22px;
+}
+
+.result-box h3 {
+    margin: 0 0 15px;
+    color: #17365d;
+}
+
+.result-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 35px;
+}
+
+.result-item span {
+    display: block;
+    color: #526276;
+    font-size: 13px;
+}
+
+.result-item strong {
+    display: block;
+    color: #176b50;
+    font-size: 26px;
+    margin-top: 6px;
+}
+
+.detail-question {
+    border: 1px solid #dce4ec;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 13px;
+    break-inside: avoid;
+}
+
+.detail-question h4 {
+    margin: 0 0 12px;
+    line-height: 1.5;
+    color: #17365d;
+}
+
+.answer-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 13px;
+    font-size: 14px;
+}
+
+.answer-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
     font-weight: bold;
-    white-space: pre-wrap;
 }
 
-.success {
+.answer-yes {
+    background: #d9f1e4;
     color: #176b50;
 }
 
-.error {
-    color: #c0392b;
+.answer-no {
+    background: #fde3e3;
+    color: #b42318;
+}
+
+.answer-missing {
+    background: #e5e7eb;
+    color: #475569;
+}
+
+.comment-heading {
+    font-size: 13px;
+    font-weight: bold;
+    color: #526276;
+    margin-bottom: 7px;
+}
+
+.comment-box {
+    background: #f1f5f9;
+    padding: 12px;
+    border-radius: 6px;
+    min-height: 40px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-size: 14px;
 }
 
 .footer {
     text-align: center;
-    padding: 15px;
-    background: #f5f7fa;
     color: #64748b;
+    padding: 20px;
     font-size: 12px;
+}
+
+.no-records {
+    text-align: center;
+    padding: 25px;
+    color: #64748b;
 }
 
 @media(max-width:650px) {
     body {
-        padding: 8px;
-    }
-
-    .content {
-        padding: 15px;
-    }
-
-    .form-grid {
-        grid-template-columns: 1fr;
+        padding: 9px;
     }
 
     .header h1 {
         font-size: 20px;
+    }
+
+    .summary {
+        grid-template-columns: 1fr;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-body {
+        padding: 13px;
     }
 }
 
@@ -247,26 +360,42 @@ button:disabled {
         padding: 0;
     }
 
-    .container {
-        box-shadow: none;
-        max-width: 100%;
-    }
-
-    .buttons,
-    #status {
+    .container,
+    .toolbar,
+    .summary,
+    .status,
+    .table-container,
+    .footer {
         display: none !important;
     }
 
-    .question-card {
+    .modal {
+        display: block !important;
+        position: static;
+        background: white;
+        padding: 0;
+        overflow: visible;
+    }
+
+    .modal-content {
+        max-width: 100%;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .modal-header {
+        background: white;
+        color: black;
+        border-bottom: 2px solid black;
+    }
+
+    .close-btn,
+    .no-print {
+        display: none !important;
+    }
+
+    .detail-question {
         break-inside: avoid;
-    }
-
-    input, select, textarea {
-        border: 1px solid #888;
-    }
-
-    .question-comment {
-        min-height: 45px;
     }
 }
 </style>
@@ -277,92 +406,76 @@ button:disabled {
 <div class="container">
 
     <div class="header">
-        <h1>MELBA DAILY KAIZEN CHECKLIST</h1>
-        <p>Daily Monitoring and Continuous Improvement</p>
+        <h1>MELBA DAILY KAIZEN RECORDS</h1>
+        <p>Daily Checklist Submission Records</p>
     </div>
 
-    <div class="content">
+    <div class="toolbar">
 
-        <h3 class="section-title">General Information</h3>
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search employee or department..."
+            oninput="displayRecords()"
+        >
 
-        <div class="form-grid">
+        <input
+            type="date"
+            id="dateFilter"
+            onchange="displayRecords()"
+        >
 
-            <div class="form-group">
-                <label for="date">Date *</label>
-                <input type="date" id="date" required>
-            </div>
+        <button class="refresh-btn" id="refreshBtn"
+                onclick="loadRecords()">
+            Refresh Records
+        </button>
 
-            <div class="form-group">
-                <label for="department">Department *</label>
-                <select id="department" required>
-                    <option value="">Select Department</option>
-                    <option>Production Directorate</option>
-                    <option>Technical Directorate</option>
-                    <option>Finance</option>
-                    <option>General Service</option>
-                    <option>Marketing</option>
-                    <option>Human Resource</option>
-                    <option>Procurement</option>
-                </select>
-            </div>
+    </div>
 
-            <div class="form-group">
-                <label for="employee">Employee Name *</label>
-                <input type="text" id="employee"
-                       placeholder="Enter employee name" required>
-            </div>
+    <div class="summary">
 
+        <div class="summary-card">
+            <span>Total Submissions</span>
+            <strong id="totalRecords">0</strong>
         </div>
 
-        <h3 class="section-title">Daily Kaizen Checklist</h3>
+        <div class="summary-card">
+            <span>Average Percentage</span>
+            <strong id="averageScore">0%</strong>
+        </div>
 
-        <p>Select Yes or No for each question. Enter a comment for that question if necessary.</p>
+        <div class="summary-card">
+            <span>Total Departments</span>
+            <strong id="totalDepartments">0</strong>
+        </div>
 
-        <form id="kaizenForm">
+    </div>
 
-            <div id="questionsContainer"></div>
+    <div id="status" class="status">
+        Loading records...
+    </div>
 
-            <div class="summary">
-                <h3>Overall Checklist Result</h3>
+    <div class="table-container">
 
-                <div class="summary-values">
-                    <div class="summary-item">
-                        Total Score
-                        <strong id="totalScore">0 / 20</strong>
-                    </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Date</th>
+                    <th>Department</th>
+                    <th>Employee Name</th>
+                    <th>Total Score</th>
+                    <th>Percentage</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
 
-                    <div class="summary-item">
-                        Percentage
-                        <strong id="percentage">0%</strong>
-                    </div>
-
-                    <div class="summary-item">
-                        Answered Questions
-                        <strong id="answered">0 / 20</strong>
-                    </div>
-                </div>
-            </div>
-
-            <div class="buttons">
-                <button type="button" class="submit-btn"
-                        id="submitBtn" onclick="submitChecklist()">
-                    Submit Checklist
-                </button>
-
-                <button type="button" class="print-btn"
-                        onclick="window.print()">
-                    Print / Save PDF
-                </button>
-
-                <button type="reset" class="reset-btn"
-                        onclick="resetChecklist()">
-                    Reset Form
-                </button>
-            </div>
-
-            <div id="status"></div>
-
-        </form>
+            <tbody id="recordsBody">
+                <tr>
+                    <td colspan="7">Loading...</td>
+                </tr>
+            </tbody>
+        </table>
 
     </div>
 
@@ -373,11 +486,52 @@ button:disabled {
 
 </div>
 
+
+<!-- DETAILS WINDOW -->
+
+<div class="modal" id="detailsModal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h2>Kaizen Checklist Details</h2>
+
+            <button class="close-btn no-print"
+                    onclick="closeDetails()">
+                Close
+            </button>
+        </div>
+
+        <div class="modal-body">
+
+            <div id="detailsContent"></div>
+
+            <div class="no-print" style="margin-top:20px;">
+                <button class="print-btn" onclick="printDetails()">
+                    Print / Save PDF
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
 <script>
 
-// IMPORTANT: Replace this with your deployed Apps Script Web App URL.
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx9uY97qKBmHAO0Ne_KYd4MEU-pBbyNmNm5TIT-KUqnw2683Vu3DX4GNaHMO9HL-7jW/exec";
+// =======================================
+// GOOGLE APPS SCRIPT WEB APP URL
+// =======================================
 
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyy35tM1BqDBmGVSNl1xU-jjSHM8wg9oOJ8ljCYi2j06RYnBqR9OfghwJWxwTqjj5vT/exec";
+
+
+// =======================================
+// CHECKLIST QUESTIONS
+// =======================================
 
 const questions = [
     "Bakki hojii qulqulluu fi sirrii ta'uu isaa mirkaneessuu",
@@ -402,258 +556,706 @@ const questions = [
     "Boruuuf hojii fooyya'aa fi tarkaanfii itti aanu murteessuu"
 ];
 
+let records = [];
+let headers = [];
 
-// Display all 20 questions.
-function loadQuestions() {
 
-    const container = document.getElementById("questionsContainer");
+// =======================================
+// NORMALIZE HEADER TEXT
+// =======================================
 
-    container.innerHTML = "";
+function normalizeHeader(value) {
 
-    questions.forEach((question, index) => {
-
-        const number = index + 1;
-
-        const card = document.createElement("div");
-        card.className = "question-card";
-
-        card.innerHTML = `
-            <div class="question-title">
-                ${number}. ${question}
-            </div>
-
-            <div class="answer-options">
-
-                <label>
-                    <input type="radio"
-                           name="answer${number}"
-                           value="Yes"
-                           onchange="calculateTotal()">
-                    Yes
-                </label>
-
-                <label>
-                    <input type="radio"
-                           name="answer${number}"
-                           value="No"
-                           onchange="calculateTotal()">
-                    No
-                </label>
-
-            </div>
-
-            <label class="comment-label"
-                   for="comment${number}">
-                Comment
-            </label>
-
-            <textarea
-                class="question-comment"
-                id="comment${number}"
-                placeholder="Enter comment for this checklist item..."
-            ></textarea>
-        `;
-
-        container.appendChild(card);
-
-    });
+    return String(value || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "");
 
 }
 
 
-// Calculate one overall score only.
-function calculateTotal() {
+// =======================================
+// FIND COLUMN USING HEADER
+// =======================================
 
-    let total = 0;
-    let answered = 0;
+function findHeaderIndex(names) {
 
-    for (let i = 1; i <= 20; i++) {
+    for (let i = 0; i < headers.length; i++) {
 
-        const selected = document.querySelector(
-            `input[name="answer${i}"]:checked`
-        );
+        const current = normalizeHeader(headers[i]);
 
-        if (selected) {
+        for (const name of names) {
 
-            answered++;
-
-            if (selected.value === "Yes") {
-                total++;
+            if (current === normalizeHeader(name)) {
+                return i;
             }
 
         }
 
     }
 
-    const percentage = (total / 20) * 100;
-
-    document.getElementById("totalScore").textContent =
-        total + " / 20";
-
-    document.getElementById("percentage").textContent =
-        percentage.toFixed(1) + "%";
-
-    document.getElementById("answered").textContent =
-        answered + " / 20";
+    return -1;
 
 }
 
 
-// Collect data and submit one row to Google Sheets.
-async function submitChecklist() {
+// =======================================
+// FIND ANSWER START POSITION
+// =======================================
 
-    const date = document.getElementById("date").value;
-    const department = document.getElementById("department").value;
-    const employee = document.getElementById("employee").value.trim();
+function findAnswerStart(row) {
 
-    const status = document.getElementById("status");
-    const submitBtn = document.getElementById("submitBtn");
+    // First, try standard column headers.
+    const headerIndex = findHeaderIndex([
+        "Q1 Answer",
+        "Question 1 Answer",
+        "Q1"
+    ]);
 
-    status.textContent = "";
-    status.className = "";
-
-    if (!date || !department || !employee) {
-
-        showStatus(
-            "Please enter Date, Department and Employee Name.",
-            "error"
-        );
-
-        return;
+    if (headerIndex >= 0) {
+        return headerIndex;
     }
 
-    if (SCRIPT_URL === "PASTE_YOUR_WEB_APP_URL_HERE") {
+    // Otherwise detect 20 consecutive Yes/No values.
+    for (let start = 0; start <= row.length - 20; start++) {
 
-        showStatus(
-            "Please add your Google Apps Script Web App URL in the HTML code.",
-            "error"
-        );
+        let valid = true;
 
-        return;
+        for (let j = 0; j < 20; j++) {
+
+            const value = String(row[start + j] || "")
+                .trim()
+                .toLowerCase();
+
+            if (value !== "yes" && value !== "no") {
+                valid = false;
+                break;
+            }
+
+        }
+
+        if (valid) {
+            return start;
+        }
+
     }
 
-    const answers = [];
-    const comments = [];
+    // Standard layout: A-C general information, D-W answers.
+    return 3;
+
+}
+
+
+// =======================================
+// GET COLUMN
+// =======================================
+
+function getColumn(row, name) {
+
+    const generalColumns = {
+        "Date": ["Date"],
+        "Department": ["Department"],
+        "Employee Name": ["Employee Name", "Employee"]
+    };
+
+    if (generalColumns[name]) {
+
+        const index = findHeaderIndex(generalColumns[name]);
+
+        if (index >= 0) {
+            return row[index] || "";
+        }
+
+        const fallback = {
+            "Date": 0,
+            "Department": 1,
+            "Employee Name": 2
+        };
+
+        return row[fallback[name]] || "";
+
+    }
+
+
+    if (name.match(/^Q\d+ Answer$/)) {
+
+        const number = parseInt(name.match(/\d+/)[0]);
+
+        const headerIndex = findHeaderIndex([
+            name,
+            "Question " + number + " Answer",
+            "Q" + number
+        ]);
+
+        if (headerIndex >= 0) {
+            return row[headerIndex] || "";
+        }
+
+        const start = findAnswerStart(row);
+
+        return row[start + number - 1] || "";
+
+    }
+
+
+    if (name.match(/^Q\d+ Comment$/)) {
+
+        const number = parseInt(name.match(/\d+/)[0]);
+
+        const headerIndex = findHeaderIndex([
+            name,
+            "Question " + number + " Comment"
+        ]);
+
+        if (headerIndex >= 0) {
+            return row[headerIndex] || "";
+        }
+
+        const start = findAnswerStart(row);
+
+        return row[start + 20 + number - 1] || "";
+
+    }
+
+
+    if (name === "Total Score") {
+
+        const index = findHeaderIndex(["Total Score"]);
+
+        if (index >= 0) {
+            return row[index] || "";
+        }
+
+        return "";
+
+    }
+
+
+    if (name === "Percentage") {
+
+        const index = findHeaderIndex(["Percentage"]);
+
+        if (index >= 0) {
+            return row[index] || "";
+        }
+
+        return "";
+
+    }
+
+
+    if (name === "Submission Time") {
+
+        const index = findHeaderIndex([
+            "Submission Time",
+            "Timestamp"
+        ]);
+
+        if (index >= 0) {
+            return row[index] || "";
+        }
+
+        return "";
+
+    }
+
+    return "";
+
+}
+
+
+// =======================================
+// CALCULATE SCORE FROM ANSWERS
+// =======================================
+
+function calculateRecordScore(row) {
+
+    let total = 0;
+    let answered = 0;
 
     for (let i = 1; i <= 20; i++) {
 
-        const selected = document.querySelector(
-            `input[name="answer${i}"]:checked`
-        );
+        const answer = String(
+            getColumn(row, "Q" + i + " Answer")
+        ).trim().toLowerCase();
 
-        if (!selected) {
-
-            showStatus(
-                "Please answer all 20 checklist questions. Question " +
-                i + " is not answered.",
-                "error"
-            );
-
-            return;
+        if (answer === "yes") {
+            total++;
+            answered++;
         }
 
-        answers.push(selected.value);
-
-        comments.push(
-            document.getElementById("comment" + i).value.trim()
-        );
+        if (answer === "no") {
+            answered++;
+        }
 
     }
 
-    const totalScore = answers.filter(
-        answer => answer === "Yes"
-    ).length;
-
-    const percentage = ((totalScore / 20) * 100).toFixed(1);
-
-    const payload = {
-        date: date,
-        department: department,
-        employee: employee,
-        answers: answers,
-        comments: comments,
-        totalScore: totalScore,
-        percentage: percentage
+    return {
+        total: total,
+        percentage: (total / 20) * 100,
+        answered: answered
     };
 
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Submitting...";
+}
 
-    try {
 
-        // text/plain avoids a browser CORS preflight request.
-        const response = await fetch(SCRIPT_URL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8"
-            },
-            body: JSON.stringify(payload)
-        });
+// =======================================
+// LOAD GOOGLE SHEETS RECORDS
+// =======================================
 
-        // In no-cors mode the response is opaque.
-        // The browser cannot read the Apps Script response body.
-        showStatus(
-            "Submission sent. Please check your Google Sheet to confirm that the record was saved.",
-            "success"
-        );
+function loadRecords() {
 
-    } catch (error) {
+    const status = document.getElementById("status");
+    const refreshBtn = document.getElementById("refreshBtn");
 
-        showStatus(
-            "Submission could not be sent. Check your internet connection and Web App URL, then try again.",
-            "error"
-        );
+    status.textContent = "Connecting to Google Sheets...";
+    status.className = "status";
 
-    } finally {
+    refreshBtn.disabled = true;
 
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Submit Checklist";
+    const oldScript = document.getElementById("recordsScript");
+
+    if (oldScript) {
+        oldScript.remove();
+    }
+
+    const callbackName = "kaizenCallback_" + Date.now();
+
+    window[callbackName] = function(data) {
+
+        try {
+
+            if (!data || data.success !== true) {
+
+                throw new Error(
+                    data && data.message
+                    ? data.message
+                    : "Unable to retrieve records."
+                );
+
+            }
+
+            headers = data.headers || [];
+            records = data.records || [];
+
+            displayRecords();
+            updateSummary();
+
+            status.textContent =
+                "Records loaded successfully. Total submissions: " +
+                records.length;
+
+            status.className = "status";
+
+        } catch (error) {
+
+            status.textContent = error.message;
+            status.className = "status error";
+
+        } finally {
+
+            refreshBtn.disabled = false;
+
+            const script =
+                document.getElementById("recordsScript");
+
+            if (script) {
+                script.remove();
+            }
+
+            delete window[callbackName];
+
+        }
+
+    };
+
+    const script = document.createElement("script");
+
+    script.id = "recordsScript";
+
+    script.src =
+        SCRIPT_URL +
+        "?callback=" + encodeURIComponent(callbackName) +
+        "&t=" + Date.now();
+
+    script.onerror = function() {
+
+        status.textContent =
+            "Connection failed. Check Web App URL, deployment and permissions.";
+
+        status.className = "status error";
+
+        refreshBtn.disabled = false;
+
+        script.remove();
+
+        delete window[callbackName];
+
+    };
+
+    document.body.appendChild(script);
+
+}
+
+
+// =======================================
+// DISPLAY RECORDS TABLE
+// =======================================
+
+function displayRecords() {
+
+    const tbody = document.getElementById("recordsBody");
+
+    const search = document.getElementById("searchInput")
+        .value.trim().toLowerCase();
+
+    const dateFilter = document.getElementById("dateFilter").value;
+
+    tbody.innerHTML = "";
+
+    const filtered = records.filter(function(row) {
+
+        const employee = String(
+            getColumn(row, "Employee Name")
+        ).toLowerCase();
+
+        const department = String(
+            getColumn(row, "Department")
+        ).toLowerCase();
+
+        const date = getColumn(row, "Date");
+
+        const matchesSearch =
+            employee.includes(search) ||
+            department.includes(search);
+
+        const matchesDate =
+            !dateFilter || date === dateFilter;
+
+        return matchesSearch && matchesDate;
+
+    });
+
+    if (filtered.length === 0) {
+
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+
+        td.colSpan = 7;
+        td.className = "no-records";
+        td.textContent = "No records found.";
+
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+
+        return;
 
     }
 
+    filtered.forEach(function(row, index) {
+
+        const originalIndex = records.indexOf(row);
+        const score = calculateRecordScore(row);
+
+        const tr = document.createElement("tr");
+
+        const values = [
+            index + 1,
+            getColumn(row, "Date"),
+            getColumn(row, "Department"),
+            getColumn(row, "Employee Name"),
+            score.total + " / 20",
+            score.percentage.toFixed(1) + "%"
+        ];
+
+        values.forEach(function(value) {
+
+            const td = document.createElement("td");
+            td.textContent = value;
+
+            tr.appendChild(td);
+
+        });
+
+        const actionCell = document.createElement("td");
+
+        const button = document.createElement("button");
+
+        button.className = "view-btn";
+        button.textContent = "View Details";
+
+        button.addEventListener("click", function() {
+            viewDetails(originalIndex);
+        });
+
+        actionCell.appendChild(button);
+        tr.appendChild(actionCell);
+
+        tbody.appendChild(tr);
+
+    });
+
 }
 
 
-function showStatus(message, type) {
+// =======================================
+// DASHBOARD SUMMARY
+// =======================================
 
-    const status = document.getElementById("status");
+function updateSummary() {
 
-    status.textContent = message;
-    status.className = type;
+    document.getElementById("totalRecords").textContent =
+        records.length;
+
+    let totalPercentage = 0;
+
+    const departments = new Set();
+
+    records.forEach(function(row) {
+
+        const score = calculateRecordScore(row);
+
+        totalPercentage += score.percentage;
+
+        const department = getColumn(row, "Department");
+
+        if (department) {
+            departments.add(department);
+        }
+
+    });
+
+    const average = records.length
+        ? totalPercentage / records.length
+        : 0;
+
+    document.getElementById("averageScore").textContent =
+        average.toFixed(1) + "%";
+
+    document.getElementById("totalDepartments").textContent =
+        departments.size;
 
 }
 
 
-function resetChecklist() {
+// =======================================
+// DISPLAY FULL CHECKLIST DETAILS
+// =======================================
 
-    setTimeout(() => {
+function viewDetails(index) {
 
-        calculateTotal();
+    const row = records[index];
 
-        document.getElementById("status").textContent = "";
-        document.getElementById("status").className = "";
+    if (!row) return;
 
-    }, 0);
+    const content = document.getElementById("detailsContent");
+
+    content.innerHTML = "";
+
+    const date = getColumn(row, "Date");
+    const department = getColumn(row, "Department");
+    const employee = getColumn(row, "Employee Name");
+    const submissionTime = getColumn(row, "Submission Time");
+
+    const score = calculateRecordScore(row);
+
+
+    // General information.
+    const infoGrid = document.createElement("div");
+    infoGrid.className = "info-grid";
+
+    const info = [
+        ["Date", date],
+        ["Department", department],
+        ["Employee Name", employee]
+    ];
+
+    info.forEach(function(item) {
+
+        const box = document.createElement("div");
+        box.className = "info-box";
+
+        const small = document.createElement("small");
+        small.textContent = item[0];
+
+        const strong = document.createElement("strong");
+        strong.textContent = item[1] || "-";
+
+        box.appendChild(small);
+        box.appendChild(strong);
+
+        infoGrid.appendChild(box);
+
+    });
+
+    content.appendChild(infoGrid);
+
+
+    // Overall result.
+    const resultBox = document.createElement("div");
+    resultBox.className = "result-box";
+
+    const heading = document.createElement("h3");
+    heading.textContent = "Overall Checklist Result";
+
+    const resultGrid = document.createElement("div");
+    resultGrid.className = "result-grid";
+
+    const totalItem = document.createElement("div");
+    totalItem.className = "result-item";
+
+    const totalLabel = document.createElement("span");
+    totalLabel.textContent = "Total Score";
+
+    const totalValue = document.createElement("strong");
+    totalValue.textContent = score.total + " / 20";
+
+    totalItem.appendChild(totalLabel);
+    totalItem.appendChild(totalValue);
+
+
+    const percentageItem = document.createElement("div");
+    percentageItem.className = "result-item";
+
+    const percentageLabel = document.createElement("span");
+    percentageLabel.textContent = "Overall Percentage";
+
+    const percentageValue = document.createElement("strong");
+    percentageValue.textContent =
+        score.percentage.toFixed(1) + "%";
+
+    percentageItem.appendChild(percentageLabel);
+    percentageItem.appendChild(percentageValue);
+
+    resultGrid.appendChild(totalItem);
+    resultGrid.appendChild(percentageItem);
+
+    resultBox.appendChild(heading);
+    resultBox.appendChild(resultGrid);
+
+    content.appendChild(resultBox);
+
+
+    // All 20 questions, answers and comments.
+    for (let i = 1; i <= 20; i++) {
+
+        const answer = String(
+            getColumn(row, "Q" + i + " Answer")
+        ).trim();
+
+        const comment = getColumn(row, "Q" + i + " Comment");
+
+        const card = document.createElement("div");
+        card.className = "detail-question";
+
+        const title = document.createElement("h4");
+        title.textContent = i + ". " + questions[i - 1];
+
+
+        // Answer.
+        const answerLine = document.createElement("div");
+        answerLine.className = "answer-line";
+
+        const answerLabel = document.createElement("strong");
+        answerLabel.textContent = "Answer:";
+
+        const badge = document.createElement("span");
+        badge.className = "answer-badge";
+
+        if (answer.toLowerCase() === "yes") {
+
+            badge.classList.add("answer-yes");
+            badge.textContent = "YES";
+
+        } else if (answer.toLowerCase() === "no") {
+
+            badge.classList.add("answer-no");
+            badge.textContent = "NO";
+
+        } else {
+
+            badge.classList.add("answer-missing");
+            badge.textContent = "Not answered";
+
+        }
+
+        answerLine.appendChild(answerLabel);
+        answerLine.appendChild(badge);
+
+
+        // Comment.
+        const commentHeading = document.createElement("div");
+        commentHeading.className = "comment-heading";
+        commentHeading.textContent = "Comment";
+
+        const commentBox = document.createElement("div");
+        commentBox.className = "comment-box";
+        commentBox.textContent = comment || "No comment entered.";
+
+        card.appendChild(title);
+        card.appendChild(answerLine);
+        card.appendChild(commentHeading);
+        card.appendChild(commentBox);
+
+        content.appendChild(card);
+
+    }
+
+
+    if (submissionTime) {
+
+        const time = document.createElement("p");
+        time.textContent = "Submission Time: " + submissionTime;
+
+        content.appendChild(time);
+
+    }
+
+    document.getElementById("detailsModal").style.display = "block";
 
 }
 
 
-// Set today's date and load questions.
-document.addEventListener("DOMContentLoaded", function() {
+// =======================================
+// CLOSE DETAILS
+// =======================================
 
-    const today = new Date();
+function closeDetails() {
 
-    const localDate = new Date(
-        today.getTime() - today.getTimezoneOffset() * 60000
-    ).toISOString().slice(0, 10);
+    document.getElementById("detailsModal").style.display = "none";
 
-    document.getElementById("date").value = localDate;
+}
 
-    loadQuestions();
 
-    calculateTotal();
+// =======================================
+// PRINT
+// =======================================
 
+function printDetails() {
+
+    window.print();
+
+}
+
+
+// Close modal by clicking outside.
+document.getElementById("detailsModal").addEventListener(
+    "click",
+    function(event) {
+
+        if (event.target === this) {
+            closeDetails();
+        }
+
+    }
+);
+
+
+// =======================================
+// START
+// =======================================
+
+window.addEventListener("DOMContentLoaded", function() {
+    loadRecords();
 });
 
 </script>

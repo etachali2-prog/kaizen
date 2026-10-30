@@ -1,13 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MELBA Daily Kaizen Records Dashboard</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
+<title>MELBA Daily Kaizen Checklist</title>
 
 <style>
 * {
@@ -16,1060 +14,540 @@
 
 body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #eef2f7;
-    color: #263445;
-}
-
-.header {
-    background: #102d4f;
-    color: white;
-    padding: 25px;
+    padding: 20px;
+    background: #edf2f7;
+    font-family: Arial, sans-serif;
+    color: #1e293b;
 }
 
 .container {
-    max-width: 1450px;
+    max-width: 1100px;
     margin: auto;
-    padding: 22px;
-}
-
-.card {
     background: white;
+    padding: 25px;
     border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 3px 12px rgba(0,0,0,.06);
-    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.08);
 }
 
-.summary {
+.header {
+    text-align: center;
+    border-bottom: 3px solid #123b63;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.header h2 {
+    color: #123b63;
+}
+
+.details {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
-.summary-card {
-    background: white;
-    padding: 22px;
-    border-radius: 12px;
-    border-left: 5px solid #2563eb;
-    box-shadow: 0 3px 10px rgba(0,0,0,.05);
-}
-
-.summary-card h2 {
-    font-size: 30px;
-    margin: 10px 0 0;
-    color: #102d4f;
-}
-
-.filters {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr auto;
-    gap: 12px;
-}
-
-input, select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #cbd5e1;
-    border-radius: 7px;
-    background: white;
-}
-
-button {
-    cursor: pointer;
-    border: none;
-    border-radius: 7px;
-    padding: 11px 16px;
+.field label {
+    display: block;
     font-weight: bold;
+    margin-bottom: 7px;
 }
 
-button:disabled {
-    opacity: .6;
-    cursor: wait;
+.field input, .field select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
 }
 
-.refresh {
-    background: #16a34a;
-    color: white;
-}
-
-.refresh:hover {
-    background: #15803d;
-}
-
-.primary {
-    background: #102d4f;
-    color: white;
-}
-
-.secondary {
-    background: #64748b;
-    color: white;
-}
-
-.view {
-    background: #2563eb;
-    color: white;
-    padding: 8px 13px;
-}
-
-.print {
-    background: #0f766e;
-    color: white;
-}
-
-.table-container {
+.table-wrapper {
     overflow-x: auto;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 750px;
-}
-
-th, td {
-    padding: 13px;
-    border-bottom: 1px solid #e2e8f0;
-    text-align: left;
-    font-size: 13px;
+    min-width: 650px;
 }
 
 th {
-    background: #102d4f;
+    background: #123b63;
     color: white;
-    white-space: nowrap;
+    padding: 12px;
 }
 
-tr:hover td {
-    background: #f8fafc;
+td {
+    border: 1px solid #dbe2ea;
+    padding: 12px 8px;
+    text-align: center;
 }
 
-.status {
+td.question {
+    text-align: left;
+    width: 70%;
+}
+
+tbody tr:nth-child(even) {
+    background: #f1f5f9;
+}
+
+input[type=checkbox] {
+    width: 19px;
+    height: 19px;
+    accent-color: #087a50;
+    cursor: pointer;
+}
+
+.score {
+    font-weight: bold;
+    color: #087a50;
+}
+
+.summary {
+    margin-top: 20px;
+    padding: 20px;
+    background: #eaf2f8;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.summary strong {
+    color: #087a50;
+    font-size: 22px;
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+button {
+    border: none;
+    padding: 13px 20px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit {
+    background: #087a50;
+    color: white;
+}
+
+.print {
+    background: #123b63;
+    color: white;
+}
+
+.reset {
+    background: #64748b;
+    color: white;
+}
+
+button:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+#message {
+    display: none;
+    margin-top: 15px;
     padding: 13px;
-    border-radius: 7px;
-    margin-bottom: 18px;
-    background: white;
+    border-radius: 6px;
+    overflow-wrap: anywhere;
 }
 
 .success {
-    color: #15803d;
-    background: #f0fdf4;
+    background: #dcfce7;
+    color: #166534;
 }
 
 .error {
-    color: #b91c1c;
-    background: #fef2f2;
+    background: #fee2e2;
+    color: #991b1b;
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    inset: 0;
-    background: rgba(0,0,0,.7);
-    overflow-y: auto;
-    padding: 20px;
-}
-
-.modal-content {
-    max-width: 1050px;
-    background: white;
-    margin: 25px auto;
-    padding: 25px;
-    border-radius: 12px;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.detail-info {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 25px;
-}
-
-.detail-box {
-    background: #f1f5f9;
-    padding: 13px;
-    border-radius: 7px;
-}
-
-.detail-box small {
-    color: #64748b;
-    display: block;
-    margin-bottom: 6px;
-}
-
-.answer-yes {
-    color: #15803d;
-    font-weight: bold;
-}
-
-.answer-no {
-    color: #dc2626;
-    font-weight: bold;
-}
-
-.close {
-    background: #dc2626;
-    color: white;
-}
-
-footer {
-    text-align: center;
-    color: #64748b;
-    padding: 25px;
-}
-
-@media(max-width: 800px) {
-    .summary {
-        grid-template-columns: 1fr;
-    }
-
-    .filters {
-        grid-template-columns: 1fr;
-    }
-
-    .detail-info {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .header h1 {
-        font-size: 20px;
-    }
+@media(max-width:700px) {
+    body { padding: 8px; }
+    .container { padding: 13px; }
+    .details { grid-template-columns: 1fr; }
+    .summary { flex-direction: column; }
 }
 
 @media print {
-    body {
-        background: white;
-    }
-
-    .no-print, .header button, footer {
-        display: none !important;
-    }
-
-    .container {
-        max-width: 100%;
-        padding: 5px;
-    }
-
-    .card, .summary-card {
-        box-shadow: none;
-        border: 1px solid #ddd;
-    }
-
-    .modal {
-        display: block !important;
-        position: static;
-        overflow: visible;
-        background: white;
-        padding: 0;
-    }
-
-    .modal-content {
-        max-width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-
-    .modal-header button {
-        display: none;
-    }
-
-    table {
-        min-width: 0;
-    }
-
-    th, td {
-        font-size: 10px;
-        padding: 6px;
-    }
-
-    tr {
-        page-break-inside: avoid;
-    }
-
-    @page {
-        size: landscape;
-        margin: 10mm;
-    }
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; }
+    .buttons, #message { display: none !important; }
+    table { font-size: 11px; min-width: 0; }
+    th, td { padding: 7px 4px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
+<div class="container">
 
-<header class="header">
-    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
+<div class="header">
+    <h2>MELBA PRINTING, PUBLISHING & PACKAGING S.C.</h2>
+    <h3>DAILY KAIZEN CHECKLIST</h3>
+    <p>Cheekliistii Hojii Irra Oolmaa Kaayizenii Guyyaa Guyyaan</p>
+</div>
 
-        <div>
-            <h1 class="text-2xl font-bold">
-                MELBA DAILY KAIZEN RECORDS
-            </h1>
+<form id="kaizenForm">
 
-            <p class="text-blue-200 mt-2 text-sm">
-                Daily Kaizen Monitoring and Evaluation Dashboard
-            </p>
+<div class="details">
 
-            <p class="text-blue-100 text-xs mt-1">
-                Technical Directorate | MELBA PRINTING, PUBLISHING & PACKAGING S.C.
-            </p>
-        </div>
-
-        <button class="refresh no-print" id="refreshBtn"
-            onclick="loadRecords()">
-            ↻ Refresh Records
-        </button>
-
-    </div>
-</header>
-
-
-<main class="container">
-
-    <!-- CONNECTION STATUS -->
-
-    <div id="status" class="status">
-        Connecting to Google Sheets...
+    <div class="field">
+        <label>Guyyaa / Date</label>
+        <input type="date" id="date" required>
     </div>
 
+    <div class="field">
+        <label>Kutaa Hojii / Department</label>
+        <select id="department" required>
+            <option value="">Select Department</option>
+            <option>Production Directorate</option>
+            <option>Technical Directorate</option>
+            <option>Finance</option>
+            <option>General Service</option>
+            <option>Marketing</option>
+            <option>Human Resource</option>
+            <option>Procurement</option>
+        </select>
+    </div>
 
-    <!-- SUMMARY -->
-
-    <section class="summary">
-
-        <div class="summary-card">
-            <p class="text-gray-500 text-sm">Total Submissions</p>
-            <h2 id="totalRecords">0</h2>
-        </div>
-
-        <div class="summary-card" style="border-color:#16a34a">
-            <p class="text-gray-500 text-sm">Departments</p>
-            <h2 id="totalDepartments">0</h2>
-        </div>
-
-        <div class="summary-card" style="border-color:#eab308">
-            <p class="text-gray-500 text-sm">Average Score</p>
-            <h2 id="averageScore">0%</h2>
-        </div>
-
-    </section>
-
-
-    <!-- FILTERS -->
-
-    <section class="card">
-
-        <h2 class="font-bold text-lg mb-4 text-[#102d4f]">
-            Search and Filter Records
-        </h2>
-
-        <div class="filters no-print">
-
-            <input type="text"
-                id="searchInput"
-                placeholder="Search ID, department or signature..."
-                oninput="displayRecords()">
-
-            <select id="departmentFilter"
-                onchange="displayRecords()">
-
-                <option value="">All Departments</option>
-
-            </select>
-
-            <input type="date"
-                id="dateFilter"
-                onchange="displayRecords()">
-
-            <button class="secondary"
-                onclick="clearFilters()">
-                Clear Filters
-            </button>
-
-        </div>
-
-        <div class="flex justify-end mt-4 no-print">
-            <button class="print" onclick="printMainRecords()">
-                Print Records
-            </button>
-        </div>
-
-    </section>
-
-
-    <!-- RECORD TABLE -->
-
-    <section class="card">
-
-        <div class="flex flex-wrap justify-between items-center mb-4 gap-3">
-
-            <h2 class="font-bold text-lg text-[#102d4f]">
-                Google Sheets Submission Records
-            </h2>
-
-            <span id="recordCount" class="text-sm text-gray-500">
-                0 records
-            </span>
-
-        </div>
-
-        <div class="table-container">
-
-            <table>
-
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Submission ID</th>
-                        <th>Date</th>
-                        <th>Department</th>
-                        <th>Signature</th>
-                        <th>Score</th>
-                        <th>Percentage</th>
-                        <th class="no-print">Action</th>
-                    </tr>
-                </thead>
-
-                <tbody id="recordsBody">
-
-                    <tr>
-                        <td colspan="8" style="text-align:center">
-                            Loading records...
-                        </td>
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </section>
-
-</main>
-
-
-<!-- DETAILS MODAL -->
-
-<div id="detailModal" class="modal">
-
-    <div class="modal-content">
-
-        <div class="modal-header">
-
-            <h2 class="text-xl font-bold text-[#102d4f]">
-                KAIZEN SUBMISSION DETAILS
-            </h2>
-
-            <button class="close no-print"
-                onclick="closeModal()">
-                Close
-            </button>
-
-        </div>
-
-        <div id="detailContent"></div>
-
-        <div class="flex justify-end mt-6 gap-3 no-print">
-
-            <button class="print"
-                onclick="printDetails()">
-                Print Details
-            </button>
-
-            <button class="secondary"
-                onclick="closeModal()">
-                Close
-            </button>
-
-        </div>
-
+    <div class="field">
+        <label>Maqaa Hojjetaa / Employee Name</label>
+        <input type="text" id="employee" required>
     </div>
 
 </div>
 
+<div class="table-wrapper">
 
-<footer>
-    MELBA PRINTING, PUBLISHING & PACKAGING S.C.
-    <br>
-    Technical Directorate | Daily Kaizen Monitoring System
-</footer>
+<table>
 
+<thead>
+<tr>
+    <th>No.</th>
+    <th>Checklist / Gaaffii Hordoffii</th>
+    <th>Yes</th>
+    <th>No</th>
+    <th>Score</th>
+</tr>
+</thead>
+
+<tbody id="checklistBody"></tbody>
+
+</table>
+
+</div>
+
+<div class="summary">
+
+    <div>Total Score: <strong id="total">0</strong> / 20</div>
+
+    <div>Percentage: <strong id="percentage">0%</strong></div>
+
+    <div>Answered: <strong id="answered">0</strong> / 20</div>
+
+</div>
+
+<div class="buttons">
+
+    <button type="submit" class="submit" id="submitBtn">
+        Submit to Google Sheets
+    </button>
+
+    <button type="button" class="print" onclick="window.print()">
+        Print / Save PDF
+    </button>
+
+    <button type="reset" class="reset">
+        Reset
+    </button>
+
+</div>
+
+<div id="message"></div>
+
+</form>
+</div>
 
 <script>
 
-/********************************************************
- GOOGLE APPS SCRIPT WEB APP URL
-********************************************************/
+// ==================================
+// GOOGLE APPS SCRIPT WEB APP URL
+// ==================================
 
-const WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbx26G-UhQy2zAURgsmjg0UxZFQWdxp76wQlYdYHmzxe9BUZ5jtJsv-v-imLvWX5wJBm/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxB0KWHJqv0qxftqttjHRA9wRHOR5mAeN4YYey0g29MEc-KOESgAJRSmIEjYRZGCAWY/exec";
 
+// ==================================
+// CHECKLIST QUESTIONS
+// ==================================
 
-/********************************************************
- GLOBAL DATA
-********************************************************/
+const questions = [
+"Bakki hojii qulqulluu fi sirrii ta'uu isaa mirkaneessuu",
 
-let allRecords = [];
-let filteredRecords = [];
+"Meeshaaleen hojii barbaachisoo ta'an bakka isaanii irratti argamuu",
 
+"Meeshaalee hin barbaachifne bakka hojii irraa qulqulleessuu",
 
-/********************************************************
- ESCAPE HTML
-********************************************************/
+"Faayilootaa fi dokumeentoota sirnaan qindeessuu",
 
-function escapeHTML(value) {
+"Hojii guyyaa sanaaf karoorfame adda baasuu",
 
-    return String(value ?? "").replace(/[&<>"']/g, function(char) {
+"Hojii dursa kennamuuf qabu adda baasuu",
 
-        return {
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#39;"
-        }[char];
+"Hojiiwwan yeroo isaanii eeganii raawwatamuu isaanii hordofuu",
+
+"Yeroo hojii sirnaan fayyadamuu",
+
+"Qisaasama yeroo, meeshaa fi qabeenyaa xiqqeessuu",
+
+"Rakkoo hojii keessatti mul'ate adda baasuu",
+
+"Sababa rakkoo sanaa adda baasuu",
+
+"Furmaata rakkoo sanaaf tarkaanfii fudhachuu",
+
+"Hojii har'aa kan kaleessaa caalaa fooyyeessuuf yaada haaraa qabaachuu",
+
+"Yaada fooyya'iinsaa hojjettoota irraa walitti qabu",
+
+"Tajaajila kennamu irratti qulqullinaa fi saffisa mirkaneessuu",
+
+"Komii ykn yaada maamilaa/hojii waliin walqabatu galmeessuu",
+
+"Hojiiwwan raawwataman ragaan isaanii sirnaan qabamuu",
+
+"Seera, qajeelfama fi tartiiba hojii kabajuu",
+
+"Hojii guyyaa sanaa madaaluu",
+
+"Boruuf hojii fooyya'aa fi tarkaanfii itti aanu murteessuu"
+];
+
+// ==================================
+// GENERATE CHECKLIST
+// ==================================
+
+const tbody = document.getElementById("checklistBody");
+
+questions.forEach((q, i) => {
+
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+        <td>${i + 1}</td>
+
+        <td class="question">${q}</td>
+
+        <td>
+            <input type="checkbox"
+                id="yes${i}"
+                onchange="selectAnswer(${i}, 'Yes')">
+        </td>
+
+        <td>
+            <input type="checkbox"
+                id="no${i}"
+                onchange="selectAnswer(${i}, 'No')">
+        </td>
+
+        <td class="score" id="score${i}">0</td>
+    `;
+
+    tbody.appendChild(row);
+});
+
+// ==================================
+// SELECT YES OR NO
+// ==================================
+
+let answers = new Array(questions.length).fill("");
+
+function selectAnswer(index, value) {
+
+    const yes = document.getElementById("yes" + index);
+    const no = document.getElementById("no" + index);
+
+    if (value === "Yes") {
+
+        if (yes.checked) {
+            no.checked = false;
+            answers[index] = "Yes";
+        } else {
+            answers[index] = "";
+        }
+
+    } else {
+
+        if (no.checked) {
+            yes.checked = false;
+            answers[index] = "No";
+        } else {
+            answers[index] = "";
+        }
+    }
+
+    calculateScore();
+}
+
+// ==================================
+// CALCULATE SCORE
+// YES = 1
+// NO = 0
+// ==================================
+
+function calculateScore() {
+
+    let total = 0;
+    let answered = 0;
+
+    questions.forEach((q, i) => {
+
+        let score = answers[i] === "Yes" ? 1 : 0;
+
+        if (answers[i] !== "") answered++;
+
+        total += score;
+
+        document.getElementById("score" + i).textContent = score;
 
     });
 
+    document.getElementById("total").textContent = total;
+
+    document.getElementById("percentage").textContent =
+        (total / questions.length * 100).toFixed(1) + "%";
+
+    document.getElementById("answered").textContent = answered;
 }
 
+// ==================================
+// SHOW MESSAGE
+// ==================================
 
-/********************************************************
- LOAD RECORDS FROM GOOGLE SHEETS
-********************************************************/
+function showMessage(message, type) {
 
-async function loadRecords() {
+    const box = document.getElementById("message");
 
-    const status = document.getElementById("status");
-    const refreshBtn = document.getElementById("refreshBtn");
+    box.style.display = "block";
+    box.className = type;
+    box.textContent = message;
+}
 
-    status.className = "status";
-    status.textContent = "Connecting to Google Sheets...";
+// ==================================
+// SUBMIT DATA TO GOOGLE SHEETS
+// ==================================
 
-    refreshBtn.disabled = true;
-    refreshBtn.textContent = "Loading...";
+document.getElementById("kaizenForm").addEventListener(
+"submit", async function(e) {
+
+    e.preventDefault();
+
+    if (SCRIPT_URL.includes("PASTE_YOUR")) {
+        showMessage("Please enter your Google Apps Script Web App URL.", "error");
+        return;
+    }
+
+    const unanswered = answers.filter(a => a === "").length;
+
+    if (unanswered > 0) {
+        showMessage("Please answer all 20 questions before submitting.", "error");
+        return;
+    }
+
+    const items = questions.map((question, i) => ({
+        question: question,
+        answer: answers[i],
+        score: answers[i] === "Yes" ? 1 : 0
+    }));
+
+    const data = {
+        date: document.getElementById("date").value,
+        department: document.getElementById("department").value,
+        employee: document.getElementById("employee").value,
+        items: items
+    };
+
+    const button = document.getElementById("submitBtn");
+
+    button.disabled = true;
+    button.textContent = "Submitting...";
 
     try {
 
-        const response = await fetch(
-            WEB_APP_URL + "?action=getRecords&t=" + Date.now()
+        const response = await fetch(SCRIPT_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (!result.success) {
+            throw new Error(result.message || "Submission failed");
+        }
+
+        showMessage(
+            "Successfully submitted! Score: " +
+            result.totalScore + "/20 (" +
+            result.percentage + "%).",
+            "success"
         );
 
-        if (!response.ok) {
-            throw new Error("HTTP error: " + response.status);
-        }
+    } catch (error) {
 
-        const data = await response.json();
-
-        if (!data.success) {
-            throw new Error(data.error || "Unable to retrieve records.");
-        }
-
-        if (!Array.isArray(data.records)) {
-            throw new Error("Google Sheets returned an invalid records list.");
-        }
-
-        allRecords = data.records;
-
-        updateDepartments();
-        updateSummary();
-        displayRecords();
-
-        status.className = "status success";
-
-        status.textContent =
-            "✓ Connected successfully. " +
-            allRecords.length +
-            " records retrieved from Google Sheets.";
-
-    } catch(error) {
-
-        status.className = "status error";
-
-        status.textContent =
-            "Connection error: " + error.message;
-
-        console.error(error);
+        showMessage(
+            "Error: " + error.message +
+            ". Check your internet and Apps Script deployment.",
+            "error"
+        );
 
     } finally {
 
-        refreshBtn.disabled = false;
-        refreshBtn.textContent = "↻ Refresh Records";
-
-    }
-
-}
-
-
-/********************************************************
- UPDATE DEPARTMENT FILTER
-********************************************************/
-
-function updateDepartments() {
-
-    const select = document.getElementById("departmentFilter");
-
-    const currentValue = select.value;
-
-    const departments = [
-        ...new Set(
-            allRecords.map(record => record["Department"])
-                .filter(Boolean)
-        )
-    ].sort();
-
-    select.innerHTML =
-        '<option value="">All Departments</option>';
-
-    departments.forEach(department => {
-
-        const option = document.createElement("option");
-
-        option.value = department;
-        option.textContent = department;
-
-        select.appendChild(option);
-
-    });
-
-    select.value = departments.includes(currentValue)
-        ? currentValue : "";
-
-}
-
-
-/********************************************************
- UPDATE SUMMARY
-********************************************************/
-
-function updateSummary() {
-
-    const departments = new Set();
-
-    let totalScore = 0;
-    let count = 0;
-
-    allRecords.forEach(record => {
-
-        if (record["Department"]) {
-            departments.add(record["Department"]);
-        }
-
-        let percentage = parseFloat(
-            String(record["Percentage"] || "").replace("%", "")
-        );
-
-        if (!isNaN(percentage)) {
-            totalScore += percentage;
-            count++;
-        }
-
-    });
-
-    document.getElementById("totalRecords").textContent =
-        allRecords.length;
-
-    document.getElementById("totalDepartments").textContent =
-        departments.size;
-
-    document.getElementById("averageScore").textContent =
-        count
-        ? (totalScore / count).toFixed(1) + "%"
-        : "0%";
-
-}
-
-
-/********************************************************
- FILTER AND DISPLAY RECORDS
-********************************************************/
-
-function displayRecords() {
-
-    const search =
-        document.getElementById("searchInput")
-        .value.toLowerCase().trim();
-
-    const department =
-        document.getElementById("departmentFilter").value;
-
-    const date =
-        document.getElementById("dateFilter").value;
-
-    filteredRecords = allRecords.filter(record => {
-
-        const id = String(record["Submission ID"] || "").toLowerCase();
-
-        const dept = String(record["Department"] || "").toLowerCase();
-
-        const signature = String(record["Signature"] || "").toLowerCase();
-
-        const recordDate = String(record["Date"] || "").substring(0, 10);
-
-        const matchesSearch =
-            !search ||
-            id.includes(search) ||
-            dept.includes(search) ||
-            signature.includes(search);
-
-        const matchesDepartment =
-            !department ||
-            record["Department"] === department;
-
-        const matchesDate =
-            !date || recordDate === date;
-
-        return matchesSearch &&
-               matchesDepartment &&
-               matchesDate;
-
-    });
-
-    const tbody = document.getElementById("recordsBody");
-
-    document.getElementById("recordCount").textContent =
-        filteredRecords.length + " records";
-
-    if (filteredRecords.length === 0) {
-
-        tbody.innerHTML = `
-            <tr>
-                <td colspan="8" style="text-align:center;padding:30px">
-                    No records found.
-                </td>
-            </tr>
-        `;
-
-        return;
-
-    }
-
-    tbody.innerHTML = filteredRecords.map((record, index) => {
-
-        const originalIndex = allRecords.indexOf(record);
-
-        return `
-
-            <tr>
-
-                <td>${index + 1}</td>
-
-                <td class="font-semibold">
-                    ${escapeHTML(record["Submission ID"])}
-                </td>
-
-                <td>${escapeHTML(record["Date"])}</td>
-
-                <td>${escapeHTML(record["Department"])}</td>
-
-                <td>${escapeHTML(record["Signature"])}</td>
-
-                <td>${escapeHTML(record["Score"])}/100</td>
-
-                <td class="font-bold text-green-700">
-                    ${escapeHTML(record["Percentage"])}
-                </td>
-
-                <td class="no-print">
-
-                    <button class="view"
-                        onclick="viewDetails(${originalIndex})">
-                        View
-                    </button>
-
-                </td>
-
-            </tr>
-
-        `;
-
-    }).join("");
-
-}
-
-
-/********************************************************
- VIEW ALL 20 CHECKLIST ANSWERS AND COMMENTS
-********************************************************/
-
-function viewDetails(index) {
-
-    const record = allRecords[index];
-
-    if (!record) return;
-
-    const content = document.getElementById("detailContent");
-
-    const questions = [
-
-        "Bakki hojii qulqulluu fi sirrii ta'uu isaa mirkaneessuu",
-
-        "Meeshaaleen hojii barbaachisoo ta'an bakka isaanii irratti argamuu",
-
-        "Meeshaalee hin barbaachifne bakka hojii irraa qulqulleessuu",
-
-        "Faayilootaa fi dokumeentoota sirnaan qindeessuu",
-
-        "Hojii guyyaa sanaaf karoorfame adda baasuu",
-
-        "Hojii dursa kennamuuf qabu adda baasuu",
-
-        "Hojiiwwan yeroo isaanii eeganii raawwatamuu isaanii hordofuu",
-
-        "Yeroo hojii sirnaan fayyadamuu",
-
-        "Qisaasama yeroo, meeshaa fi qabeenyaa xiqqeessuu",
-
-        "Rakkoo hojii keessatti mul'ate adda baasuu",
-
-        "Sababa rakkoo sanaa adda baasuu",
-
-        "Furmaata rakkoo sanaaf tarkaanfii fudhachuu",
-
-        "Hojii har'aa kan kaleessaa caalaa fooyyeessuuf yaada haaraa qabaachuu",
-
-        "Yaada fooyya'iinsaa hojjettoota irraa walitti qabu",
-
-        "Tajaajila kennamu irratti qulqullinaa fi saffisa mirkaneessuu",
-
-        "Komii ykn yaada maamilaa/hojii waliin walqabatu galmeessuu",
-
-        "Hojiiwwan raawwataman ragaan isaanii sirnaan qabamuu",
-
-        "Seera, qajeelfama fi tartiiba hojii kabajuu",
-
-        "Hojii guyyaa sanaa madaaluu",
-
-        "Boruuf hojii fooyya'aa fi tarkaanfii itti aanu murteessuu"
-
-    ];
-
-
-    // Submission information
-
-    let html = `
-
-        <div class="detail-info">
-
-            <div class="detail-box">
-                <small>Submission ID</small>
-                <strong>${escapeHTML(record["Submission ID"])}</strong>
-            </div>
-
-            <div class="detail-box">
-                <small>Date</small>
-                <strong>${escapeHTML(record["Date"])}</strong>
-            </div>
-
-            <div class="detail-box">
-                <small>Department</small>
-                <strong>${escapeHTML(record["Department"])}</strong>
-            </div>
-
-            <div class="detail-box">
-                <small>Signature</small>
-                <strong>${escapeHTML(record["Signature"])}</strong>
-            </div>
-
-            <div class="detail-box">
-                <small>Total Score</small>
-                <strong>${escapeHTML(record["Score"])} / 100</strong>
-            </div>
-
-            <div class="detail-box">
-                <small>Percentage</small>
-                <strong class="text-green-700">
-                    ${escapeHTML(record["Percentage"])}
-                </strong>
-            </div>
-
-        </div>
-
-        <h3 class="font-bold text-lg mb-3 text-[#102d4f]">
-            DAILY KAIZEN EVALUATION CHECKLIST
-        </h3>
-
-        <div class="table-container">
-
-            <table>
-
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Evaluation Criteria</th>
-                        <th>Answer</th>
-                        <th>Comment / Observation</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-    `;
-
-
-    // Display each of the 20 questions
-
-    for (let i = 1; i <= 20; i++) {
-
-        const answer = record["Q" + i + " Answer"] || "";
-
-        const comment = record["Q" + i + " Comment"] || "";
-
-        let answerClass = "";
-
-        if (answer === "Eeyyee") {
-            answerClass = "answer-yes";
-        }
-
-        if (answer === "Lakki") {
-            answerClass = "answer-no";
-        }
-
-        html += `
-
-            <tr>
-
-                <td>${i}</td>
-
-                <td>${escapeHTML(questions[i - 1])}</td>
-
-                <td class="${answerClass}">
-                    ${escapeHTML(answer)}
-                </td>
-
-                <td>${escapeHTML(comment)}</td>
-
-            </tr>
-
-        `;
-
-    }
-
-
-    html += `
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-        <div class="mt-6 border-t pt-4">
-
-            <h3 class="font-bold text-lg text-[#102d4f]">
-                Evaluation Summary
-            </h3>
-
-            <p class="mt-2">
-                Total Score:
-                <strong>${escapeHTML(record["Score"])} / 100</strong>
-            </p>
-
-            <p class="mt-2">
-                Achievement:
-                <strong class="text-green-700">
-                    ${escapeHTML(record["Percentage"])}
-                </strong>
-            </p>
-
-        </div>
-
-    `;
-
-
-    content.innerHTML = html;
-
-    document.getElementById("detailModal").style.display = "block";
-
-}
-
-
-/********************************************************
- CLOSE MODAL
-********************************************************/
-
-function closeModal() {
-
-    document.getElementById("detailModal").style.display = "none";
-
-}
-
-
-/********************************************************
- CLEAR FILTERS
-********************************************************/
-
-function clearFilters() {
-
-    document.getElementById("searchInput").value = "";
-
-    document.getElementById("departmentFilter").value = "";
-
-    document.getElementById("dateFilter").value = "";
-
-    displayRecords();
-
-}
-
-
-/********************************************************
- PRINT MAIN RECORDS
-********************************************************/
-
-function printMainRecords() {
-
-    document.getElementById("detailModal").style.display = "none";
-
-    window.print();
-
-}
-
-
-/********************************************************
- PRINT INDIVIDUAL DETAILS
-********************************************************/
-
-function printDetails() {
-
-    window.print();
-
-}
-
-
-/********************************************************
- CLOSE MODAL WHEN CLICKING OUTSIDE
-********************************************************/
-
-window.addEventListener("click", function(event) {
-
-    const modal = document.getElementById("detailModal");
-
-    if (event.target === modal) {
-        closeModal();
+        button.disabled = false;
+        button.textContent = "Submit to Google Sheets";
     }
 
 });
 
+// ==================================
+// RESET FORM
+// ==================================
 
-/********************************************************
- AUTOMATICALLY LOAD RECORDS
-********************************************************/
+document.getElementById("kaizenForm").addEventListener(
+"reset", function() {
 
-window.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
 
-    loadRecords();
+        answers = new Array(questions.length).fill("");
+
+        calculateScore();
+
+        document.getElementById("message").style.display = "none";
+
+    }, 0);
 
 });
+
+// ==================================
+// DEFAULT DATE
+// ==================================
+
+document.getElementById("date").value =
+    new Date().toLocaleDateString("en-CA");
 
 </script>
 

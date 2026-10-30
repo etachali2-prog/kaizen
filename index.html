@@ -4,7 +4,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>MELBA Daily Kaizen Checklist</title>
 
 <style>
@@ -15,199 +14,230 @@
 body {
     margin: 0;
     padding: 20px;
-    background: #edf2f7;
-    font-family: Arial, sans-serif;
-    color: #1e293b;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #eef2f7;
+    color: #243247;
 }
 
 .container {
-    max-width: 1150px;
+    max-width: 1050px;
     margin: auto;
-    background: white;
-    padding: 25px;
+    background: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,.08);
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.09);
 }
 
 .header {
+    background: #142d4e;
+    color: white;
+    padding: 25px;
     text-align: center;
-    border-bottom: 3px solid #123b63;
-    padding-bottom: 15px;
-    margin-bottom: 25px;
 }
 
-.header h2 {
-    color: #123b63;
-    margin-bottom: 8px;
-}
-
-.header h3 {
-    margin-bottom: 5px;
+.header h1 {
+    margin: 0 0 8px;
+    font-size: 25px;
 }
 
 .header p {
-    color: #64748b;
+    margin: 0;
+    color: #d7e2ef;
+    font-size: 13px;
 }
 
-.details {
+.content {
+    padding: 25px;
+}
+
+.section-title {
+    color: #17365d;
+    border-bottom: 2px solid #dce5ef;
+    padding-bottom: 9px;
+    margin: 25px 0 18px;
+}
+
+.form-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-bottom: 25px;
+    gap: 18px;
 }
 
-.field label {
-    display: block;
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group label {
     font-weight: bold;
-    margin-bottom: 7px;
+    font-size: 14px;
 }
 
-.field input, .field select, .field textarea {
+input[type="date"],
+input[type="text"],
+select,
+textarea {
     width: 100%;
     padding: 11px;
     border: 1px solid #cbd5e1;
     border-radius: 6px;
-    font-size: 15px;
-    font-family: Arial, sans-serif;
+    font-family: inherit;
+    font-size: 14px;
+    background: white;
 }
 
-.field textarea {
-    min-height: 75px;
+.question-card {
+    border: 1px solid #dbe3ed;
+    border-radius: 8px;
+    padding: 17px;
+    margin-bottom: 16px;
+    background: #fff;
+}
+
+.question-title {
+    font-weight: bold;
+    line-height: 1.5;
+    margin-bottom: 13px;
+    color: #263c58;
+}
+
+.answer-options {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 15px;
+}
+
+.answer-options label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.answer-options input {
+    width: 17px;
+    height: 17px;
+    accent-color: #176b50;
+}
+
+.comment-label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 7px;
+    color: #526276;
+}
+
+.question-comment {
+    min-height: 65px;
     resize: vertical;
 }
 
-.table-wrapper {
-    overflow-x: auto;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 650px;
-}
-
-th {
-    background: #123b63;
-    color: white;
-    padding: 12px;
-}
-
-td {
-    border: 1px solid #dbe2ea;
-    padding: 12px 8px;
-    text-align: center;
-}
-
-td.question {
-    text-align: left;
-    width: 70%;
-}
-
-tbody tr:nth-child(even) {
-    background: #f1f5f9;
-}
-
-input[type=checkbox] {
-    width: 19px;
-    height: 19px;
-    accent-color: #087a50;
-    cursor: pointer;
-}
-
-.score {
-    font-weight: bold;
-    color: #087a50;
-}
-
 .summary {
-    margin-top: 20px;
-    padding: 20px;
-    background: #eaf2f8;
+    background: #edf4fa;
+    border: 1px solid #d1dfed;
     border-radius: 8px;
+    padding: 20px;
+    margin-top: 25px;
+}
+
+.summary h3 {
+    margin-top: 0;
+    color: #17365d;
+}
+
+.summary-values {
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 30px;
 }
 
-.summary div {
-    font-weight: bold;
+.summary-item {
+    font-size: 15px;
 }
 
-.summary strong {
-    color: #087a50;
-    font-size: 22px;
+.summary-item strong {
+    color: #176b50;
+    font-size: 21px;
+    display: block;
+    margin-top: 5px;
 }
 
 .buttons {
     display: flex;
-    gap: 12px;
     flex-wrap: wrap;
+    gap: 12px;
     margin-top: 25px;
 }
 
 button {
     border: none;
-    padding: 13px 20px;
     border-radius: 6px;
-    font-size: 15px;
+    padding: 12px 22px;
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer;
 }
 
-.submit {
-    background: #087a50;
+.submit-btn {
+    background: #176b50;
     color: white;
 }
 
-.print {
-    background: #123b63;
+.print-btn {
+    background: #17365d;
     color: white;
 }
 
-.reset {
-    background: #64748b;
-    color: white;
+.reset-btn {
+    background: #e5eaf0;
+    color: #263c58;
 }
 
 button:disabled {
-    opacity: .6;
+    opacity: 0.6;
     cursor: not-allowed;
 }
 
-#message {
-    display: none;
+#status {
     margin-top: 15px;
-    padding: 13px;
-    border-radius: 6px;
-    overflow-wrap: anywhere;
+    font-weight: bold;
+    white-space: pre-wrap;
 }
 
 .success {
-    background: #dcfce7;
-    color: #166534;
+    color: #176b50;
 }
 
 .error {
-    background: #fee2e2;
-    color: #991b1b;
+    color: #c0392b;
 }
 
-@media(max-width:700px) {
+.footer {
+    text-align: center;
+    padding: 15px;
+    background: #f5f7fa;
+    color: #64748b;
+    font-size: 12px;
+}
+
+@media(max-width:650px) {
     body {
         padding: 8px;
     }
 
-    .container {
-        padding: 13px;
+    .content {
+        padding: 15px;
     }
 
-    .details {
+    .form-grid {
         grid-template-columns: 1fr;
     }
 
-    .summary {
-        flex-direction: column;
+    .header h1 {
+        font-size: 20px;
     }
 }
 
@@ -219,29 +249,24 @@ button:disabled {
 
     .container {
         box-shadow: none;
-        padding: 10px;
+        max-width: 100%;
     }
 
-    .buttons, #message {
+    .buttons,
+    #status {
         display: none !important;
     }
 
-    .table-wrapper {
-        overflow: visible;
+    .question-card {
+        break-inside: avoid;
     }
 
-    table {
-        min-width: 0;
-        font-size: 10px;
+    input, select, textarea {
+        border: 1px solid #888;
     }
 
-    th, td {
-        padding: 6px 4px;
-    }
-
-    .details input, .details select, .details textarea {
-        border: none;
-        padding-left: 0;
+    .question-comment {
+        min-height: 45px;
     }
 }
 </style>
@@ -252,28 +277,23 @@ button:disabled {
 <div class="container">
 
     <div class="header">
-        <h2>MELBA PRINTING, PUBLISHING & PACKAGING S.C.</h2>
-        <h3>DAILY KAIZEN CHECKLIST</h3>
-        <p>
-            Cheekliistii Hojii Irra Oolmaa Kaayizenii
-            Guyyaa Guyyaan Ittiin Hordofamu
-        </p>
+        <h1>MELBA DAILY KAIZEN CHECKLIST</h1>
+        <p>Daily Monitoring and Continuous Improvement</p>
     </div>
 
-    <form id="kaizenForm">
+    <div class="content">
 
-        <!-- EMPLOYEE INFORMATION -->
+        <h3 class="section-title">General Information</h3>
 
-        <div class="details">
+        <div class="form-grid">
 
-            <div class="field">
-                <label>Guyyaa / Date</label>
+            <div class="form-group">
+                <label for="date">Date *</label>
                 <input type="date" id="date" required>
             </div>
 
-            <div class="field">
-                <label>Kutaa Hojii / Department</label>
-
+            <div class="form-group">
+                <label for="department">Department *</label>
                 <select id="department" required>
                     <option value="">Select Department</option>
                     <option>Production Directorate</option>
@@ -286,455 +306,355 @@ button:disabled {
                 </select>
             </div>
 
-            <div class="field">
-                <label>Maqaa Hojjetaa / Employee Name</label>
+            <div class="form-group">
+                <label for="employee">Employee Name *</label>
                 <input type="text" id="employee"
                        placeholder="Enter employee name" required>
             </div>
 
-            <div class="field">
-                <label>Yaada / Comment</label>
-                <textarea id="comment"
-                    placeholder="Enter comments or improvement suggestions"></textarea>
-            </div>
-
         </div>
 
-        <!-- CHECKLIST TABLE -->
+        <h3 class="section-title">Daily Kaizen Checklist</h3>
 
-        <div class="table-wrapper">
+        <p>Select Yes or No for each question. Enter a comment for that question if necessary.</p>
 
-            <table>
+        <form id="kaizenForm">
 
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Checklist / Gaaffii Hordoffii</th>
-                        <th>Yes</th>
-                        <th>No</th>
-                        <th>Score</th>
-                    </tr>
-                </thead>
+            <div id="questionsContainer"></div>
 
-                <tbody id="checklistBody"></tbody>
+            <div class="summary">
+                <h3>Overall Checklist Result</h3>
 
-            </table>
+                <div class="summary-values">
+                    <div class="summary-item">
+                        Total Score
+                        <strong id="totalScore">0 / 20</strong>
+                    </div>
 
-        </div>
+                    <div class="summary-item">
+                        Percentage
+                        <strong id="percentage">0%</strong>
+                    </div>
 
-        <!-- SCORE SUMMARY -->
-
-        <div class="summary">
-
-            <div>
-                Total Score:
-                <strong id="total">0</strong> / 20
+                    <div class="summary-item">
+                        Answered Questions
+                        <strong id="answered">0 / 20</strong>
+                    </div>
+                </div>
             </div>
 
-            <div>
-                Percentage:
-                <strong id="percentage">0%</strong>
+            <div class="buttons">
+                <button type="button" class="submit-btn"
+                        id="submitBtn" onclick="submitChecklist()">
+                    Submit Checklist
+                </button>
+
+                <button type="button" class="print-btn"
+                        onclick="window.print()">
+                    Print / Save PDF
+                </button>
+
+                <button type="reset" class="reset-btn"
+                        onclick="resetChecklist()">
+                    Reset Form
+                </button>
             </div>
 
-            <div>
-                Answered:
-                <strong id="answered">0</strong> / 20
-            </div>
+            <div id="status"></div>
 
-        </div>
+        </form>
 
-        <!-- BUTTONS -->
+    </div>
 
-        <div class="buttons">
-
-            <button type="submit" class="submit" id="submitBtn">
-                Submit to Google Sheets
-            </button>
-
-            <button type="button" class="print"
-                    onclick="window.print()">
-                Print / Save PDF
-            </button>
-
-            <button type="reset" class="reset">
-                Reset Form
-            </button>
-
-        </div>
-
-        <div id="message"></div>
-
-    </form>
+    <div class="footer">
+        MELBA PRINTING, PUBLISHING & PACKAGING S.C.
+        <br>Technical Directorate
+    </div>
 
 </div>
 
 <script>
 
-// ========================================
-// GOOGLE APPS SCRIPT WEB APP URL
-// ========================================
+// IMPORTANT: Replace this with your deployed Apps Script Web App URL.
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxhsSnvaHplmWaBUjJHcGfhANMola8Kim858tbgpfkixrp8F5lK12sBZlxP7FLYAltT/exec";
 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzxE7U4hXfrErGIMkHw-byoZccAbfZl4NJQwNbS4LXNhTkqL9yWDXIPhTfPxhNG3sSV/exec";
-
-
-// ========================================
-// CHECKLIST QUESTIONS
-// ========================================
 
 const questions = [
-
-"Bakki hojii qulqulluu fi sirrii ta'uu isaa mirkaneessuu",
-
-"Meeshaaleen hojii barbaachisoo ta'an bakka isaanii irratti argamuu",
-
-"Meeshaalee hin barbaachifne bakka hojii irraa qulqulleessuu",
-
-"Faayilootaa fi dokumeentoota sirnaan qindeessuu",
-
-"Hojii guyyaa sanaaf karoorfame adda baasuu",
-
-"Hojii dursa kennamuuf qabu adda baasuu",
-
-"Hojiiwwan yeroo isaanii eeganii raawwatamuu isaanii hordofuu",
-
-"Yeroo hojii sirnaan fayyadamuu",
-
-"Qisaasama yeroo, meeshaa fi qabeenyaa xiqqeessuu",
-
-"Rakkoo hojii keessatti mul'ate adda baasuu",
-
-"Sababa rakkoo sanaa adda baasuu",
-
-"Furmaata rakkoo sanaaf tarkaanfii fudhachuu",
-
-"Hojii har'aa kan kaleessaa caalaa fooyyeessuuf yaada haaraa qabaachuu",
-
-"Yaada fooyya'iinsaa hojjettoota irraa walitti qabu",
-
-"Tajaajila kennamu irratti qulqullinaa fi saffisa mirkaneessuu",
-
-"Komii ykn yaada maamilaa/hojii waliin walqabatu galmeessuu",
-
-"Hojiiwwan raawwataman ragaan isaanii sirnaan qabamuu",
-
-"Seera, qajeelfama fi tartiiba hojii kabajuu",
-
-"Hojii guyyaa sanaa madaaluu",
-
-"Boruuf hojii fooyya'aa fi tarkaanfii itti aanu murteessuu"
-
+    "Bakki hojii qulqulluu fi sirrii ta'uu isaa mirkaneessuu",
+    "Meeshaaleen hojii barbaachisoo ta'an bakka isaanii irratti argamuu",
+    "Meeshaalee hin barbaachifne bakka hojii irraa qulqulleessuu",
+    "Faayilootaa fi dokumeentoota sirnaan qindeessuu",
+    "Hojii guyyaa sanaaf karoorfame adda baasuu",
+    "Hojii dursa kennamuuf qabu adda baasuu",
+    "Hojiiwwan yeroo isaanii eeganii raawwatamuu isaanii hordofuu",
+    "Yeroo hojii sirnaan fayyadamuu",
+    "Qisaasama yeroo, meeshaa fi qabeenyaa xiqqeessuu",
+    "Rakkoo hojii keessatti mul'ate adda baasuu",
+    "Sababa rakkoo sanaa adda baasuu",
+    "Furmaata rakkoo sanaaf tarkaanfii fudhachuu",
+    "Hojii har'aa kan kaleessaa caalaa fooyyeessuuf yaada haaraa qabaachuu",
+    "Yaada fooyya'iinsaa hojjettoota irraa walitti qabu",
+    "Tajaajila kennamu irratti qulqullinaa fi saffisa mirkaneessuu",
+    "Komii ykn yaada maamilaa/hojii waliin walqabatu galmeessuu",
+    "Hojiiwwan raawwataman ragaan isaanii sirnaan qabamuu",
+    "Seera, qajeelfama fi tartiiba hojii kabajuu",
+    "Hojii guyyaa sanaa madaaluu",
+    "Boruuuf hojii fooyya'aa fi tarkaanfii itti aanu murteessuu"
 ];
 
 
-// ========================================
-// GENERATE CHECKLIST TABLE
-// ========================================
+// Display all 20 questions.
+function loadQuestions() {
 
-const tbody = document.getElementById("checklistBody");
+    const container = document.getElementById("questionsContainer");
 
-questions.forEach((question, index) => {
+    container.innerHTML = "";
 
-    const row = document.createElement("tr");
+    questions.forEach((question, index) => {
 
-    row.innerHTML = `
+        const number = index + 1;
 
-        <td>${index + 1}</td>
+        const card = document.createElement("div");
+        card.className = "question-card";
 
-        <td class="question">${question}</td>
+        card.innerHTML = `
+            <div class="question-title">
+                ${number}. ${question}
+            </div>
 
-        <td>
-            <input type="checkbox"
-                id="yes${index}"
-                onchange="selectAnswer(${index}, 'Yes')">
-        </td>
+            <div class="answer-options">
 
-        <td>
-            <input type="checkbox"
-                id="no${index}"
-                onchange="selectAnswer(${index}, 'No')">
-        </td>
+                <label>
+                    <input type="radio"
+                           name="answer${number}"
+                           value="Yes"
+                           onchange="calculateTotal()">
+                    Yes
+                </label>
 
-        <td class="score" id="score${index}">0</td>
+                <label>
+                    <input type="radio"
+                           name="answer${number}"
+                           value="No"
+                           onchange="calculateTotal()">
+                    No
+                </label>
 
-    `;
+            </div>
 
-    tbody.appendChild(row);
+            <label class="comment-label"
+                   for="comment${number}">
+                Comment
+            </label>
 
-});
+            <textarea
+                class="question-comment"
+                id="comment${number}"
+                placeholder="Enter comment for this checklist item..."
+            ></textarea>
+        `;
+
+        container.appendChild(card);
+
+    });
+
+}
 
 
-// ========================================
-// STORE ANSWERS
-// ========================================
+// Calculate one overall score only.
+function calculateTotal() {
 
-let answers = new Array(20).fill("");
+    let total = 0;
+    let answered = 0;
 
+    for (let i = 1; i <= 20; i++) {
 
-// ========================================
-// YES / NO SELECTION
-// ========================================
+        const selected = document.querySelector(
+            `input[name="answer${i}"]:checked`
+        );
 
-function selectAnswer(index, value) {
+        if (selected) {
 
-    const yes = document.getElementById("yes" + index);
+            answered++;
 
-    const no = document.getElementById("no" + index);
-
-    if (value === "Yes") {
-
-        if (yes.checked) {
-
-            no.checked = false;
-
-            answers[index] = "Yes";
-
-        } else {
-
-            answers[index] = "";
-
-        }
-
-    } else {
-
-        if (no.checked) {
-
-            yes.checked = false;
-
-            answers[index] = "No";
-
-        } else {
-
-            answers[index] = "";
+            if (selected.value === "Yes") {
+                total++;
+            }
 
         }
 
     }
 
-    calculateScore();
+    const percentage = (total / 20) * 100;
 
-}
-
-
-// ========================================
-// AUTOMATIC SCORE CALCULATION
-// YES = 1, NO = 0
-// ========================================
-
-function calculateScore() {
-
-    let total = 0;
-
-    let answered = 0;
-
-    questions.forEach((question, index) => {
-
-        let score = answers[index] === "Yes" ? 1 : 0;
-
-        if (answers[index] !== "") {
-            answered++;
-        }
-
-        total += score;
-
-        document.getElementById("score" + index).textContent = score;
-
-    });
-
-    let percentage = (total / 20) * 100;
-
-    document.getElementById("total").textContent = total;
+    document.getElementById("totalScore").textContent =
+        total + " / 20";
 
     document.getElementById("percentage").textContent =
         percentage.toFixed(1) + "%";
 
-    document.getElementById("answered").textContent = answered;
+    document.getElementById("answered").textContent =
+        answered + " / 20";
 
 }
 
 
-// ========================================
-// MESSAGE DISPLAY
-// ========================================
+// Collect data and submit one row to Google Sheets.
+async function submitChecklist() {
 
-function showMessage(message, type) {
+    const date = document.getElementById("date").value;
+    const department = document.getElementById("department").value;
+    const employee = document.getElementById("employee").value.trim();
 
-    const box = document.getElementById("message");
+    const status = document.getElementById("status");
+    const submitBtn = document.getElementById("submitBtn");
 
-    box.style.display = "block";
+    status.textContent = "";
+    status.className = "";
 
-    box.className = type;
+    if (!date || !department || !employee) {
 
-    box.textContent = message;
-
-}
-
-
-// ========================================
-// SUBMIT TO GOOGLE SHEETS
-// ONE SUBMISSION = ONE ROW
-// ========================================
-
-document.getElementById("kaizenForm").addEventListener(
-"submit", async function(event) {
-
-    event.preventDefault();
-
-    if (SCRIPT_URL.includes("PASTE_YOUR")) {
-
-        showMessage(
-            "Please enter your Google Apps Script Web App URL.",
+        showStatus(
+            "Please enter Date, Department and Employee Name.",
             "error"
         );
 
         return;
+    }
+
+    if (SCRIPT_URL === "PASTE_YOUR_WEB_APP_URL_HERE") {
+
+        showStatus(
+            "Please add your Google Apps Script Web App URL in the HTML code.",
+            "error"
+        );
+
+        return;
+    }
+
+    const answers = [];
+    const comments = [];
+
+    for (let i = 1; i <= 20; i++) {
+
+        const selected = document.querySelector(
+            `input[name="answer${i}"]:checked`
+        );
+
+        if (!selected) {
+
+            showStatus(
+                "Please answer all 20 checklist questions. Question " +
+                i + " is not answered.",
+                "error"
+            );
+
+            return;
+        }
+
+        answers.push(selected.value);
+
+        comments.push(
+            document.getElementById("comment" + i).value.trim()
+        );
 
     }
 
-    // Check all questions
-
-    const unanswered = answers.filter(
-        answer => answer === ""
+    const totalScore = answers.filter(
+        answer => answer === "Yes"
     ).length;
 
-    if (unanswered > 0) {
+    const percentage = ((totalScore / 20) * 100).toFixed(1);
 
-        showMessage(
-            "Please answer all 20 checklist questions.",
-            "error"
-        );
-
-        return;
-
-    }
-
-    // Prepare 20 answers
-
-    const items = questions.map((question, index) => ({
-
-        question: question,
-
-        answer: answers[index],
-
-        score: answers[index] === "Yes" ? 1 : 0
-
-    }));
-
-
-    // Prepare complete submission
-
-    const data = {
-
-        date: document.getElementById("date").value,
-
-        department: document.getElementById("department").value,
-
-        employee: document.getElementById("employee").value,
-
-        comment: document.getElementById("comment").value,
-
-        items: items
-
+    const payload = {
+        date: date,
+        department: department,
+        employee: employee,
+        answers: answers,
+        comments: comments,
+        totalScore: totalScore,
+        percentage: percentage
     };
 
-
-    const button = document.getElementById("submitBtn");
-
-    button.disabled = true;
-
-    button.textContent = "Submitting...";
-
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
 
     try {
 
+        // text/plain avoids a browser CORS preflight request.
         const response = await fetch(SCRIPT_URL, {
-
             method: "POST",
-
+            mode: "no-cors",
             headers: {
-
                 "Content-Type": "text/plain;charset=utf-8"
-
             },
-
-            body: JSON.stringify(data)
-
+            body: JSON.stringify(payload)
         });
 
-
-        const result = await response.json();
-
-
-        if (!response.ok || !result.success) {
-
-            throw new Error(
-                result.message || "Submission failed"
-            );
-
-        }
-
-
-        showMessage(
-
-            "Successfully submitted to Google Sheets! " +
-
-            "Total Score: " + result.totalScore + "/20. " +
-
-            "Percentage: " + result.percentage + "%.",
-
+        // In no-cors mode the response is opaque.
+        // The browser cannot read the Apps Script response body.
+        showStatus(
+            "Submission sent. Please check your Google Sheet to confirm that the record was saved.",
             "success"
-
         );
-
 
     } catch (error) {
 
-        showMessage(
-
-            "Submission error: " + error.message +
-
-            ". Check your internet connection and Apps Script deployment.",
-
+        showStatus(
+            "Submission could not be sent. Check your internet connection and Web App URL, then try again.",
             "error"
-
         );
 
     } finally {
 
-        button.disabled = false;
-
-        button.textContent = "Submit to Google Sheets";
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit Checklist";
 
     }
 
-});
+}
 
 
-// ========================================
-// RESET FORM
-// ========================================
+function showStatus(message, type) {
 
-document.getElementById("kaizenForm").addEventListener(
-"reset", function() {
+    const status = document.getElementById("status");
 
-    setTimeout(function() {
+    status.textContent = message;
+    status.className = type;
 
-        answers = new Array(20).fill("");
+}
 
-        calculateScore();
 
-        document.getElementById("message").style.display = "none";
+function resetChecklist() {
+
+    setTimeout(() => {
+
+        calculateTotal();
+
+        document.getElementById("status").textContent = "";
+        document.getElementById("status").className = "";
 
     }, 0);
 
+}
+
+
+// Set today's date and load questions.
+document.addEventListener("DOMContentLoaded", function() {
+
+    const today = new Date();
+
+    const localDate = new Date(
+        today.getTime() - today.getTimezoneOffset() * 60000
+    ).toISOString().slice(0, 10);
+
+    document.getElementById("date").value = localDate;
+
+    loadQuestions();
+
+    calculateTotal();
+
 });
-
-
-// ========================================
-// AUTOMATIC DATE
-// ========================================
-
-document.getElementById("date").value =
-    new Date().toLocaleDateString("en-CA");
 
 </script>
 
